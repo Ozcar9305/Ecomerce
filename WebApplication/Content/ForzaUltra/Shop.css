@@ -1,0 +1,7 @@
+﻿.shopBackGround {
+    background-image: url("../../Images/ForzaUltra/Site/fu_banner.jpg");
+    background-size: cover;
+    height: 250px;
+    padding: 0 !important;
+    text-align: center;
+}

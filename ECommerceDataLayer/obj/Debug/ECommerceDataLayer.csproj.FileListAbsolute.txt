@@ -1,0 +1,9 @@
+C:\ZharpSystems\Proyectos\WebFormTestProyect\WebApplication\ECommerceDataLayer\bin\Debug\ECommerceDataLayer.dll
+C:\ZharpSystems\Proyectos\WebFormTestProyect\WebApplication\ECommerceDataLayer\bin\Debug\ECommerceDataLayer.pdb
+C:\ZharpSystems\Proyectos\WebFormTestProyect\WebApplication\ECommerceDataLayer\bin\Debug\ECommerceDataModel.dll
+C:\ZharpSystems\Proyectos\WebFormTestProyect\WebApplication\ECommerceDataLayer\bin\Debug\ECommerceDataModel.pdb
+C:\ZharpSystems\Proyectos\WebFormTestProyect\WebApplication\ECommerceDataLayer\obj\Debug\ECommerceDataLayer.csprojAssemblyReference.cache
+C:\ZharpSystems\Proyectos\WebFormTestProyect\WebApplication\ECommerceDataLayer\obj\Debug\ECommerceDataLayer.csproj.CoreCompileInputs.cache
+C:\ZharpSystems\Proyectos\WebFormTestProyect\WebApplication\ECommerceDataLayer\obj\Debug\ECommerceDataLayer.csproj.CopyComplete
+C:\ZharpSystems\Proyectos\WebFormTestProyect\WebApplication\ECommerceDataLayer\obj\Debug\ECommerceDataLayer.dll
+C:\ZharpSystems\Proyectos\WebFormTestProyect\WebApplication\ECommerceDataLayer\obj\Debug\ECommerceDataLayer.pdb

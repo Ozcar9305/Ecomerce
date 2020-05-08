@@ -1,0 +1,5 @@
+C:\ZharpSystems\Proyectos\WebFormTestProyect\WebApplication\ECommerceDataModel\bin\Debug\ECommerceDataModel.dll
+C:\ZharpSystems\Proyectos\WebFormTestProyect\WebApplication\ECommerceDataModel\bin\Debug\ECommerceDataModel.pdb
+C:\ZharpSystems\Proyectos\WebFormTestProyect\WebApplication\ECommerceDataModel\obj\Debug\ECommerceDataModel.csproj.CoreCompileInputs.cache
+C:\ZharpSystems\Proyectos\WebFormTestProyect\WebApplication\ECommerceDataModel\obj\Debug\ECommerceDataModel.dll
+C:\ZharpSystems\Proyectos\WebFormTestProyect\WebApplication\ECommerceDataModel\obj\Debug\ECommerceDataModel.pdb
