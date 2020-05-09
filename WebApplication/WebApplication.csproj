@@ -132,6 +132,7 @@
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Images\ForzaUltra\Site\fu_banner.jpg" />
     <Content Include="Images\ForzaUltra\Site\fu_logo.png" />
+    <Content Include="Images\ForzaUltra\Site\logo-inicio.png" />
     <Content Include="Images\ForzaUltra\Upload\tn_img0124.png" />
     <Content Include="Images\ForzaUltra\Upload\tn_img0126.png" />
     <Content Include="Images\ForzaUltra\Upload\tn_img0128.png" />
@@ -143,6 +144,7 @@
     <Content Include="Images\ForzaUltra\Upload\tn_sud_monu.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\common.js" />
     <Content Include="Scripts\ForzaUltra\Admin\Categories.js" />
     <Content Include="Scripts\ForzaUltra\Login.js" />
     <Content Include="Scripts\ForzaUltra\RegisterForm.js" />

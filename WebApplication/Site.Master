@@ -18,10 +18,11 @@
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/Site.css" rel="stylesheet" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    
 
 </head>
 <body>
-    <form id="frmStore" runat="server">
+    <form id="frmStore" runat="server" ClientIDMode="Static">
         <asp:ScriptManager runat="server">
             <Scripts>
                 <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
@@ -38,10 +39,11 @@
                 <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
                 <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
                 <asp:ScriptReference Name="WebFormsBundle" />
-                <asp:ScriptReference Path="~/Scripts/jquery.validate.js" />
+                <%--<asp:ScriptReference Path="~/Scripts/jquery.validate.min.js" />--%>
                 <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
+        <script type="text/javascript" src="<%: ResolveUrl("~/Scripts/jquery.validate.min.js") %>"></script>
 
         <%--Login--%>
         <ECommerce:Login runat="server" ID="Login" />
