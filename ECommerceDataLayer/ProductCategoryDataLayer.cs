@@ -23,7 +23,6 @@ namespace ECommerceDataLayer
             return response;
         }
 
-
         public ProductCategoryDTO ProductCategoryGetItem(long categoryIdentifier)
         {
             var productCategory = new ProductCategoryDTO();
@@ -33,6 +32,31 @@ namespace ECommerceDataLayer
                 productCategory = command.Select(reader => reader.ToProductCategory())?.FirstOrDefault();
             }
             return productCategory;
+        }
+
+        public bool ProductCategoryMerge(ProductCategoryDTO productCategory)
+        {
+            bool isMergeComplete = default(bool);
+            using (SqlCommand command = new SqlCommand("Usp_ProductCategory_MRG"))
+            {
+                command.Parameters.Add("@ProductCategoryId", SqlDbType.BigInt).Value = productCategory.Identifier;
+                command.Parameters.Add("@ProductCategoryName", SqlDbType.VarChar).Value = productCategory.Name;
+                command.Parameters.Add("@ProductCategoryDescription", SqlDbType.VarChar).Value = productCategory.Description;
+                isMergeComplete = command.ExecuteQuery();
+            }
+            return isMergeComplete;
+        }
+
+        public bool ProductCategoryChangeStatus(long productCategoryIdentifier)
+        {
+            bool isUpdateComplete = default(bool);
+            using (SqlCommand command = new SqlCommand("Usp_ProductCategoryChangeStatus_UPD"))
+            {
+                command.Parameters.Add("@ProductCategoryId", SqlDbType.BigInt).Value = productCategoryIdentifier;
+                command.Parameters.Add("@StatusId", SqlDbType.Bit).Value = 0;
+                isUpdateComplete = command.ExecuteQuery();
+            }
+            return isUpdateComplete;
         }
     }
 }
