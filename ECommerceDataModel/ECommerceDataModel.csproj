@@ -44,7 +44,9 @@
     <Compile Include="ProductCatalogDTO.cs" />
     <Compile Include="ProductCategoryDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shared\OperationType.cs" />
     <Compile Include="Shared\PagingDTO.cs" />
+    <Compile Include="Shared\RequestDTO.cs" />
     <Compile Include="Shared\ResponseDTO.cs" />
     <Compile Include="Shared\ResponseListDTO.cs" />
     <Compile Include="SizesDTO.cs" />
