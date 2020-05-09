@@ -9,3 +9,14 @@ C:\ZharpSystems\Proyectos\WebFormTestProyect\WebApplication\ECommerce\obj\Debug\
 C:\ZharpSystems\Proyectos\WebFormTestProyect\WebApplication\ECommerce\obj\Debug\ECommerce.csproj.CopyComplete
 C:\ZharpSystems\Proyectos\WebFormTestProyect\WebApplication\ECommerce\obj\Debug\ECommerce.dll
 C:\ZharpSystems\Proyectos\WebFormTestProyect\WebApplication\ECommerce\obj\Debug\ECommerce.pdb
+C:\ZharpSystems\Proyectos\ECommerce\Ecomerce\ECommerce\bin\Debug\ECommerce.dll
+C:\ZharpSystems\Proyectos\ECommerce\Ecomerce\ECommerce\bin\Debug\ECommerce.pdb
+C:\ZharpSystems\Proyectos\ECommerce\Ecomerce\ECommerce\bin\Debug\ECommerceDataLayer.dll
+C:\ZharpSystems\Proyectos\ECommerce\Ecomerce\ECommerce\bin\Debug\ECommerceDataModel.dll
+C:\ZharpSystems\Proyectos\ECommerce\Ecomerce\ECommerce\bin\Debug\ECommerceDataLayer.pdb
+C:\ZharpSystems\Proyectos\ECommerce\Ecomerce\ECommerce\bin\Debug\ECommerceDataModel.pdb
+C:\ZharpSystems\Proyectos\ECommerce\Ecomerce\ECommerce\obj\Debug\ECommerce.csprojAssemblyReference.cache
+C:\ZharpSystems\Proyectos\ECommerce\Ecomerce\ECommerce\obj\Debug\ECommerce.csproj.CoreCompileInputs.cache
+C:\ZharpSystems\Proyectos\ECommerce\Ecomerce\ECommerce\obj\Debug\ECommerce.csproj.CopyComplete
+C:\ZharpSystems\Proyectos\ECommerce\Ecomerce\ECommerce\obj\Debug\ECommerce.dll
+C:\ZharpSystems\Proyectos\ECommerce\Ecomerce\ECommerce\obj\Debug\ECommerce.pdb
