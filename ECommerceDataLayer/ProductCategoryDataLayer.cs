@@ -1,4 +1,6 @@
-﻿
+﻿/// <summary>
+/// namespace ECommerceDataLayer
+/// </summary>
 namespace ECommerceDataLayer
 {
     using ECommerceDataLayer.Extensions;
