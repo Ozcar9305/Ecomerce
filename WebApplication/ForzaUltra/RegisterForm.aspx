@@ -8,6 +8,7 @@
     <script type="text/javascript" src="<%:ResolveUrl("~/Scripts/jquery-3.3.1.min.js") %>"></script>
     <script type="text/javascript" src="<%:ResolveUrl("~/Scripts/common.js") %>"></script>
     <script type="text/javascript" src="<%:ResolveUrl("~/Scripts/sweet-alert.min.js") %>"></script>
+    <script type="text/javascript" src="<%:ResolveUrl("~/Scripts/jquery.validate.min.js") %>"></script>
     
     <%--Styles--%>
     <link rel="stylesheet" type="text/css" href="<%:ResolveUrl("~/Content/bootstrap.css") %>" />
