@@ -37,6 +37,11 @@ namespace ECommerce
             return customerResponse;
         }
 
+        /// <summary>
+        /// Permite encriptar una contraseña
+        /// </summary>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public string HashPassword(string password)
         {
             var cryptoProvider = new RNGCryptoServiceProvider();
@@ -49,6 +54,12 @@ namespace ECommerce
                    Convert.ToBase64String(hash);
         }
 
+        /// <summary>
+        /// Permite validar una contraseña
+        /// </summary>
+        /// <param name="password">Contraseña desencriptada</param>
+        /// <param name="correctHash">Contraseña encriptada</param>
+        /// <returns></returns>
         public bool ValidatePassword(string password, string correctHash)
         {
             char[] delimiter = { ':' };

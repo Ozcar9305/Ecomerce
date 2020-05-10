@@ -2,6 +2,7 @@
 let serviceUri = '';
 $(document).ready(function () {
 
+    swal("Good job!", "You clicked the button!", "success")
     serviceUri = window.location.href + '/';
 
     let $registerForm = $('#frmRegister');
@@ -66,15 +67,22 @@ function registerUser() {
         success: function (response) {
             var data = response.d;
             if (data.Success) {
-                alert('Se ha eliminado el registro correctamente');
-                loadCategoryList();
+                swal({
+                    title: "Gracias por tu registro!",
+                    text: "Ahora puedes comenzar a comprar en ForzaUltra",
+                    type: "success"
+                });
             }
             else {
-                alert("No fue posible eliminar el registro");
+                swal({
+                    title: "Ha ocurrido un error",
+                    text: "No pudimos completar tu registro, por favor intenta de nuevo más tarde",
+                    type: "danger"
+                });
             }
         },
         failure: function (xhr, textStatus, errorThrown) {
-            alert("Fail[LoadCategoryChangeStatus]" + xhr + " " + textStatus + " " + errorThrown);
+            console.log("Fail[LoadCategoryChangeStatus]" + xhr + " " + textStatus + " " + errorThrown);
         }
     });
 };
