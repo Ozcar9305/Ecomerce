@@ -15,7 +15,8 @@
         <%: Scripts.Render("~/bundles/modernizr") %>
         <%: Styles.Render("~/Content/bootstrap.min.css") %>
         <%: Styles.Render("~/Content/css/style.css") %>
-        <%: Styles.Render("~/Content/css/mdb.min.css") %>        
+        <%: Styles.Render("~/Content/css/mdb.min.css") %>
+        <%: Scripts.Render("~/Scripts/jquery-3.3.1.min.js") %>
     </asp:PlaceHolder>
 
 
@@ -68,68 +69,68 @@
 </head>
 
 <body>
+    <form id="frmStore" runat="server">
+        <!-- Navbar -->
+        <nav class="navbar forza-navbar forza-navbar-font fixed-top navbar-expand-lg navbar-light scrolling-navbar">
+            <div class="container">
 
-    <!-- Navbar -->
-    <nav class="navbar forza-navbar forza-navbar-font fixed-top navbar-expand-lg navbar-light scrolling-navbar">
-        <div class="container">
+                <!-- Brand -->
+                <a class="navbar-brand waves-effect" href="https://mdbootstrap.com/docs/jquery/" target="_blank">
+                    <strong class="blue-text"></strong>
+                </a>
 
-            <!-- Brand -->
-            <a class="navbar-brand waves-effect" href="https://mdbootstrap.com/docs/jquery/" target="_blank">
-                <strong class="blue-text"></strong>
-            </a>
+                <!-- Collapse -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-            <!-- Collapse -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+                <!-- Links -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-            <!-- Links -->
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-                <!-- Left -->
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link waves-effect" href="#">Tienda
+                    <!-- Left -->
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link waves-effect" href="#">Tienda
               <span class="sr-only">(current)</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link waves-effect" href="https://mdbootstrap.com/docs/jquery/" target="_blank">Productos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link waves-effect" href="https://mdbootstrap.com/education/bootstrap/" target="_blank">Contacto
-              </a>
-                    </li>
-                </ul>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect" href="https://mdbootstrap.com/docs/jquery/" target="_blank">Productos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect" href="https://mdbootstrap.com/education/bootstrap/" target="_blank">Contacto
+                            </a>
+                        </li>
+                    </ul>
 
-                <!-- Right -->
-                <ul class="navbar-nav nav-flex-icons">
-                    <li class="nav-item">
-                        <a class="nav-link waves-effect">
-                            <span class="badge red z-depth-1 mr-1">1 </span>
-                            <i class="glyphicon glyphicon-search"></i>
-                            <span class="clearfix d-none d-sm-inline-block">Carrito </span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="https://www.facebook.com/mdbootstrap" class="nav-link waves-effect" target="_blank">
-                            <i class="fab fa-facebook-f">Login</i>
-                        </a>
-                    </li>
-                </ul>
+                    <!-- Right -->
+                    <ul class="navbar-nav nav-flex-icons">
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect">
+                                <span class="badge red z-depth-1 mr-1">1 </span>
+                                <i class="glyphicon glyphicon-search"></i>
+                                <span class="clearfix d-none d-sm-inline-block">Carrito </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="https://www.facebook.com/mdbootstrap" class="nav-link waves-effect" target="_blank">
+                                <i class="fab fa-facebook-f">Login</i>
+                            </a>
+                        </li>
+                    </ul>
+
+                </div>
 
             </div>
+        </nav>
+        <!-- Navbar -->
 
-        </div>
-    </nav>
-    <!-- Navbar -->
+        <asp:ContentPlaceHolder ID="MainContent" runat="server">
+        </asp:ContentPlaceHolder>
 
-    <asp:ContentPlaceHolder ID="MainContent" runat="server">
-    </asp:ContentPlaceHolder>
-
-    <!--Main layout-->
-    <%--<main>
+        <!--Main layout-->
+        <%--<main>
         <div class="container">
 
             <!--Navbar-->
@@ -582,10 +583,10 @@
             </form>
         </div>
     </main>--%>
-    <!--Main layout-->
+        <!--Main layout-->
 
-    <!--Footer-->
-    <%--<footer class="page-footer text-center font-small mt-4 wow fadeIn">
+        <!--Footer-->
+        <%--<footer class="page-footer text-center font-small mt-4 wow fadeIn">
 
         <!--Call to action-->
         <div class="pt-4">
@@ -646,24 +647,28 @@
         <!--/.Copyright-->
 
     </footer>--%>
-    <!--/.Footer-->
-    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-    </asp:ContentPlaceHolder>
-    <!-- SCRIPTS -->
-    <!-- JQuery -->
-    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
-    <!-- Bootstrap tooltips -->
-    <script type="text/javascript" src="js/popper.min.js"></script>
-    <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="js/mdb.min.js"></script>
-    <!-- Initializations -->
-    <script type="text/javascript">
-        // Animations initialization
-        new WOW().init();
+        <!--/.Footer-->
 
-    </script>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+
+
+        <!-- SCRIPTS -->
+        <!-- JQuery -->
+        <%--<script type="text/javascript" src="<%:ResolveUrl("~/Scripts/jquery-3.3.1.min.js") %>"></script>--%>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="js/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="js/mdb.min.js"></script>
+        <!-- Initializations -->
+        <script type="text/javascript">
+            // Animations initialization
+            new WOW().init();
+
+        </script>
+    </form>
 </body>
 
 </html>

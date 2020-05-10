@@ -1,7 +1,8 @@
 ﻿<%@ Page Title="Categorias" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Categories.aspx.cs" Inherits="WebApplication.ForzaUltra.Categories" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="container-fluid">
+    <main>
+        <div class="container-fluid">
         <br />
         <br />
         <br />
@@ -58,6 +59,8 @@
             </div>
         </div>
     </div>
+    </main>
+    
 
     <asp:HiddenField runat="server" ID="hdnCategoryIdentifier" Value="0" ClientIDMode="Static" />
     <asp:HiddenField runat="server" ID="hdnCurrentPage" Value="" ClientIDMode="Static" />
