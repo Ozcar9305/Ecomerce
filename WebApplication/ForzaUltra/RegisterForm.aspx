@@ -1,16 +1,22 @@
 ﻿<%@ Page Title="Registro" Language="C#" AutoEventWireup="true" CodeBehind="RegisterForm.aspx.cs" Inherits="WebApplication.ForzaUltra.RegisterForm" %>
 
+<!DOCTYPE html>
 <html>
 <head>
     <title>Registro</title>
+    <%--Scripts--%>
     <script type="text/javascript" src="<%:ResolveUrl("~/Scripts/jquery-3.3.1.min.js") %>"></script>
-    <script type="text/javascript" src="<%:ResolveUrl("~/Scripts/jquery.validate.min.js") %>"></script>
-    <script type="text/javascript" src="<%:ResolveUrl("~/Scripts/bootstrap.min.js") %>"></script>
     <script type="text/javascript" src="<%:ResolveUrl("~/Scripts/common.js") %>"></script>
-    <link rel="stylesheet" type="text/css" href="<%:ResolveUrl("~/Content/bootstrap.css") %>">
+    <script type="text/javascript" src="<%:ResolveUrl("~/Scripts/sweet-alert.min.js") %>"></script>
+    <script type="text/javascript" src="<%:ResolveUrl("~/Scripts/jquery.validate.min.js") %>"></script>
+    
+    <%--Styles--%>
+    <link rel="stylesheet" type="text/css" href="<%:ResolveUrl("~/Content/bootstrap.css") %>" />
+    <%--<link rel="stylesheet" type="text/css" href="<%:ResolveUrl("~/Content/sweet-alert.css") %>" />--%>
 </head>
 <body>
     <style type="text/css">
+
         .formValidateError {
             color: crimson;
         }
