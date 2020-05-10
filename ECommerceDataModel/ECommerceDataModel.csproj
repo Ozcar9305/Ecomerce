@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomerDTO.cs" />
+    <Compile Include="Enum\CustomerRole.cs" />
     <Compile Include="ProductCatalogDTO.cs" />
     <Compile Include="ProductCategoryDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
