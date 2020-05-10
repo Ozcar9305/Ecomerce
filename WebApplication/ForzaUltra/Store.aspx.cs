@@ -13,7 +13,7 @@ namespace WebApplication.ForzaUltra
         {
             if (!Page.IsPostBack)
             {
-                hfdMainPageProductCount.Value = System.Configuration.ConfigurationManager.AppSettings["MainPageProductCount"] ?? "3";
+                //hfdMainPageProductCount.Value = System.Configuration.ConfigurationManager.AppSettings["MainPageProductCount"] ?? "3";
             }
         }
     }
