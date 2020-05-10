@@ -20,3 +20,13 @@ C:\ZharpSystems\Proyectos\ECommerce\Ecomerce\ECommerce\obj\Debug\ECommerce.cspro
 C:\ZharpSystems\Proyectos\ECommerce\Ecomerce\ECommerce\obj\Debug\ECommerce.csproj.CopyComplete
 C:\ZharpSystems\Proyectos\ECommerce\Ecomerce\ECommerce\obj\Debug\ECommerce.dll
 C:\ZharpSystems\Proyectos\ECommerce\Ecomerce\ECommerce\obj\Debug\ECommerce.pdb
+D:\Users\Ozcar\Proyects\GitRepository\Ecomerce\ECommerce\bin\Debug\ECommerce.dll
+D:\Users\Ozcar\Proyects\GitRepository\Ecomerce\ECommerce\bin\Debug\ECommerce.pdb
+D:\Users\Ozcar\Proyects\GitRepository\Ecomerce\ECommerce\bin\Debug\ECommerceDataLayer.dll
+D:\Users\Ozcar\Proyects\GitRepository\Ecomerce\ECommerce\bin\Debug\ECommerceDataModel.dll
+D:\Users\Ozcar\Proyects\GitRepository\Ecomerce\ECommerce\bin\Debug\ECommerceDataLayer.pdb
+D:\Users\Ozcar\Proyects\GitRepository\Ecomerce\ECommerce\bin\Debug\ECommerceDataModel.pdb
+D:\Users\Ozcar\Proyects\GitRepository\Ecomerce\ECommerce\obj\Debug\ECommerce.csprojAssemblyReference.cache
+D:\Users\Ozcar\Proyects\GitRepository\Ecomerce\ECommerce\obj\Debug\ECommerce.csproj.CopyComplete
+D:\Users\Ozcar\Proyects\GitRepository\Ecomerce\ECommerce\obj\Debug\ECommerce.dll
+D:\Users\Ozcar\Proyects\GitRepository\Ecomerce\ECommerce\obj\Debug\ECommerce.pdb
