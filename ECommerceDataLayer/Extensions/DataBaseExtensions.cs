@@ -59,9 +59,16 @@
         /// <returns></returns>
         public static T Escalar<T>(this SqlCommand command)
         {
-            var reader = command?.ExecuteScalar().ToString();
-            var converter = TypeDescriptor.GetConverter(typeof(T));
-            return (T)converter.ConvertFrom(reader);
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                command.Connection = connection;
+                command.Connection.Open();
+
+                var reader = command?.ExecuteScalar().ToString();
+                var converter = TypeDescriptor.GetConverter(typeof(T));
+                return (T)converter.ConvertFrom(reader);
+            }
         }
 
         /// <summary>

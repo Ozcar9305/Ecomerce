@@ -1,4 +1,5 @@
 ﻿using ECommerceDataModel;
+using ECommerceDataModel.Enum;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -31,7 +32,36 @@ namespace ECommerceDataLayer.Extensions
                 Description = reader.Get<string>("ProductDescription"),
                 AditionalDescription = reader.Get<string>("ProductDescriptionAditional"),
                 Price = reader.Get<decimal>("ProductPrice"),
-                Status = reader.Get<bool>("ProductStatus")
+                Status = reader.Get<bool>("ProductStatus"),
+                ImageName = reader.Get<string>("ProductImage")
+            };
+        }
+
+        public static CustomerDTO ToCustomer(this IDataReader reader)
+        {
+            return new CustomerDTO
+            {
+                Identifier = reader.Get<int>("CustomerId"),
+                FirstName = reader.Get<string>("FirstName"),
+                LastName = reader.Get<string>("LastName"),
+                Email = reader.Get<string>("Email"),
+                EncryptedPassword = reader.Get<string>("EncryptedPassword"),
+                ShippingAddress = reader.Get<string>("ShippingAddress"),
+                Role = (CustomerRole)reader.Get<int>("CustomerRoleId"),
+                Status = reader.Get<bool>("StatusId")
+            };
+        }
+
+        public static CartDTO ToCart(this IDataReader reader)
+        {
+            return new CartDTO
+            {
+                Identifier = reader.Get<string>("CartItemId"),
+                Quantity = reader.Get<int>("Quantity"),
+                TotalAmount = reader.Get<decimal>("TotalAmount"),
+                ProductCatalog = ToProductCatalog(reader),
+                ProductCategory = ToProductCategory(reader),
+                Customer = ToCustomer(reader)
             };
         }
 

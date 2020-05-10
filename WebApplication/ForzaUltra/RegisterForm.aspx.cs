@@ -26,7 +26,7 @@
         [WebMethod(EnableSession = true)]
         public static ResponseDTO<CustomerDTO> RegisterUser(CustomerDTO customer)
         {
-            return loginLogic.RegisterUser(new RequestDTO<CustomerDTO>
+            return loginLogic.CustomerExecute(new RequestDTO<CustomerDTO>
             {
                 Item = customer
             });

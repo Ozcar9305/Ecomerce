@@ -3,6 +3,7 @@ namespace ECommerceDataLayer
 {
     using ECommerceDataLayer.Extensions;
     using ECommerceDataModel;
+    using System.Linq;
     using System.Data;
     using System.Data.SqlClient;
 
@@ -22,6 +23,18 @@ namespace ECommerceDataLayer
                 isCustomerRegistered = command.ExecuteQuery();
             }
             return isCustomerRegistered;
+        }
+
+
+        public CustomerDTO GetCustomerByEmail(CustomerDTO item)
+        {
+            var customer = new CustomerDTO();
+            using(SqlCommand command = new SqlCommand("Usp_CustomersByEmail_GETI"))
+            {
+                command.Parameters.Add("@Email", SqlDbType.VarChar).Value = item.Email;
+                customer = command.Select(reader => reader.ToCustomer())?.FirstOrDefault();
+            }
+            return customer;
         }
     }
 }
