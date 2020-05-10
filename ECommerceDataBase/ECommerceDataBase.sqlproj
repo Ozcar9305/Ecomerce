@@ -72,5 +72,6 @@
     <Build Include="Procedures\Usp_ProductCatalogChangeStatus_UPD.sql" />
     <Build Include="Tables\CustomerRoleCatalog.sql" />
     <Build Include="Tables\Customers.sql" />
+    <Build Include="Procedures\Usp_ProductCatalog_MainPage_GETL.sql" />
   </ItemGroup>
 </Project>

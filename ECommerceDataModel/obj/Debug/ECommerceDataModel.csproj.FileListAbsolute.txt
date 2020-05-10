@@ -5,6 +5,7 @@ C:\ZharpSystems\Proyectos\WebFormTestProyect\WebApplication\ECommerceDataModel\o
 C:\ZharpSystems\Proyectos\WebFormTestProyect\WebApplication\ECommerceDataModel\obj\Debug\ECommerceDataModel.pdb
 C:\ZharpSystems\Proyectos\ECommerce\Ecomerce\ECommerceDataModel\bin\Debug\ECommerceDataModel.dll
 C:\ZharpSystems\Proyectos\ECommerce\Ecomerce\ECommerceDataModel\bin\Debug\ECommerceDataModel.pdb
+C:\ZharpSystems\Proyectos\ECommerce\Ecomerce\ECommerceDataModel\obj\Debug\ECommerceDataModel.csprojAssemblyReference.cache
 C:\ZharpSystems\Proyectos\ECommerce\Ecomerce\ECommerceDataModel\obj\Debug\ECommerceDataModel.csproj.CoreCompileInputs.cache
 C:\ZharpSystems\Proyectos\ECommerce\Ecomerce\ECommerceDataModel\obj\Debug\ECommerceDataModel.dll
 C:\ZharpSystems\Proyectos\ECommerce\Ecomerce\ECommerceDataModel\obj\Debug\ECommerceDataModel.pdb
