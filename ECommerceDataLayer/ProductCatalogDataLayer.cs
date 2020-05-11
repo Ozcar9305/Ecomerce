@@ -25,7 +25,7 @@ namespace ECommerceDataLayer
 
         public ResponseListDTO<ProductCatalogDTO> ProductCatalogForMainPage(long productCategoryIdentifier, PagingDTO paging)
         {
-            var response = new ResponseListDTO<ProductCatalogDTO>();
+            var response = new ResponseListDTO<ProductCatalogDTO> { Paging = new PagingDTO() };
             using (SqlCommand command = new SqlCommand("Usp_ProductCatalog_MainPage_GETL"))
             {
                 command.Parameters.AddWithValue("@CategoryId", productCategoryIdentifier);

@@ -80,6 +80,8 @@
                             }
                         )?.Result;
                     }
+
+                    dataResponse = new ResponseListDTO<ProductCategoryDTO>();
                     dataResponse.Result = categoryList;
                     dataResponse.Success = categoryList.Any() && categoryList.Any(p => p.ProductList.Any());
                 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ECommerce;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,11 @@ namespace WebApplication
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!Page.IsPostBack)
+            {
+                //Prueba de CategoryListForMainPage
+                //var categoryResponse = new ProductCategoryLogic().CategoryListForMainPage(4);
+            }
         }
     }
 }
