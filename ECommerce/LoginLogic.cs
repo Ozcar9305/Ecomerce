@@ -4,6 +4,7 @@ namespace ECommerce
     using ECommerceDataLayer;
     using ECommerceDataModel;
     using ECommerceDataModel.Shared;
+    using ECommerce.Helpers;
     using System;
     using System.Security.Cryptography;
 
@@ -22,7 +23,7 @@ namespace ECommerce
         /// </summary>
         /// <param name="customer"></param>
         /// <returns></returns>
-        public ResponseDTO<CustomerDTO> RegisterUser(RequestDTO<CustomerDTO> customer)
+        public ResponseDTO<CustomerDTO> CustomerExecute(RequestDTO<CustomerDTO> customer)
         {
             var customerResponse = new ResponseDTO<CustomerDTO>();
             try
@@ -32,11 +33,36 @@ namespace ECommerce
             }
             catch (Exception exception)
             {
-                throw exception;
+                exception.LogException();
             }
             return customerResponse;
         }
 
+        /// <summary>
+        /// Obtiene un item customer
+        /// </summary>
+        /// <param name="customer"></param>
+        /// <returns></returns>
+        public ResponseDTO<CustomerDTO> CustomerGetItem(RequestDTO<CustomerDTO> customer)
+        {
+            var customerResponse = new ResponseDTO<CustomerDTO>();
+            try
+            {
+                customerResponse.Result = dataLayer.GetCustomerByEmail(customer.Item);
+                customerResponse.Success = customerResponse.Result.Identifier > default(int);
+            }
+            catch (Exception exception)
+            {
+                exception.LogException();
+            }
+            return customerResponse;
+        }
+
+        /// <summary>
+        /// Permite encriptar una contraseña
+        /// </summary>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public string HashPassword(string password)
         {
             var cryptoProvider = new RNGCryptoServiceProvider();
@@ -49,6 +75,12 @@ namespace ECommerce
                    Convert.ToBase64String(hash);
         }
 
+        /// <summary>
+        /// Permite validar una contraseña
+        /// </summary>
+        /// <param name="password">Contraseña desencriptada</param>
+        /// <param name="correctHash">Contraseña encriptada</param>
+        /// <returns></returns>
         public bool ValidatePassword(string password, string correctHash)
         {
             char[] delimiter = { ':' };

@@ -4,6 +4,7 @@
 	FirstName VARCHAR(30) NOT NULL,
 	LastName VARCHAR(30) NOT NULL,
 	Email VARCHAR(254) NOT NULL,
+	PhoneNumber VARCHAR(10),
 	EncryptedPassword VARCHAR(MAX) NOT NULL,
 	ShippingAddress VARCHAR(250),
 	NewsletterSubscription BIT DEFAULT(0),

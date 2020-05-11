@@ -22,5 +22,7 @@ namespace ECommerceDataModel
         public string PhoneNumber { get; set; }
 
         public CustomerRole Role { get; set; }
+
+        public bool Status { get; set; }
     }
 }

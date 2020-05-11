@@ -1,14 +1,13 @@
-﻿using ECommerceDataLayer;
-using ECommerceDataModel;
-using ECommerceDataModel.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ECommerce
+﻿namespace ECommerce
 {
+    using ECommerce.Helpers;
+    using ECommerceDataLayer;
+    using ECommerceDataModel;
+    using ECommerceDataModel.Shared;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
     public class ProductCategoryLogic
     {
         /// <summary>
@@ -29,7 +28,7 @@ namespace ECommerce
             catch (Exception exception)
             {
                 categoryResponse = null;
-                throw exception;
+                exception.LogException();
             }
             return categoryResponse;
         }
@@ -51,7 +50,7 @@ namespace ECommerce
             catch (Exception exception)
             {
                 categoryResponse = null;
-                throw exception;
+                exception.LogException();
             }
             return categoryResponse;
         }
@@ -81,13 +80,15 @@ namespace ECommerce
                             }
                         )?.Result;
                     }
+
+                    dataResponse = new ResponseListDTO<ProductCategoryDTO>();
                     dataResponse.Result = categoryList;
                     dataResponse.Success = categoryList.Any() && categoryList.Any(p => p.ProductList.Any());
                 }
             }
             catch (Exception exception)
             {
-                throw exception;
+                exception.LogException();
             }
             return dataResponse;
         }
@@ -124,7 +125,7 @@ namespace ECommerce
             }
             catch (Exception exception)
             {
-                throw exception;
+                exception.LogException();
             }
             return response;
         }

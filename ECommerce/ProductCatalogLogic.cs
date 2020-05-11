@@ -1,5 +1,6 @@
 ﻿namespace ECommerce
 {
+    using ECommerce.Helpers;
     using ECommerceDataLayer;
     using ECommerceDataModel;
     using ECommerceDataModel.Shared;
@@ -28,7 +29,7 @@
             }
             catch (Exception exception)
             {
-                throw exception;
+                exception.LogException();
             }
             return productCatalogItem;
         }
@@ -50,7 +51,7 @@
             }
             catch (Exception exception)
             {
-                throw;
+                exception.LogException();
             }
             return productList;
         }
@@ -86,7 +87,7 @@
             }
             catch (Exception exception)
             {
-                throw exception;
+                exception.LogException();
             }
             return response;
         }
