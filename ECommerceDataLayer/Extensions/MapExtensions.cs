@@ -25,8 +25,8 @@ namespace ECommerceDataLayer.Extensions
         {
             return new ProductCatalogDTO
             {
-                Identifier = reader.Get<long>("ProductCatalogIdentifier"),
-                ProductCategoryIdentifier = reader.Get<long>("ProductCategoryId"),
+                Identifier = reader.Get<long>("ProductCatalogId"),
+                //ProductCategoryIdentifier = reader.Get<long>("ProductCategoryId"),
                 ShortName = reader.Get<string>("ProductShortName"),
                 Description = reader.Get<string>("ProductDescription"),
                 AditionalDescription = reader.Get<string>("ProductDescriptionAditional"),

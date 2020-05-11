@@ -18,7 +18,7 @@ namespace ECommerceDataLayer
                 command.Parameters.AddWithValue("@ProductCatalogId", product.Item.Identifier);
                 command.Parameters.AddWithValue("@WordFilter", product.WordFilter);
                 response.Result = command.Select(reader => reader.ToProductCatalog());
-                response.Paging.TotalRecords = command.Select(reader => reader.ToTotalRecords()).FirstOrDefault();
+                //response.Paging.TotalRecords = command.Select(reader => reader.ToTotalRecords()).FirstOrDefault();
             }
             return response;
         }
@@ -31,7 +31,7 @@ namespace ECommerceDataLayer
                 command.Parameters.AddWithValue("@CategoryId", productCategoryIdentifier);
                 command.Parameters.AddWithValue("@PageSize", paging.PageSize);
                 response.Result = command.Select(reader => reader.ToProductCatalog());
-                response.Paging.TotalRecords = command.Select(reader => reader.ToTotalRecords()).FirstOrDefault();
+                //response.Paging.TotalRecords = command.Select(reader => reader.ToTotalRecords()).FirstOrDefault();
             }
             return response;
         }

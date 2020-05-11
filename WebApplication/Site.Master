@@ -12,30 +12,41 @@
     <title>Material Design Bootstrap</title>
 
     <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js") %>
+        <%: Styles.Render("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css") %>
         <%: Scripts.Render("~/bundles/modernizr") %>
-        <%: Styles.Render("~/Content/bootstrap.min.css") %>
-        <%: Styles.Render("~/Content/css/style.css") %>
-        <%: Styles.Render("~/Content/css/mdb.min.css") %>
+        <%: Styles.Render("~/Content/css/bootstrap.min.css") %>
+        <%--<%: Styles.Render("https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css") %>--%>
+        <%--<%: Styles.Render("https://code.jquery.com/jquery-3.4.1.slim.min.js") %>--%>
+        <%--<%: Styles.Render("https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js") %>--%>
+        <%--<%: Styles.Render("https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js") %>--%>
+        <%--<%: Styles.Render("https://kit.fontawesome.com/6506c34d73.js") %>--%>        
+        <%: Styles.Render("~/Content/css/mdb.css") %>
         <%: Scripts.Render("~/Scripts/jquery-3.3.1.min.js") %>
+        <%: Scripts.Render("~/Scripts/handlebars.min-v4.7.3.js") %>
+        <%: Scripts.Render("/js/bootstrap.min.js") %>
+        <%: Styles.Render("//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css") %>
+        <%: Scripts.Render("//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js") %>
+        <%: Styles.Render("~/Content/css/style.css") %>
     </asp:PlaceHolder>
 
-
+    "stylesheet">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="Content/css/all.css">
+    <%--<link rel="stylesheet" href="Content/css/all.css">--%>
     <!-- Bootstrap core CSS -->
     <%--<link href="../Content/bootstrap.min.css" rel="stylesheet" runat="server" />--%>
     <!-- Material Design Bootstrap -->
     <%--<link href="Content/css/mdb.min.css" rel="stylesheet">--%>
 
-    <link href="Content/css/modules/animations-extended.css" rel="stylesheet" />
+    <%--<link href="Content/css/modules/animations-extended.css" rel="stylesheet" />--%>
 
     <%--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">--%>
     <!-- Google Fonts -->
     <%--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">--%>
     <!-- Bootstrap core CSS -->
     <%--<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">--%>
-    <!-- Material Design Bootstrap -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.16.0/css/mdb.min.css" rel="stylesheet">
+    <!-- Material Design Bootst-->
+    <%--<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.16.0/css/mdb.min.css" rel=lesheet">--%>
     <!-- Your custom styles (optional) -->
 
     <style type="text/css">
@@ -126,9 +137,10 @@
         </nav>
         <!-- Navbar -->
 
-        <asp:ContentPlaceHolder ID="MainContent" runat="server">
-        </asp:ContentPlaceHolder>
-
+        <main>
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+        </main>
         <!--Main layout-->
         <%--<main>
         <div class="container">
@@ -657,17 +669,17 @@
         <!-- JQuery -->
         <%--<script type="text/javascript" src="<%:ResolveUrl("~/Scripts/jquery-3.3.1.min.js") %>"></script>--%>
         <!-- Bootstrap tooltips -->
-        <script type="text/javascript" src="js/popper.min.js"></script>
+        <%--<script type="text/javascript" src="js/popper.min.js"></script>--%>
         <!-- Bootstrap core JavaScript -->
-        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <%--<script type="text/javascript" src="js/bootstrap.min.js"></script>--%>
         <!-- MDB core JavaScript -->
-        <script type="text/javascript" src="js/mdb.min.js"></script>
+        <%--<script type="text/javascript" src="js/mdb.min.js"></script>--%>
         <!-- Initializations -->
-        <script type="text/javascript">
+        <%--<script type="text/javascript">
             // Animations initialization
-            new WOW().init();
+            //new WOW().init();
 
-        </script>
+        //</script>--%>
     </form>
 </body>
 

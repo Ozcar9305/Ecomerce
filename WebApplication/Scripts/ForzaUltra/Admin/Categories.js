@@ -42,8 +42,8 @@ function loadCategoryList() {
                     tableContent += "   <td>" + item.Name + "</td>";
                     tableContent += "   <td>" + item.Description + "</td>";
                     tableContent += "   <td>";
-                    tableContent += "	    <span data-placement='top' data-toggle='tooltip' title='Editar'><button id='btnEdit' class='btn btn-default btn-xs edit' data-title='Editar' data-toggle='modal' data-target='#edit' data-category-id='" + item.Identifier + "'><span class='glyphicon glyphicon-pencil'></span></button></span>";
-                    tableContent += "	    <span data-placement='top' data-toggle='tooltip' title='Eliminar'><button id='btnDelete' class='btn btn-default btn-xs delete' data-title='Eliminar' data-target='#delete' data-category-id='" + item.Identifier + "'><span class='glyphicon glyphicon-trash'></span></button></span>";
+                    tableContent += "	    <span data-placement='top' data-toggle='tooltip' title='Editar'><button id='btnEdit' class='btn btn-sm btn-default btn-xs edit' data-title='Editar' data-toggle='modal' data-target='#edit' data-category-id='" + item.Identifier + "'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></button></span>";
+                    tableContent += "	    <span data-placement='top' data-toggle='tooltip' title='Eliminar'><button id='btnDelete' class='btn btn-sm btn-default btn-xs delete' data-title='Eliminar' data-target='#delete' data-category-id='" + item.Identifier + "'><span><i class='fa fa-trash-o' aria-hidden='true'></i></span></button></span>";
                     tableContent += "   </td>";
                     tableContent += "</tr>";
                 });

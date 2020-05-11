@@ -56,4 +56,22 @@
     </div>
     <!--/.Carousel Wrapper-->
     </main>
+    <script type="text/javascript">
+        (function (){
+            $.ajax({
+                type: "POST",
+                url: "Store.aspx/GetStoreGetList",
+                data: "",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                async: false,
+                success: function (response) {
+                    console.log(response);
+                },
+                failure: function () {
+                    alert("Sorry,there is a error!");
+                }
+            });
+        })();
+    </script>
 </asp:Content>
