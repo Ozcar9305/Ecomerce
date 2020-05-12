@@ -1,4 +1,6 @@
-﻿
+﻿/// <summary>
+/// namespace ECommerceDataLayer
+/// </summary>
 namespace ECommerceDataLayer
 {
     using ECommerceDataLayer.Extensions;
@@ -26,7 +28,7 @@ namespace ECommerceDataLayer
         public ProductCategoryDTO ProductCategoryGetItem(long categoryIdentifier)
         {
             var productCategory = new ProductCategoryDTO();
-            using(SqlCommand command = new SqlCommand("Usp_ProductCategoryGetItem"))
+            using(SqlCommand command = new SqlCommand("Usp_ProductCategory_GETI"))
             {
                 command.Parameters.AddWithValue("@ProductCategoryId", categoryIdentifier);
                 productCategory = command.Select(reader => reader.ToProductCategory())?.FirstOrDefault();

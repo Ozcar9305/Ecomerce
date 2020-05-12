@@ -22,15 +22,6 @@ namespace WebApplication {
         protected global::System.Web.UI.HtmlControls.HtmlForm frmStore;
         
         /// <summary>
-        /// Login control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::WebApplication.ForzaUltra.Controles.Login.Login Login;
-        
-        /// <summary>
         /// MainContent control.
         /// </summary>
         /// <remarks>
@@ -38,5 +29,14 @@ namespace WebApplication {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        
+        /// <summary>
+        /// ContentPlaceHolder1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder1;
     }
 }

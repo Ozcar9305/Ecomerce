@@ -1,7 +1,10 @@
-﻿using System;
+﻿using ECommerce;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -13,8 +16,15 @@ namespace WebApplication.ForzaUltra
         {
             if (!Page.IsPostBack)
             {
-                hfdMainPageProductCount.Value = System.Configuration.ConfigurationManager.AppSettings["MainPageProductCount"] ?? "3";
+                //hfdMainPageProductCount.Value = System.Configuration.ConfigurationManager.AppSettings["MainPageProductCount"] ?? "3";
             }
+        }
+
+        [WebMethod]
+        public static string GetStoreGetList()
+        {
+            var response = new ProductCategoryLogic().CategoryListForMainPage(4);
+            return JsonConvert.SerializeObject(response);
         }
     }
 }
