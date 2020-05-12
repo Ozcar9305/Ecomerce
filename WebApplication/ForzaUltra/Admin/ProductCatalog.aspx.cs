@@ -27,7 +27,7 @@ namespace WebApplication.ForzaUltra
                 WordFilter = string.Empty,
                 Item = new ProductCatalogDTO
                 {
-                    Identifier = default
+                    Identifier = default(long)
                 }
             });
             return response;

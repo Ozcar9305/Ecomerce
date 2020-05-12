@@ -15,6 +15,11 @@
         private readonly ProductCatalogDataLayer dataLayer = new ProductCatalogDataLayer();
 
         /// <summary>
+        /// Acceso a capa logica de categorias
+        /// </summary>
+        private readonly ProductSizeLogic productSizeLogic = new ProductSizeLogic();
+
+        /// <summary>
         /// Obtiene un producto apartir de su identificador
         /// </summary>
         /// <param name="productIdentifier"></param>
@@ -26,6 +31,14 @@
             {
                 productCatalogItem.Result = dataLayer.ProductCatalogGetItem(productIdentifier);
                 productCatalogItem.Success = productCatalogItem.Result.Identifier > default(long);
+                if (productCatalogItem.Success)
+                {
+                    productCatalogItem.Result.Sizes = productSizeLogic.ProductSizeGetFilteredList
+                    (
+                        productCatalogItem.Result.ProductCategoryIdentifier,
+                        productCatalogItem.Result.Identifier
+                    )?.Result;
+                }
             }
             catch (Exception exception)
             {
