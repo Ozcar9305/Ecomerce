@@ -12,7 +12,7 @@ namespace ECommerceDataLayer
     {
         public ResponseListDTO<ProductCatalogDTO> ProductCatalogGetFilteredList(RequestDTO<ProductCatalogDTO> product)
         {
-            var response = new ResponseListDTO<ProductCatalogDTO>();
+            var response = new ResponseListDTO<ProductCatalogDTO> { Paging = new PagingDTO() };
             using (SqlCommand command = new SqlCommand("Usp_ProductCatalogFiltered_GETL"))
             {
                 command.Parameters.AddWithValue("@ProductCatalogId", product.Item.Identifier);

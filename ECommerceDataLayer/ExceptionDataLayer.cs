@@ -1,6 +1,7 @@
 ﻿namespace ECommerceDataLayer
 {
     using System;
+    using System.Data;
     using System.Data.SqlClient;
     using ECommerceDataLayer.Extensions;
 
@@ -10,10 +11,9 @@
         {
             using (SqlCommand command = new SqlCommand("Usp_ExceptionLogging_INS"))
             {
-                command.Parameters.AddWithValue("@ExceptionMsg", exception.Message.ToString());
-                command.Parameters.AddWithValue("@ExceptionType", exception.GetType().Name.ToString());
-                command.Parameters.AddWithValue("@ExceptionURL", exception);
-                command.Parameters.AddWithValue("@ExceptionSource", exception.StackTrace.ToString());
+                command.Parameters.Add("@ExceptionMsg", SqlDbType.VarChar).Value = exception.Message.ToString();
+                command.Parameters.Add("@ExceptionType", SqlDbType.VarChar).Value = exception.GetType().Name.ToString();
+                command.Parameters.Add("@ExceptionSource", SqlDbType.VarChar).Value = exception.StackTrace.ToString();
                 command.ExecuteQuery();
             }
         }
