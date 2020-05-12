@@ -70,15 +70,23 @@
                 if (categoryList.Any())
                 {
                     var productDataLayer = new ProductCatalogDataLayer();
+                    var productSizeLogic = new ProductSizeLogic();
+
                     for (int i = 0; i < categoryList.Count; i++)
                     {
                         categoryList[i].ProductList = productDataLayer.ProductCatalogForMainPage
                         (
-                            categoryList[i].Identifier, new PagingDTO
-                            {
-                                PageSize = productCount
-                            }
+                            categoryList[i].Identifier, new PagingDTO { PageSize = productCount }
                         )?.Result;
+
+                        for (int j = 0; j < categoryList[i].ProductList.Count; j++)
+                        {
+                            categoryList[i].ProductList[j].Sizes = productSizeLogic.ProductSizeGetFilteredList
+                            (
+                                categoryList[i].Identifier,
+                                categoryList[i].ProductList[j].Identifier
+                            ).Result;
+                        }
                     }
 
                     dataResponse = new ResponseListDTO<ProductCategoryDTO>();

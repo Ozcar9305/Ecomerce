@@ -49,6 +49,7 @@
     <Compile Include="LoginDataLayer.cs" />
     <Compile Include="ProductCatalogDataLayer.cs" />
     <Compile Include="ProductCategoryDataLayer.cs" />
+    <Compile Include="ProductSizeDataLayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

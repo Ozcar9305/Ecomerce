@@ -26,7 +26,7 @@ namespace ECommerceDataLayer.Extensions
         {
             return new ProductCatalogDTO
             {
-                Identifier = reader.Get<long>("ProductCatalogIdentifier"),
+                Identifier = reader.Get<long>("ProductCatalogId"),
                 ProductCategoryIdentifier = reader.Get<long>("ProductCategoryId"),
                 ShortName = reader.Get<string>("ProductShortName"),
                 Description = reader.Get<string>("ProductDescription"),
@@ -62,6 +62,17 @@ namespace ECommerceDataLayer.Extensions
                 ProductCatalog = ToProductCatalog(reader),
                 ProductCategory = ToProductCategory(reader),
                 Customer = ToCustomer(reader)
+            };
+        }
+
+        public static SizesDTO ToSize(this IDataReader reader)
+        {
+            return new SizesDTO
+            {
+                Identifier = reader.Get<int>("SizeId"),
+                Name = reader.Get<string>("SizeName"),
+                Abreviature = reader.Get<string>("SizeAbreviature"),
+                Status = reader.Get<bool>("StatusId")
             };
         }
 

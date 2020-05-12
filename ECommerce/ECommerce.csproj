@@ -46,6 +46,7 @@
     <Compile Include="LoginLogic.cs" />
     <Compile Include="ProductCatalogLogic.cs" />
     <Compile Include="ProductCategoryLogic.cs" />
+    <Compile Include="ProductSizeLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

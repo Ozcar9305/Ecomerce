@@ -15,7 +15,7 @@ namespace WebApplication
             if (!Page.IsPostBack)
             {
                 //Prueba de CategoryListForMainPage
-                //var categoryResponse = new ProductCategoryLogic().CategoryListForMainPage(4);
+                var categoryResponse = new ProductCategoryLogic().CategoryListForMainPage(4);
             }
         }
     }

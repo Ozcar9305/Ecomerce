@@ -79,5 +79,7 @@
     <Build Include="Tables\Sizes.sql" />
     <Build Include="Tables\ExceptionLog.sql" />
     <Build Include="Procedures\Usp_ExceptionLogging_INS.sql" />
+    <Build Include="Procedures\Usp_ProductSize_GETL.sql" />
+    <Build Include="Tables\ProductSizes.sql" />
   </ItemGroup>
 </Project>
