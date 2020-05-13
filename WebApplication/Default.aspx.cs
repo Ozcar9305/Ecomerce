@@ -19,17 +19,17 @@ namespace WebApplication
 
                 //var productItem = new ProductCatalogLogic().ProductCatalogGetItem(1);
 
-                var x = new ProductCatalogLogic().ProductCatalogGetFilteredList
-                (
-                    new ECommerceDataModel.Shared.RequestDTO<ECommerceDataModel.ProductCatalogDTO>
-                    {
-                        Item = new ECommerceDataModel.ProductCatalogDTO
-                        {
-                            Identifier = 1
-                        },
-                        WordFilter = ""
-                    }
-                 );
+                //var x = new ProductCatalogLogic().ProductCatalogGetFilteredList
+                //(
+                //    new ECommerceDataModel.Shared.RequestDTO<ECommerceDataModel.ProductCatalogDTO>
+                //    {
+                //        Item = new ECommerceDataModel.ProductCatalogDTO
+                //        {
+                //            Identifier = 1
+                //        },
+                //        WordFilter = ""
+                //    }
+                // );
 
             }
         }

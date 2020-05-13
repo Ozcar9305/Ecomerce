@@ -93,6 +93,12 @@ namespace ECommerce
             return SlowEquals(hash, testHash);
         }
 
+        /// <summary>
+        /// Compara las contraseñas byte por byte
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
         private bool SlowEquals(byte[] a, byte[] b)
         {
             var diff = (uint)a.Length ^ (uint)b.Length;
@@ -103,6 +109,14 @@ namespace ECommerce
             return diff == 0;
         }
 
+        /// <summary>
+        /// Convierte la contraseña a un arreglo de bytes
+        /// </summary>
+        /// <param name="password"></param>
+        /// <param name="salt"></param>
+        /// <param name="iterations"></param>
+        /// <param name="outputBytes"></param>
+        /// <returns></returns>
         private byte[] GetPbkdf2Bytes(string password, byte[] salt, int iterations, int outputBytes)
         {
             var pbkdf2 = new Rfc2898DeriveBytes(password, salt);
