@@ -24,3 +24,12 @@ C:\ZharpSystems\Proyectos\ECommerce\Ecomerce\ECommerceDataLayer\obj\Debug\EComme
 C:\ZharpSystems\Proyectos\ECommerce\Ecomerce\ECommerceDataLayer\obj\Debug\ECommerceDataLayer.csproj.CopyComplete
 C:\ZharpSystems\Proyectos\ECommerce\Ecomerce\ECommerceDataLayer\obj\Debug\ECommerceDataLayer.dll
 C:\ZharpSystems\Proyectos\ECommerce\Ecomerce\ECommerceDataLayer\obj\Debug\ECommerceDataLayer.pdb
+C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\ECommerceDataLayer\bin\Debug\ECommerceDataLayer.dll
+C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\ECommerceDataLayer\bin\Debug\ECommerceDataLayer.pdb
+C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\ECommerceDataLayer\bin\Debug\ECommerceDataModel.dll
+C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\ECommerceDataLayer\bin\Debug\ECommerceDataModel.pdb
+C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\ECommerceDataLayer\obj\Debug\ECommerceDataLayer.csprojAssemblyReference.cache
+C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\ECommerceDataLayer\obj\Debug\ECommerceDataLayer.csproj.CoreCompileInputs.cache
+C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\ECommerceDataLayer\obj\Debug\ECommerceDataLayer.csproj.CopyComplete
+C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\ECommerceDataLayer\obj\Debug\ECommerceDataLayer.dll
+C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\ECommerceDataLayer\obj\Debug\ECommerceDataLayer.pdb

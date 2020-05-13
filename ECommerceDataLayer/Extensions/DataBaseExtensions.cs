@@ -87,7 +87,7 @@
                     command.CommandType = CommandType.StoredProcedure;
                     command.CommandTimeout = 0;
                     command.Connection.Open();
-                    isQueryExecuted = command?.ExecuteNonQuery() != default(int);
+                    isQueryExecuted = command?.ExecuteNonQuery() > default(int);
                 }
             }
             return isQueryExecuted;

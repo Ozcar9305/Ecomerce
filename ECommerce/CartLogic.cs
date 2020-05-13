@@ -10,6 +10,9 @@ namespace ECommerce
     
     public class CartLogic
     {
+        /// <summary>
+        /// Objeto de acceso a capa de datos
+        /// </summary>
         private readonly CartDataLayer dataLayer = new CartDataLayer();
 
         /// <summary>
@@ -46,6 +49,12 @@ namespace ECommerce
                 {
                     case OperationType.Insert:
                         cartResponse.Result = dataLayer.CartAddItem(cartRequest.Item);
+                        break;
+                    case OperationType.Update:
+                        cartResponse.Success = dataLayer.CartUpdateItem(cartRequest.Item);
+                        break;
+                    case OperationType.Delete:
+                        cartResponse.Success = dataLayer.CartDeleteItem(cartRequest.Item);
                         break;
                     default:
                         break;
