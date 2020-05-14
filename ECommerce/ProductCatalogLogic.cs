@@ -84,7 +84,7 @@
                     switch (product.OperationType)
                     {
                         case OperationType.Merge:
-                            response.Success = dataLayer.ProductCatalogMerge(product.Item);
+                            response.Success = dataLayer.ProductCatalogMerge(product.Item) && productSizeLogic.ProductSizeMerge(product).Success;
                             break;
                         case OperationType.Delete:
                             response.Success = dataLayer.ProductCatalogChangeStatus(product.Item.Identifier);

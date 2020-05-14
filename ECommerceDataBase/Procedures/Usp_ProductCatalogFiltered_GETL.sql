@@ -10,12 +10,19 @@ CREATE PROCEDURE [dbo].[Usp_ProductCatalogFiltered_GETL]
 @ProductCatalogId BIGINT,
 @WordFilter VARCHAR(20),
 @PageSize INT,
-@PageNumber INT
+@PageNumber INT,
+@All BIT
 AS
 BEGIN
 
 	SET NOCOUNT ON
 	SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+
+	IF @All = 1
+	BEGIN
+		SET @PageNumber = 1
+		SET @PageSize = 1000000
+	END
 
 	IF @ProductCatalogId = 0
 	BEGIN
@@ -42,7 +49,6 @@ BEGIN
 	ORDER BY product.ProductCatalogId ASC
 	OFFSET (@PageNumber-1) * @PageSize ROWS
 	FETCH NEXT @PageSize ROWS ONLY
-
 
 	SET TRANSACTION ISOLATION LEVEL READ COMMITTED
 	SET NOCOUNT OFF
