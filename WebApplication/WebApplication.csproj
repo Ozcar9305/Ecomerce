@@ -113,6 +113,7 @@
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="Contact.aspx" />
+    <Content Include="Content\bootstrap-select.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\addons\datatables-select.css" />
@@ -931,6 +932,7 @@
     <Content Include="Content\svg\zoom-in.svg" />
     <Content Include="Content\svg\zoom-out.svg" />
     <Content Include="Content\sweet-alert.css" />
+    <Content Include="Content\toastr.css" />
     <Content Include="css\addons\datatables-select.css" />
     <Content Include="css\addons\datatables-select.min.css" />
     <Content Include="css\addons\datatables.css" />
@@ -1046,6 +1048,7 @@
     <Content Include="js\modules\waves.js" />
     <Content Include="js\modules\wow.js" />
     <Content Include="js\popper.min.js" />
+    <Content Include="Scripts\bootstrap-select.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\common.js" />
@@ -1064,6 +1067,7 @@
     <Content Include="Scripts\masterPage.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\sweet-alert.min.js" />
+    <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\WebForms\DetailsView.js" />
     <Content Include="Scripts\WebForms\Focus.js" />
     <Content Include="Scripts\WebForms\GridView.js" />

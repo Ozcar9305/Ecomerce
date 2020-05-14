@@ -5,7 +5,11 @@
     using ECommerceDataModel;
     using ECommerceDataModel.Shared;
     using System;
+    using System.Configuration;
+    using System.IO;
     using System.Linq;
+    using System.Drawing;
+    using System.Drawing.Imaging;
 
     public class ProductCatalogLogic
     {
@@ -85,6 +89,18 @@
                     {
                         case OperationType.Merge:
                             response.Success = dataLayer.ProductCatalogMerge(product.Item);
+                            if (response.Success && !string.IsNullOrEmpty(product.Item.ImageBase64))
+                            {
+                                Image image;
+                                byte[] imageBytes = Convert.FromBase64String(product.Item.ImageBase64);
+                                using (var ms = new MemoryStream(imageBytes))
+                                {
+                                    image = Image.FromStream(ms);
+                                }
+                                var extension = ImageFormat.Jpeg.Equals(image.RawFormat) ? ".jpg" : ".png";
+
+                                File.WriteAllBytes(string.Format("{0}/{1}{2}", ConfigurationManager.AppSettings["ProductImagesDirectoryPath"], "name", extension), imageBytes);
+                            }
                             break;
                         case OperationType.Delete:
                             response.Success = dataLayer.ProductCatalogChangeStatus(product.Item.Identifier);

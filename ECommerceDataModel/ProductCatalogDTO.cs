@@ -26,5 +26,6 @@ namespace ECommerceDataModel
         public int DiscountAmount { get; set; }
 
         public bool Status { get; set; }
+        public string ImageBase64 { get; set; }
     }
 }
