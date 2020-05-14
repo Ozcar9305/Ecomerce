@@ -15,8 +15,10 @@ namespace ECommerceDataLayer
             var response = new ResponseListDTO<ProductCatalogDTO> { Paging = new PagingDTO() };
             using (SqlCommand command = new SqlCommand("Usp_ProductCatalogFiltered_GETL"))
             {
-                command.Parameters.AddWithValue("@ProductCatalogId", product.Item.Identifier);
-                command.Parameters.AddWithValue("@WordFilter", product.WordFilter);
+                command.Parameters.Add("@ProductCatalogId", SqlDbType.VarChar).Value = product.Item.Identifier;
+                command.Parameters.Add("@WordFilter", SqlDbType.VarChar).Value = product.WordFilter;
+                command.Parameters.Add("@PageSize", SqlDbType.Int).Value = product.Paging.PageSize;
+                command.Parameters.Add("@PageNumber", SqlDbType.Int).Value = product.Paging.PageNumber;
                 response.Result = command.Select(reader => reader.ToProductCatalog());
                 response.Paging.TotalRecords = command.Select(reader => reader.ToTotalRecords()).FirstOrDefault();
             }

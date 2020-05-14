@@ -138,6 +138,7 @@
     <Content Include="Content\css\modules\animations-extended.min.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\style.min.css" />
+    <Content Include="Content\ForzaUltra\cart.css" />
     <Content Include="Content\ForzaUltra\Shop.css" />
     <Content Include="Content\jquery.loadingModal.min.css" />
     <Content Include="Content\js\addons\datatables-select.js" />
@@ -958,6 +959,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="ForzaUltra\Admin\Categories.aspx" />
+    <Content Include="ForzaUltra\Cart.aspx" />
     <Content Include="ForzaUltra\Controles\Login\Login.ascx" />
     <Content Include="ForzaUltra\Admin\ProductCatalog.aspx" />
     <Content Include="ForzaUltra\RegisterForm.aspx" />
@@ -1123,6 +1125,13 @@
     </Compile>
     <Compile Include="ForzaUltra\Admin\Categories.aspx.designer.cs">
       <DependentUpon>Categories.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ForzaUltra\Cart.aspx.cs">
+      <DependentUpon>Cart.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ForzaUltra\Cart.aspx.designer.cs">
+      <DependentUpon>Cart.aspx</DependentUpon>
     </Compile>
     <Compile Include="ForzaUltra\Controles\Login\Login.ascx.cs">
       <DependentUpon>Login.ascx</DependentUpon>
