@@ -4,6 +4,7 @@ namespace ECommerceDataLayer
     using ECommerceDataLayer.Extensions;
     using ECommerceDataModel;
     using ECommerceDataModel.Shared;
+    using System;
     using System.Data;
     using System.Data.SqlClient;
     using System.Linq;
@@ -49,9 +50,9 @@ namespace ECommerceDataLayer
             return response;
         }
 
-        public long ProductCatalogMerge(ProductCatalogDTO productCatalog)
+        public ProductCatalogDTO ProductCatalogMerge(ProductCatalogDTO productCatalog)
         {
-            long productCatalogIdentifier = default(long);
+            var product = new ProductCatalogDTO();
             using (SqlCommand command = new SqlCommand("Usp_ProductCatalog_MRG"))
             {
                 command.Parameters.Add("@ProductCatalogId", SqlDbType.BigInt).Value = productCatalog.Identifier;
@@ -61,9 +62,9 @@ namespace ECommerceDataLayer
                 command.Parameters.Add("@ProductDescriptionAditional", SqlDbType.VarChar).Value = productCatalog.AditionalDescription;
                 command.Parameters.Add("@ProductPrice", SqlDbType.Decimal).Value = productCatalog.Price;
                 command.Parameters.Add("@ProductImage", SqlDbType.VarChar).Value = productCatalog.ImageName;
-                productCatalogIdentifier = command.Escalar<long>();
+                productCatalog = command.Select(reader => reader.ToProductCatalog()).FirstOrDefault();
             }
-            return productCatalogIdentifier;
+            return product;
         }
 
         public bool ProductCatalogChangeStatus(long productCatalogIdentifier)
