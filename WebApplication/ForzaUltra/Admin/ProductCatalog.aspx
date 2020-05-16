@@ -195,6 +195,17 @@
                 $btnNewProcut = $('#btnNewProcut'),
                 $btnSaveObjectProduct = $('#btnSaveObjectProduct');
 
+            var request = {
+                Paging: {
+                    PageNumber: 1,
+                    PageSize: 10
+                },
+                WordFilter: '',
+                Item: {
+                    Identifier: 0
+                }
+            };
+
             function readURL(input) {
                 if (input.files && input.files[0]) {
                     var reader = new FileReader();
@@ -349,7 +360,7 @@
                 $.ajax({
                     type: "POST",
                     url: "ProductCatalog.aspx/GetList",
-                    data: "",
+                    data: JSON.stringify({ "request": request }),
                     contentType: "application/json;charset=utf-8",
                     dataType: "json",
                     async: false,

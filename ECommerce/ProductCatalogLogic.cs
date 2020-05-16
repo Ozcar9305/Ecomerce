@@ -88,7 +88,8 @@
                     switch (product.OperationType)
                     {
                         case OperationType.Merge:
-                            response.Success = dataLayer.ProductCatalogMerge(product.Item);
+                            response.Result = new ProductCatalogDTO { Identifier = dataLayer.ProductCatalogMerge(product.Item) };
+                            response.Success = productSizeLogic.ProductSizeMerge(product).Success;
                             if (response.Success && !string.IsNullOrEmpty(product.Item.ImageBase64))
                             {
                                 Image image;
@@ -100,9 +101,7 @@
                                 var extension = ImageFormat.Jpeg.Equals(image.RawFormat) ? ".jpg" : ".png";
 
                                 File.WriteAllBytes(string.Format("{0}/{1}{2}", ConfigurationManager.AppSettings["ProductImagesDirectoryPath"], "name", extension), imageBytes);
-                            }
-                            response.Result = new ProductCatalogDTO { Identifier = dataLayer.ProductCatalogMerge(product.Item) };
-                            response.Success = productSizeLogic.ProductSizeMerge(product).Success;
+                            }                                                        
                             break;
                         case OperationType.Delete:
                             response.Success = dataLayer.ProductCatalogChangeStatus(product.Item.Identifier);

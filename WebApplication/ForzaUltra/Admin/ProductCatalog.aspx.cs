@@ -20,16 +20,9 @@ namespace WebApplication.ForzaUltra
         }
 
         [WebMethod]
-        public static ResponseListDTO<ProductCatalogDTO> GetList()
+        public static ResponseListDTO<ProductCatalogDTO> GetList(RequestDTO<ProductCatalogDTO> request)
         {
-            var response = new ProductCatalogLogic().ProductCatalogGetFilteredList(new RequestDTO<ProductCatalogDTO>
-            {
-                WordFilter = string.Empty,
-                Item = new ProductCatalogDTO
-                {
-                    Identifier = default(long)
-                }
-            });
+            var response = new ProductCatalogLogic().ProductCatalogGetFilteredList(request);
             return response;
         }
 

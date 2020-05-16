@@ -1,4 +1,6 @@
 ﻿using ECommerce;
+using ECommerceDataModel;
+using ECommerceDataModel.Shared;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -21,10 +23,10 @@ namespace WebApplication.ForzaUltra
         }
 
         [WebMethod]
-        public static string GetStoreGetList()
+        public static ResponseListDTO<ProductCategoryDTO> GetStoreGetList()
         {
             var response = new ProductCategoryLogic().CategoryListForMainPage(4);
-            return JsonConvert.SerializeObject(response);
+            return response;
         }
     }
 }
