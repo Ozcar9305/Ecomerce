@@ -7,6 +7,7 @@ namespace ECommerce
     using ECommerceDataModel.Shared;
     using System;
     using System.Linq;
+    using Newtonsoft.Json;
 
     public class ProductSizeLogic
     {
@@ -31,6 +32,29 @@ namespace ECommerce
                 exception.LogException();
             }
             return responseList;
+        }
+
+        /// <summary>
+        /// Pemite actualizar las tallas de un producto especifico
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
+        public ResponseDTO<SizesDTO> ProductSizeMerge(RequestDTO<ProductCatalogDTO> product)
+        {
+            var productSizeResponse = new ResponseDTO<SizesDTO>();
+            try
+            {
+                var json = JsonConvert.SerializeObject(product);
+                if (!string.IsNullOrEmpty(json))
+                {
+                    productSizeResponse.Success = dataLayer.ProductSizeMerge(product, json);
+                }
+            }
+            catch (Exception exception)
+            {
+                exception.LogException();
+            }
+            return productSizeResponse;
         }
     }
 }

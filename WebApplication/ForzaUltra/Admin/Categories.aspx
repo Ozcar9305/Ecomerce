@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="Categorias" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Categories.aspx.cs" Inherits="WebApplication.ForzaUltra.Categories" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-
     <br />
     <br />
     <br />
@@ -10,6 +9,7 @@
             <div class="col-lg-12">
                 <div class="col-lg-12">
                     <h2>Administración de Categorias</h2>
+                    <hr />
                 </div>
             </div>
         </div>

@@ -51,6 +51,7 @@ function loadCategoryList() {
 
                 //modal de edicion
                 $('.edit').off("click").on("click", function (e) {
+                    console.log('edit');
                     var categoryIdentifier = $(this).data('category-id');
                     loadCategoryDetail(categoryIdentifier);
                 });

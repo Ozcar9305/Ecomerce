@@ -15,8 +15,10 @@ namespace ECommerceDataLayer
             var response = new ResponseListDTO<ProductCatalogDTO> { Paging = new PagingDTO() };
             using (SqlCommand command = new SqlCommand("Usp_ProductCatalogFiltered_GETL"))
             {
-                command.Parameters.AddWithValue("@ProductCatalogId", product.Item.Identifier);
-                command.Parameters.AddWithValue("@WordFilter", product.WordFilter);
+                command.Parameters.Add("@ProductCatalogId", SqlDbType.VarChar).Value = product.Item.Identifier;
+                command.Parameters.Add("@WordFilter", SqlDbType.VarChar).Value = product.WordFilter;
+                command.Parameters.Add("@PageSize", SqlDbType.Int).Value = product.Paging.PageSize;
+                command.Parameters.Add("@PageNumber", SqlDbType.Int).Value = product.Paging.PageNumber;
                 response.Result = command.Select(reader => reader.ToProductCatalog());
                 response.Paging.TotalRecords = command.Select(reader => reader.ToTotalRecords()).FirstOrDefault();
             }
@@ -47,9 +49,9 @@ namespace ECommerceDataLayer
             return response;
         }
 
-        public bool ProductCatalogMerge(ProductCatalogDTO productCatalog)
+        public long ProductCatalogMerge(ProductCatalogDTO productCatalog)
         {
-            bool isMergeComplete = default(bool);
+            long productCatalogIdentifier = default(long);
             using (SqlCommand command = new SqlCommand("Usp_ProductCatalog_MRG"))
             {
                 command.Parameters.Add("@ProductCatalogId", SqlDbType.BigInt).Value = productCatalog.Identifier;
@@ -59,9 +61,9 @@ namespace ECommerceDataLayer
                 command.Parameters.Add("@ProductDescriptionAditional", SqlDbType.VarChar).Value = productCatalog.AditionalDescription;
                 command.Parameters.Add("@ProductPrice", SqlDbType.Decimal).Value = productCatalog.Price;
                 command.Parameters.Add("@ProductImage", SqlDbType.VarChar).Value = productCatalog.ImageName;
-                isMergeComplete = command.ExecuteQuery();
+                productCatalogIdentifier = command.Escalar<long>();
             }
-            return isMergeComplete;
+            return productCatalogIdentifier;
         }
 
         public bool ProductCatalogChangeStatus(long productCatalogIdentifier)

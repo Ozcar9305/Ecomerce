@@ -10,6 +10,7 @@
             <div class="col-lg-12">
                 <div class="col-lg-12">
                     <h2>Administración de Productos</h2>
+                    <hr />
                 </div>
             </div>
         </div>

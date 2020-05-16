@@ -20,6 +20,22 @@ namespace WebApplication
                 //Prueba de CategoryListForMainPage
                 //var categoryResponse = new ProductCategoryLogic().CategoryListForMainPage(4);
 
+                var productSizeResponse = new ProductSizeLogic().ProductSizeMerge(new RequestDTO<ProductCatalogDTO>
+                {
+                    Item = new ProductCatalogDTO
+                    {
+                        Identifier = 1,
+                        ProductCategoryIdentifier = 1,
+                        Sizes = new List<SizesDTO>
+                        {
+                            new SizesDTO { Identifier = 1 },
+                            new SizesDTO { Identifier = 2 },
+                            new SizesDTO { Identifier = 3 },
+                            new SizesDTO { Identifier = 4 },
+                        }
+                    }
+                });
+
                 //var productItem = new ProductCatalogLogic().ProductCatalogGetItem(1);
 
                 //var x = new ProductCatalogLogic().ProductCatalogGetFilteredList

@@ -8,5 +8,7 @@ namespace ECommerceDataModel.Shared
         public int PageSize { get; set; }
 
         public int TotalRecords { get; set; }
+
+        public bool All { get; set; }
     }
 }

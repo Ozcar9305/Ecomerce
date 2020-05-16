@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Material Design Bootstrap</title>
+    <title>Forza Ultra</title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js") %>
@@ -32,9 +32,12 @@
         <%: Styles.Render("~/Content/toastr.css") %>
         <%: Scripts.Render("~/Scripts/bootstrap-select.js") %>
         <%: Scripts.Render("~/Scripts/toastr.js") %>
+        <%: Styles.Render("~/Content/jquery.loadingModal.min.css") %>
+        <%: Scripts.Render("~/Scripts/jquery.loadingModal.min.js") %>
+        <%: Scripts.Render("~/Scripts/masterPage.js") %>
     </asp:PlaceHolder>
 
-    "stylesheet">
+    <%--"stylesheet">--%>
     <!-- Font Awesome -->
     <%--<link rel="stylesheet" href="Content/css/all.css">--%>
     <!-- Bootstrap core CSS -->

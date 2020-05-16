@@ -101,6 +101,8 @@
 
                                 File.WriteAllBytes(string.Format("{0}/{1}{2}", ConfigurationManager.AppSettings["ProductImagesDirectoryPath"], "name", extension), imageBytes);
                             }
+                            response.Result = new ProductCatalogDTO { Identifier = dataLayer.ProductCatalogMerge(product.Item) };
+                            response.Success = productSizeLogic.ProductSizeMerge(product).Success;
                             break;
                         case OperationType.Delete:
                             response.Success = dataLayer.ProductCatalogChangeStatus(product.Item.Identifier);
