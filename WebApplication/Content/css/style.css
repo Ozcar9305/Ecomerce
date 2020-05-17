@@ -25,14 +25,27 @@ body,
   .carousel {
     height: 100%; } }
 
+.bootstrap-select {
+    width: 100% !important;
+    margin-left: -5px !important;
+}
 /* Footer color for sake of consistency with Navbar */
 .page-footer {
-  background-color: #929FBA; }
+    background-color: #929FBA;
+}
 
 .forza-navbar {
     background: #212121!important;
 }
 
 .forza-navbar-font a{
+    color:white!important;
+}
+
+.modal-header {
+    background: #212121 !important;
+    color: white !important;
+}
+.close{
     color:white!important;
 }

@@ -20,7 +20,8 @@
         <%--<%: Styles.Render("https://code.jquery.com/jquery-3.4.1.slim.min.js") %>--%>
         <%--<%: Styles.Render("https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js") %>--%>
         <%--<%: Styles.Render("https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js") %>--%>
-        <%--<%: Styles.Render("https://kit.fontawesome.com/6506c34d73.js") %>--%>        
+        <%--<%: Styles.Render("https://kit.fontawesome.com/6506c34d73.js") %>--%>
+        <%: Styles.Render("~/Content/bootstrap-select.css") %>
         <%: Styles.Render("~/Content/css/mdb.css") %>
         <%: Scripts.Render("~/Scripts/jquery-3.3.1.min.js") %>
         <%: Scripts.Render("~/Scripts/handlebars.min-v4.7.3.js") %>
@@ -28,9 +29,15 @@
         <%: Styles.Render("//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css") %>
         <%: Scripts.Render("//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js") %>
         <%: Styles.Render("~/Content/css/style.css") %>
+        <%: Styles.Render("~/Content/toastr.css") %>
+        <%: Scripts.Render("~/Scripts/bootstrap-select.js") %>
+        <%: Scripts.Render("~/Scripts/toastr.js") %>
         <%: Styles.Render("~/Content/jquery.loadingModal.min.css") %>
+        <%: Styles.Render("~/Content/jqpagination.css") %>
         <%: Scripts.Render("~/Scripts/jquery.loadingModal.min.js") %>
         <%: Scripts.Render("~/Scripts/masterPage.js") %>
+        <%: Scripts.Render("~/Scripts/jquery.jqpagination.js") %>
+        <%: Scripts.Render("~/Scripts/jquery.tinypubsub.min.js") %>
     </asp:PlaceHolder>
 
     <%--"stylesheet">--%>
@@ -80,6 +87,12 @@
             }
         }
     </style>
+
+    <script type="text/javascript">
+
+        
+    </script>
+
 </head>
 
 <body>
