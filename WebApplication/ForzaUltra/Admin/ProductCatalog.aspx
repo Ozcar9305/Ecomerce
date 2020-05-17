@@ -330,9 +330,15 @@
                     imageBase64 = $('#imageProductPreviewBytes').val();
                 }
 
+                var hdIdentifier = 0
+
+                if ($('#productIdentifier').val() !== '') {
+                    hdIdentifier = parseInt($('#productIdentifier').val());
+                }
+
                 var product =
                 {
-                    Identifier: $('#productIdentifier').val(),
+                    Identifier: hdIdentifier,
                     ProductCategoryIdentifier: $ddlCategory.val(),
                     ShortName: $txtProductName.val(),
                     Description: $txtDescription.val(),
