@@ -141,6 +141,7 @@
     <Content Include="Content\css\style.min.css" />
     <Content Include="Content\ForzaUltra\cart.css" />
     <Content Include="Content\ForzaUltra\Shop.css" />
+    <Content Include="Content\jqpagination.css" />
     <Content Include="Content\jquery.loadingModal.min.css" />
     <Content Include="Content\js\addons\datatables-select.js" />
     <Content Include="Content\js\addons\datatables-select.min.js" />
@@ -1065,7 +1066,9 @@
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.jqpagination.js" />
     <Content Include="Scripts\jquery.loadingModal.min.js" />
+    <Content Include="Scripts\jquery.tinypubsub.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\masterPage.js" />

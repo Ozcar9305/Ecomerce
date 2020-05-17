@@ -4,6 +4,7 @@ using ECommerceDataModel.Shared;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
@@ -29,11 +30,20 @@ namespace WebApplication.ForzaUltra
         [WebMethod]
         public static ResponseDTO<ProductCatalogDTO> Merge(ProductCatalogDTO product)
         {
+            var path = HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["ProductImagesDirectoryPath"]);
             var response = new ProductCatalogLogic().ProductCatalogExecute(new RequestDTO<ProductCatalogDTO>
             {
                 OperationType = OperationType.Merge,
-                Item = product
+                Item = product,
+                ServerPath = path
             });
+            return response;
+        }
+
+        [WebMethod]
+        public static ResponseDTO<ProductCatalogDTO> GetItem(int productIdentifier)
+        {
+            var response = new ProductCatalogLogic().ProductCatalogGetItem(productIdentifier);
             return response;
         }
     }

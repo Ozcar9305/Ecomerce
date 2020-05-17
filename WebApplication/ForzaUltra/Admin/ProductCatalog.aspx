@@ -8,25 +8,19 @@
     <div class="row">
         <div class="container">
             <div class="col-lg-12">
-                <div class="col-lg-12">
-                    <h2>Administración de Productos</h2>
-                    <hr />
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h2>Administración de Productos</h2>
+                    </div>
+                    <div class="col-lg-6">
+                        <a class="btn btn-sm btn-danger pull-right" id="btnNewProcut" data-toggle="modal" data-target="#basicExampleModal"><i class="fa fa-plus-circle"></i>&nbsp;Nuevo</a>
+                    </div>
                 </div>
+                <hr />
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="container">
-            <div class="col-lg-12">
-                <div class="col-lg-3"></div>
-                <div class="col-lg-3"></div>
-                <div class="col-lg-3"></div>
-                <div class="col-offset-3 col-lg-3 pull-right">
-                    <a class="btn btn-sm btn-danger pull-right" id="btnNewProcut" data-toggle="modal" data-target="#basicExampleModal"><i class="fa fa-plus-circle"></i>&nbsp;Nuevo</a>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <div class="row">
         <div class="container">
             <div class="col-lg-12">
@@ -35,7 +29,19 @@
             </div>
         </div>
     </div>
-
+    <div class="row">
+        <div class="container">
+            <div class="col-lg-12 text-center">
+                <div class="pagination">
+                    <a href="#" class="first" data-action="first">&laquo;</a>
+                    <a href="#" class="previous" data-action="previous">&lsaquo;</a>
+                    <input type="text" readonly="readonly" data-max-page="40" />
+                    <a href="#" class="next" data-action="next">&rsaquo;</a>
+                    <a href="#" class="last" data-action="last">&raquo;</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Button trigger modal -->
     <div class="modal fade" id="mergeProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -49,6 +55,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <%--<label for="recipient-name" class="col-form-label">Nombre:</label>--%>
+                        <input type="hidden" id="productIdentifier" />
                         <input type="text" class="form-control" id="txtProductName" placeholder="Nombre">
                     </div>
                     <div class="form-group">
@@ -101,6 +108,8 @@
                     </div>
                     <div class="form-group">
                         <img id="imageProductPreview" src="#" hidden />
+                        <input type="hidden" id="imageProductPreviewBytes" />
+                        <input type="hidden" id="fileNameProductCatalog" />
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -206,12 +215,29 @@
                 }
             };
 
+            function PaginatorInit(response) {
+                var $estatusPedidoSelectPickerTemplate = $('.pagination');
+                var maxPage = (response.PageSize > response.TotalRecords) ? 1 : (Math.floor(response.TotalRecords / response.PageSize)) + (((response.TotalRecords % response.PageSize) > 0) ? 1 : 0);
+
+                $estatusPedidoSelectPickerTemplate.jqPagination({
+                    link_string: '/?page={page_number}',
+                    max_page: maxPage,
+                    paged: function (page) {
+                        $('.log').prepend('<li>Requested page ' + page + '</li>');
+                        if (page <= maxPage) {
+                            $.publish('pagination-component:onChange', { PageNumber: page });
+                        }
+                    }
+                });
+            }
+
             function readURL(input) {
                 if (input.files && input.files[0]) {
                     var reader = new FileReader();
 
                     reader.onload = function (e) {
                         $('#imageProductPreview').attr('src', e.target.result);
+                        $('#imageProductPreviewBytes').val(/base64,(.+)/.exec(e.target.result)[1]);
                     }
 
                     reader.readAsDataURL(input.files[0]); // convert to base64 string
@@ -221,12 +247,25 @@
             function btnNewProduct_onClick() {
                 $modalProductCatalogMerge.modal('show');
                 getListCategory();
+                clearProductModal();
                 $('.custom-file-input').bind('change', function (e) {
                     readURL(this);
                     var fileName = document.getElementById("customFileLang").files[0].name;
                     console.log(document.getElementById("customFileLang").files[0]);
                     var nextSibling = e.target.nextElementSibling
-                    nextSibling.innerText = fileName
+                    nextSibling.innerText = fileName;
+                    $('#fileNameProductCatalog').val(fileName);
+                });
+            }
+
+            function clearProductModal() {
+                $('#productIdentifier').val('');
+                $('#txtProductName').val('');
+                $('#txtDescription').val('');
+                $('#txtProductPrice').val('');
+
+                $('.form-check-input:checkbox').each(function () {
+                    $(this).prop('checked', false);
                 });
             }
 
@@ -287,12 +326,13 @@
 
                 var imageBase64 = '';
                 if ($('#imageProductPreview').attr('src') !== undefined && $('#imageProductPreview').attr('src') !== '') {
-                    imageBase64 = document.getElementById("imageProductPreview").src;
+                    //imageBase64 = document.getElementById("imageProductPreview").src;
+                    imageBase64 = $('#imageProductPreviewBytes').val();
                 }
 
                 var product =
                 {
-                    Identifier: 1000,
+                    Identifier: $('#productIdentifier').val(),
                     ProductCategoryIdentifier: $ddlCategory.val(),
                     ShortName: $txtProductName.val(),
                     Description: $txtDescription.val(),
@@ -303,7 +343,8 @@
                     ApplyDiscount: false,
                     DiscountAmount: 0,
                     Status: true,
-                    ImageBase64: imageBase64
+                    ImageBase64: imageBase64,
+                    ImageName: $('#fileNameProductCatalog').val()
                 };
 
                 $.ajax({
@@ -336,17 +377,20 @@
                 $.ajax({
                     type: "POST",
                     url: "ProductCatalog.aspx/GetItem",
-                    data: JSON.stringify({ 'idProduct': idProduct }),
+                    data: JSON.stringify({ 'productIdentifier': idProduct }),
                     contentType: "application/json;charset=utf-8",
                     dataType: "json",
                     async: false,
                     success: function (response) {
                         if (response.d.Success) {
-                            //$('#mergeProductModalTitle').html('Editar');
-                            //$('#txtProductName').val()
-                            //  $txtDescription = $('#txtDescription'),
-                            //$ddlCategory = $('#ddlCategory'),
-                            //$txtProductPrice = $('#txtProductPrice');
+                            $modalProductCatalogMerge.modal('show');
+                            getListCategory();
+                            console.log(response.d);
+                            $('#mergeProductModalTitle').html('Editar');
+                            $('#productIdentifier').val(response.d.Result.Identifier);
+                            $('#txtProductName').val(response.d.Result.ShortName);
+                            $('#txtDescription').val(response.d.Result.Description);
+                            $('#txtProductPrice').val(response.d.Result.Price);
 
                         }
                     },
@@ -366,7 +410,7 @@
                     async: false,
                     success: function (response) {
                         if (response.d.Success) {
-                            console.log(response.d);
+                            PaginatorInit(response.d.Paging);
                             var compile = Handlebars.compile($gridProductCatalogTemplate);
                             $griProductCatalog.empty();
                             $griProductCatalog.append(compile(response.d));
@@ -403,8 +447,14 @@
                 });
             }
 
+            function pagination_onChange(event, response) {
+                request.Paging.PageNumber = response.PageNumber;
+                getData();
+            }
+
             bindEvents();
             getData();
+            $.subscribe('pagination-component:onChange', pagination_onChange);
         })();
 
     </script>

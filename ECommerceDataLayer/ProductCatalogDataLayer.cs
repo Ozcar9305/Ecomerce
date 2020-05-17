@@ -23,6 +23,8 @@ namespace ECommerceDataLayer
                 command.Parameters.Add("@All", SqlDbType.Bit).Value = product.Paging.All;
                 response.Result = command.Select(reader => reader.ToProductCatalog());
                 response.Paging.TotalRecords = command.Select(reader => reader.ToTotalRecords()).FirstOrDefault();
+                response.Paging.PageNumber = product.Paging.PageNumber;
+                response.Paging.PageSize = product.Paging.PageSize;
             }
             return response;
         }
