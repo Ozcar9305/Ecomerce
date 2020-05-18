@@ -5,6 +5,8 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
@@ -37,6 +39,18 @@ namespace WebApplication.ForzaUltra
                 Item = product,
                 ServerPath = path
             });
+
+            //Guardar la imagen del producto
+            if (response.Success && !string.IsNullOrEmpty(path) && !string.IsNullOrEmpty(product.ImageBase64))
+            {
+                System.Drawing.Image image;
+                byte[] imageBytes = Convert.FromBase64String(product.ImageBase64);
+                using (var ms = new MemoryStream(imageBytes))
+                {
+                    image = System.Drawing.Image.FromStream(ms);
+                }
+                File.WriteAllBytes(Path.Combine(path, product.ImageName), imageBytes);
+            }
             return response;
         }
 

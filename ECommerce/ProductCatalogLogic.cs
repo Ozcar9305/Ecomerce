@@ -88,20 +88,7 @@
                     switch (product.OperationType)
                     {
                         case OperationType.Merge:
-                            response.Result = dataLayer.ProductCatalogMerge(product.Item);
-                            response.Success = productSizeLogic.ProductSizeMerge(product).Success;
-                            if (response.Success && !string.IsNullOrEmpty(product.Item.ImageBase64))
-                            {
-                                Image image;
-                                byte[] imageBytes = Convert.FromBase64String(product.Item.ImageBase64);
-                                using (var ms = new MemoryStream(imageBytes))
-                                {
-                                    image = Image.FromStream(ms);
-                                }
-                                var extension = ImageFormat.Jpeg.Equals(image.RawFormat) ? ".jpg" : ".png";
-
-                                File.WriteAllBytes(string.Format("{0}/{1}{2}", ConfigurationManager.AppSettings["ProductImagesDirectoryPath"], "name", extension), imageBytes);
-                            }                                                        
+                            response = mergeProduct(product);                                                   
                             break;
                         case OperationType.Delete:
                             response.Success = dataLayer.ProductCatalogChangeStatus(product.Item.Identifier);
@@ -119,6 +106,24 @@
             {
                 exception.LogException();
             }
+            return response;
+        }
+
+        /// <summary>
+        /// Permite realizar la operacion merge sobre un producto
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
+        private ResponseDTO<ProductCatalogDTO> mergeProduct(RequestDTO<ProductCatalogDTO> product)
+        {
+            var response = new ResponseDTO<ProductCatalogDTO>();
+            response.Result = dataLayer.ProductCatalogMerge(product.Item);
+            if (product.Item.Identifier == default(long))
+            {
+                product.Item.Identifier = response.Result.Identifier;
+            }
+
+            response.Success = product.Item.Identifier > 0 && productSizeLogic.ProductSizeMerge(product).Success;
             return response;
         }
     }
