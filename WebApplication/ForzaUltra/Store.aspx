@@ -13,7 +13,7 @@
                 <div class="view" style="background-image: url('../Images/ForzaUltra/Site/fu_banner.jpg'); background-repeat: no-repeat; background-size: cover;">
 
                     <!-- Mask & flexbox options-->
-                    <div class="mask rgba-black-strong d-flex justify-content-center align-items-center">
+                    <div class="mask d-flex justify-content-center align-items-center">
 
                         <!-- Content -->
                         <div class="text-center white-text mx-5 wow fadeIn">
@@ -53,11 +53,9 @@
         <div class="container">
             
             <!--Navbar-->
-            <nav class="navbar navbar-expand-lg navbar-light lighten-3 mt-3 mb-5" style="box-shadow:none">
-
+            <nav class="navbar navbar-expand-lg navbar-light lighten-3 mt-3 mb-5" style="box-shadow: none">
                 <!-- Navbar brand -->
                 <span class="navbar-brand dark-grey-text"><strong>{{Name}}</strong></span>
-
             </nav>
             <!--/.Navbar-->
            
@@ -98,9 +96,9 @@
                                 </h5>
 
                                 <h4 class="font-weight-bold blue-text">
-                                    <strong>{{numberFormat Price}}</strong>
+                                    <strong>${{numberFormat Price}}</strong>
                                 </h4>
-
+                                <input type="button" class="addToCart" data-category="{{ProductCategoryId}}" value="Agregar al carrito" />
                             </div>
                             <!--Card content-->
 

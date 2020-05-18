@@ -86,6 +86,8 @@
                                 categoryList[i].Identifier,
                                 categoryList[i].ProductList[j].Identifier
                             ).Result;
+
+                            categoryList[i].ProductList[j].ProductCategoryIdentifier = categoryList[i].Identifier;
                         }
                     }
 
