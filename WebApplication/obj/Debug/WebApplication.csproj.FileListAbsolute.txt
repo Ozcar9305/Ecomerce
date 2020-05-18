@@ -228,8 +228,8 @@ C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\WebApplication\bin\WebGreas
 C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\WebApplication\bin\ECommerceDataLayer.dll
 C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\WebApplication\bin\ECommerceDataModel.pdb
 C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\WebApplication\bin\ECommerce.pdb
-C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\WebApplication\bin\System.Web.Optimization.xml
 C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\WebApplication\bin\Newtonsoft.Json.xml
+C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\WebApplication\bin\System.Web.Optimization.xml
 C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\WebApplication\bin\Antlr3.Runtime.pdb
 C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\WebApplication\bin\Microsoft.AspNet.FriendlyUrls.xml
 C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\WebApplication\bin\System.Diagnostics.DiagnosticSource.xml

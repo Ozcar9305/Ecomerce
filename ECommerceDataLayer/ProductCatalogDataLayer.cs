@@ -65,7 +65,20 @@ namespace ECommerceDataLayer
                 command.Parameters.Add("@ProductDescriptionAditional", SqlDbType.VarChar).Value = productCatalog.AditionalDescription;
                 command.Parameters.Add("@ProductPrice", SqlDbType.Decimal).Value = productCatalog.Price;
                 command.Parameters.Add("@ProductImage", SqlDbType.VarChar).Value = productCatalog.ImageName;
-                productCatalog = command.Select(reader => reader.ToProductCatalog()).FirstOrDefault();
+
+                string execCommand = $"exec {command.CommandText}";
+                foreach(SqlParameter parameter in command.Parameters)
+                {
+                    if(parameter.DbType == DbType.AnsiString)
+                    {
+                        execCommand += $"{parameter.ParameterName} = '{parameter.Value}',\n";
+                    }
+                    else
+                    {
+                        execCommand += $"{parameter.ParameterName} = {parameter.Value},\n";
+                    }
+                }
+                product = command.Select(reader => reader.ToProductCatalog()).FirstOrDefault();
             }
             return product;
         }

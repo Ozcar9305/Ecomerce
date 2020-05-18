@@ -11,6 +11,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <h2>Administración de Productos</h2>
+                        <hr />
                     </div>
                     <div class="col-lg-6">
                         <a class="btn btn-sm btn-danger pull-right" id="btnNewProcut" data-toggle="modal" data-target="#basicExampleModal"><i class="fa fa-plus-circle"></i>&nbsp;Nuevo</a>
@@ -397,7 +398,7 @@
                             $('#txtProductName').val(response.d.Result.ShortName);
                             $('#txtDescription').val(response.d.Result.Description);
                             $('#txtProductPrice').val(response.d.Result.Price);
-
+                            $('#ddlCategory').val(response.d.Result.ProductCategoryIdentifier);
                         }
                     },
                     failure: function () {

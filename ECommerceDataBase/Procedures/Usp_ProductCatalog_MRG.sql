@@ -24,6 +24,15 @@ BEGIN
 		WHEN NOT MATCHED BY TARGET THEN
 			INSERT (ProductCategoryId, ProductShortName, ProductDescription, ProductDescriptionAditional, ProductPrice, ProductImage)
 			VALUES (@ProductCategoryId, @ProductShortName, @ProductDescription, @ProductDescriptionAditional, @ProductPrice, @ProductImage);
+			
+	IF @ProductCatalogId > 0
+	BEGIN
+		SELECT @ProductCatalogId AS ProductCatalogId
+	END
+	ELSE
+	BEGIN
+		SELECT SCOPE_IDENTITY() AS ProductCatalogId
+	END
 
 	COMMIT TRANSACTION ProductCatalogTransaction
 	END TRY
