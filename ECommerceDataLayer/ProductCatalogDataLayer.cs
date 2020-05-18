@@ -20,8 +20,11 @@ namespace ECommerceDataLayer
                 command.Parameters.Add("@WordFilter", SqlDbType.VarChar).Value = product.WordFilter;
                 command.Parameters.Add("@PageSize", SqlDbType.Int).Value = product.Paging.PageSize;
                 command.Parameters.Add("@PageNumber", SqlDbType.Int).Value = product.Paging.PageNumber;
+                command.Parameters.Add("@All", SqlDbType.Bit).Value = product.Paging.All;
                 response.Result = command.Select(reader => reader.ToProductCatalog());
                 response.Paging.TotalRecords = command.Select(reader => reader.ToTotalRecords()).FirstOrDefault();
+                response.Paging.PageNumber = product.Paging.PageNumber;
+                response.Paging.PageSize = product.Paging.PageSize;
             }
             return response;
         }
@@ -62,7 +65,20 @@ namespace ECommerceDataLayer
                 command.Parameters.Add("@ProductDescriptionAditional", SqlDbType.VarChar).Value = productCatalog.AditionalDescription;
                 command.Parameters.Add("@ProductPrice", SqlDbType.Decimal).Value = productCatalog.Price;
                 command.Parameters.Add("@ProductImage", SqlDbType.VarChar).Value = productCatalog.ImageName;
-                productCatalog = command.Select(reader => reader.ToProductCatalog()).FirstOrDefault();
+
+                string execCommand = $"exec {command.CommandText}";
+                foreach(SqlParameter parameter in command.Parameters)
+                {
+                    if(parameter.DbType == DbType.AnsiString)
+                    {
+                        execCommand += $"{parameter.ParameterName} = '{parameter.Value}',\n";
+                    }
+                    else
+                    {
+                        execCommand += $"{parameter.ParameterName} = {parameter.Value},\n";
+                    }
+                }
+                product = command.Select(reader => reader.ToProductCatalog()).FirstOrDefault();
             }
             return product;
         }

@@ -5,7 +5,11 @@
     using ECommerceDataModel;
     using ECommerceDataModel.Shared;
     using System;
+    using System.Configuration;
+    using System.IO;
     using System.Linq;
+    using System.Drawing;
+    using System.Drawing.Imaging;
 
     public class ProductCatalogLogic
     {
@@ -84,8 +88,7 @@
                     switch (product.OperationType)
                     {
                         case OperationType.Merge:
-                            response.Result = dataLayer.ProductCatalogMerge(product.Item);
-                            response.Success = productSizeLogic.ProductSizeMerge(product).Success;
+                            response = mergeProduct(product);                                                   
                             break;
                         case OperationType.Delete:
                             response.Success = dataLayer.ProductCatalogChangeStatus(product.Item.Identifier);
@@ -103,6 +106,24 @@
             {
                 exception.LogException();
             }
+            return response;
+        }
+
+        /// <summary>
+        /// Permite realizar la operacion merge sobre un producto
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
+        private ResponseDTO<ProductCatalogDTO> mergeProduct(RequestDTO<ProductCatalogDTO> product)
+        {
+            var response = new ResponseDTO<ProductCatalogDTO>();
+            response.Result = dataLayer.ProductCatalogMerge(product.Item);
+            if (product.Item.Identifier == default(long))
+            {
+                product.Item.Identifier = response.Result.Identifier;
+            }
+
+            response.Success = product.Item.Identifier > 0 && productSizeLogic.ProductSizeMerge(product).Success;
             return response;
         }
     }
