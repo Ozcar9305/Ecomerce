@@ -1,5 +1,4 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="WebApplication.SiteMaster" %>
-
 <%@ Register Src="~/ForzaUltra/Controles/Login/Login.ascx" TagPrefix="ECommerce" TagName="Login" %>
 
 <!DOCTYPE html>
@@ -88,14 +87,23 @@
     </style>
 
     <script type="text/javascript">
+        $(document).ready(function () {
 
+            $('#lnkLogin').click(function (e) {
+                $("#loginModal").modal();
+            });
+
+        });
         
     </script>
 
 </head>
-
+    
 <body>
+    <ECommerce:Login runat="server" ID="Login" />
     <form id="frmStore" runat="server">
+
+        
         <!-- Navbar -->
         <nav class="navbar forza-navbar forza-navbar-font fixed-top navbar-expand-lg navbar-light scrolling-navbar">
             <div class="container">
@@ -140,8 +148,8 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="https://www.facebook.com/mdbootstrap" class="nav-link waves-effect" target="_blank">
-                                <i class="fab fa-facebook-f">Login</i>
+                            <a class="nav-link waves-effect" id="lnkLogin" data-toggle="modal" data-target="#modalLoginForm">
+                                <i class="fa fa-sign-in">&nbsp;Login</i>
                             </a>
                         </li>
                     </ul>
