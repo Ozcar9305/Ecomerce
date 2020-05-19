@@ -98,7 +98,7 @@
                                 <h4 class="font-weight-bold blue-text">
                                     <strong>${{numberFormat Price}}</strong>
                                 </h4>
-                                <input type="button" class="addToCart" data-category="{{ProductCategoryId}}" value="Agregar al carrito" />
+                                <input type="button" class="addToCart" data-category="{{ProductCategoryIdentifier}}" value="Agregar al carrito" />
                             </div>
                             <!--Card content-->
 
