@@ -151,9 +151,7 @@
                                     <td>{{Description}}</td>
                                     <td>{{numberFormat Price}}</td>
                                     <td class="text-center">
-                                        <a>
-                                            <i class="fa fa-pencil-square edit-product" style="width: 25px; height: 25px;" data-idproduct="{{Identifier}}" aria-hidden="true"></i>
-                                        </a>
+                                        <a><i class="fa fa-pencil-square edit-product" style="width: 25px; height: 25px;" data-idproduct="{{Identifier}}" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>
                                 {{/each}}

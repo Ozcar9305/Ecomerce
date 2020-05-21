@@ -1,5 +1,4 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="WebApplication.SiteMaster" %>
-
 <%@ Register Src="~/ForzaUltra/Controles/Login/Login.ascx" TagPrefix="ECommerce" TagName="Login" %>
 
 <!DOCTYPE html>
@@ -37,6 +36,7 @@
         <%--<%: Scripts.Render("~/Scripts/masterPage.js") %>--%>
         <%: Scripts.Render("~/Scripts/jquery.jqpagination.js") %>
         <%: Scripts.Render("~/Scripts/jquery.tinypubsub.min.js") %>
+        <%: Scripts.Render("~/Scripts/ForzaUltra/Cart.js") %>
     </asp:PlaceHolder>
 
     <%--"stylesheet">--%>
@@ -88,14 +88,23 @@
     </style>
 
     <script type="text/javascript">
+        $(document).ready(function () {
 
+            $('#lnkLogin').click(function (e) {
+                $("#loginModal").modal();
+            });
+
+        });
         
     </script>
 
 </head>
-
+    
 <body>
+    <ECommerce:Login runat="server" ID="Login" />
     <form id="frmStore" runat="server">
+
+        
         <!-- Navbar -->
         <nav class="navbar forza-navbar forza-navbar-font fixed-top navbar-expand-lg navbar-light scrolling-navbar">
             <div class="container">
@@ -134,14 +143,14 @@
                     <ul class="navbar-nav nav-flex-icons">
                         <li class="nav-item">
                             <a class="nav-link waves-effect">
-                                <span class="badge red z-depth-1 mr-1">1 </span>
-                                <i class="glyphicon glyphicon-search"></i>
+                                <span class="badge red z-depth-1 mr-1" id="cart-elements-count">0&nbsp;</span>
+                                <i class="fa fa-shopping-cart"></i>
                                 <span class="clearfix d-none d-sm-inline-block">Carrito </span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="https://www.facebook.com/mdbootstrap" class="nav-link waves-effect" target="_blank">
-                                <i class="fab fa-facebook-f">Login</i>
+                            <a class="nav-link waves-effect" id="lnkLogin" data-toggle="modal" data-target="#modalLoginForm">
+                                <i class="fa fa-sign-in">&nbsp;Login</i>
                             </a>
                         </li>
                     </ul>

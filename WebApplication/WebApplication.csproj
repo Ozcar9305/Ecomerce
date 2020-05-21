@@ -1058,6 +1058,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\common.js" />
     <Content Include="Scripts\ForzaUltra\Admin\Categories.js" />
+    <Content Include="Scripts\ForzaUltra\Cart.js" />
     <Content Include="Scripts\ForzaUltra\Login.js" />
     <Content Include="Scripts\ForzaUltra\NewPasswordForm.js" />
     <Content Include="Scripts\ForzaUltra\RegisterForm.js" />

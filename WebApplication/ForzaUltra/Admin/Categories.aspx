@@ -7,10 +7,15 @@
     <div class="row">
         <div class="container">
             <div class="col-lg-12">
-                <div class="col-lg-12">
-                    <h2>Administración de Categorias</h2>
-                    <hr />
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h2>Administración de Categorias</h2>                        
+                    </div>
+                    <div class="col-lg-6">
+                        <a class="btn btn-sm btn-danger pull-right" id="btnAddCategory" data-toggle="modal" data-target="#basicExampleModal"><i class="fa fa-plus-circle"></i>&nbsp;Nuevo</a>
+                    </div>
                 </div>
+                <hr />
             </div>
         </div>
     </div>
@@ -37,21 +42,30 @@
                     </div>
                 </div>
             </div>
-            <%-- <div class="col-lg-8 col-md-offset-2 text-right">
-                <input type="button" id="btnAddCategory" value="Agregar nueva categoría" class="btn btn-danger" />
-            </div>--%>
         </div>
     </div>
-
+      <div class="row">
+        <div class="container">
+            <div class="col-lg-12 text-center">
+                <div class="pagination">
+                    <a href="#" class="first" data-action="first">&laquo;</a>
+                    <a href="#" class="previous" data-action="previous">&lsaquo;</a>
+                    <input type="text" readonly="readonly" data-max-page="40" />
+                    <a href="#" class="next" data-action="next">&rsaquo;</a>
+                    <a href="#" class="last" data-action="last">&raquo;</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <%--Modal de alta y edicion--%>
     <div class="modal fade" id="divModalCategory" role="dialog">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     <h4 class="modal-title">
                         <span id="spnModalTitle"></span>
                     </h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                 </div>
                 <div class="modal-body" style="padding: 10px 15px;">
                     <form role="form">
@@ -66,8 +80,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    <button type="button" id="btnSave" class="btn btn-danger">Guardar</button>
+                    <button type="button" class="btn btn-sm btn-outline-primary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" id="btnSave" class="btn btn-sm btn-outline-danger">Guardar</button>
                 </div>
             </div>
         </div>

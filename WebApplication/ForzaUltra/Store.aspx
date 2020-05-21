@@ -51,20 +51,20 @@
     <script type="text/x-handlebars-template" id="catalogMainPageTemplate">
         {{#each Result}}
         <div class="container">
-            
+
             <!--Navbar-->
             <nav class="navbar navbar-expand-lg navbar-light lighten-3 mt-3 mb-5" style="box-shadow: none">
                 <!-- Navbar brand -->
                 <span class="navbar-brand dark-grey-text"><strong>{{Name}}</strong></span>
             </nav>
             <!--/.Navbar-->
-           
+
             <!--Section: Products v.3-->
             <section class="text-center mb-4">
 
                 <!--Grid row-->
                 <div class="row wow fadeIn">
-                     {{#each ProductList}}
+                    {{#each ProductList}}
                     <!--Grid column-->
                     <div class="col-lg-3 col-md-6 mb-4">
 
@@ -73,7 +73,7 @@
 
                             <!--Card image-->
                             <div class="view overlay">
-                                <img src="../Images/ForzaUltra/Upload/{{ImageName}}"  class="card-img-top"
+                                <img src="../Images/ForzaUltra/Upload/{{ImageName}}" class="card-img-top"
                                     alt="">
                                 <a>
                                     <div class="mask rgba-white-slight"></div>
@@ -89,19 +89,19 @@
                                 </a>
                                 <h5>
                                     <strong>
-                                        <a  class="dark-grey-text">{{Description}}</a>
+                                        <a class="dark-grey-text">{{Description}}
+                      <%--<span class="badge badge-pill danger-color">NEW</span>--%>
+                                        </a>
                                     </strong>
                                 </h5>
+
                                 <h4 class="font-weight-bold blue-text">
                                     <strong>${{numberFormat Price}}</strong>
                                 </h4>
-
-                                <%--{{#if (lt HolaMundo 0)}}--%>
-                                <input type="button" class="addToCart" 
-                                    data-category="{{ProductCategoryIdentifier}}" 
-                                    data-product="{{Identifier}}"   
-                                    value="Agregar al carrito" />
-                                <%--{{/if}}--%>
+                                <a class="btn btn-sm btn-danger product-identifier" data-identifier="{{Identifier}}" data-category="{{ProductCategoryIdentifier}}" data-price="{{Price}}">
+                                    <i class="fa fa-cart-plus"></i>
+                                    <span class="clearfix d-none d-sm-inline-block">&nbsp;Agregar</span>
+                                </a>
                             </div>
                             <!--Card content-->
 
@@ -115,67 +115,12 @@
                 <!--Grid row-->
             </section>
             <!--Section: Products v.3-->
-            
+
         </div>
         {{/each}}
     </script>
 
     <script type="text/javascript">
-
-        Handlebars.registerHelper({
-            eq: function (v1, v2) {
-                return v1 === v2;
-            },
-            ne: function (v1, v2) {
-                return v1 !== v2;
-            },
-            lt: function (v1, v2) {
-                return v1 < v2;
-            },
-            gt: function (v1, v2) {
-                return v1 > v2;
-            },
-            lte: function (v1, v2) {
-                return v1 <= v2;
-            },
-            gte: function (v1, v2) {
-                return v1 >= v2;
-            },
-            and: function () {
-                return Array.prototype.slice.call(arguments).every(Boolean);
-            },
-            or: function () {
-                return Array.prototype.slice.call(arguments, 0, -1).some(Boolean);
-            }
-        });
-
-        Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
-
-            switch (operator) {
-                case '==':
-                    return (v1 == v2) ? options.fn(this) : options.inverse(this);
-                case '===':
-                    return (v1 === v2) ? options.fn(this) : options.inverse(this);
-                case '!=':
-                    return (v1 != v2) ? options.fn(this) : options.inverse(this);
-                case '!==':
-                    return (v1 !== v2) ? options.fn(this) : options.inverse(this);
-                case '<':
-                    return (v1 < v2) ? options.fn(this) : options.inverse(this);
-                case '<=':
-                    return (v1 <= v2) ? options.fn(this) : options.inverse(this);
-                case '>':
-                    return (v1 > v2) ? options.fn(this) : options.inverse(this);
-                case '>=':
-                    return (v1 >= v2) ? options.fn(this) : options.inverse(this);
-                case '&&':
-                    return (v1 && v2) ? options.fn(this) : options.inverse(this);
-                case '||':
-                    return (v1 || v2) ? options.fn(this) : options.inverse(this);
-                default:
-                    return options.inverse(this);
-            }
-        });
 
         Handlebars.registerHelper('numberFormat', function (value, options) {
             // Helper parameters
@@ -198,9 +143,63 @@
 
         (function () {
 
+            
+
             var $catalogMainPageTemplate = $('#catalogMainPageTemplate').html(),
                 $catalogMainPage = $('#catalogMainPage');
 
+            function product_onClick(e) {
+                var session = "True"; <%--'<%= HttpContext.Current.Session["SessionInit"] %>';                --%>
+                var categoryIentifier = $(this).attr('data-category');
+                var productIdentifier = $(this).attr('data-identifier');
+                var productPrice = $(this).attr('data-price');
+
+                if (session === 'False') {
+                    $("#loginModal").modal();
+                } else {
+                    var item = {
+                        Identifier: '',
+                        ProductCategory: {
+                            Identifier: categoryIentifier
+                        },
+                        ProductCatalog: {
+                            Identifier: productIdentifier,
+                            Price: productPrice,
+                            Sizes: [
+                                {
+                                    Identifier: 5
+                                }
+                            ]
+                        },
+                        Quantity: 1
+                    };
+
+                    $.ajax({
+                        type: "POST",
+                        url: "Store.aspx/CartItemExecute",
+                        data: "",
+                        contentType: "application/json;charset=utf-8",
+                        dataType: "json",
+                        data: JSON.stringify({ "item": item }),
+                        async: false,
+                        success: function (ressult) {
+                            var response = ressult.d;
+                            if (response.success) {
+                                $.publish('cart-elements-count:onChange');
+                                toastr.success("Se agrego un elemento a tu carrito de compras.");
+                            }
+                        },
+                        failure: function () {
+                            toastr.error("Error al agregar el producto.");
+                        }
+                    });
+                }
+            }
+
+            function bindEvents() {
+                $('.product-identifier').bind('click', product_onClick);
+            }
+                 
 
             $.ajax({
                 type: "POST",
@@ -210,12 +209,11 @@
                 dataType: "json",
                 async: false,
                 success: function (response) {
-                    response.d.Result.HolaMundo = 13;
                     console.log(response.d);
-
                     var compile = Handlebars.compile($catalogMainPageTemplate);
                     $catalogMainPage.empty();
                     $catalogMainPage.append(compile(response.d));
+                    bindEvents();
                 },
                 failure: function () {
                     toastr.error("Error al consultar los datos");

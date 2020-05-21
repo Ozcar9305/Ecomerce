@@ -34,7 +34,21 @@
                 command.Parameters.Add("@ProductPrice", SqlDbType.Decimal).Value = cart.ProductCatalog.Price;
                 command.Parameters.Add("@Quantity", SqlDbType.Int).Value = cart.Quantity;
                 command.Parameters.Add("@SizeId", SqlDbType.Int).Value = cart.ProductCatalog.Sizes[0].Identifier;
-                cartResult.Identifier = command.Escalar<string>();
+
+                string execCommand = $"exec {command.CommandText}";
+                foreach (SqlParameter parameter in command.Parameters)
+                {
+                    if (parameter.DbType == DbType.AnsiString)
+                    {
+                        execCommand += $"{parameter.ParameterName} = '{parameter.Value}',\n";
+                    }
+                    else
+                    {
+                        execCommand += $"{parameter.ParameterName} = {parameter.Value},\n";
+                    }
+                }
+
+                cartResult.Identifier = command.Escalar<string>();                
             }
             return cartResult;
         }
