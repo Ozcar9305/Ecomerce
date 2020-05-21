@@ -49,6 +49,7 @@
     <Compile Include="CartLogic.cs" />
     <Compile Include="Helpers\ExceptionClassExtension.cs" />
     <Compile Include="LoginLogic.cs" />
+    <Compile Include="MailLogic.cs" />
     <Compile Include="ProductCatalogLogic.cs" />
     <Compile Include="ProductCategoryLogic.cs" />
     <Compile Include="ProductSizeLogic.cs" />

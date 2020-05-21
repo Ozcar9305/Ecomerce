@@ -7,6 +7,7 @@ namespace ECommerce
     using ECommerce.Helpers;
     using System;
     using System.Security.Cryptography;
+    using System.Collections.Specialized;
 
     public class LoginLogic
     {
@@ -28,8 +29,18 @@ namespace ECommerce
             var customerResponse = new ResponseDTO<CustomerDTO>();
             try
             {
-                customer.Item.EncryptedPassword = HashPassword(customer.Item.Password);
-                customerResponse.Success = dataLayer.RegisterUser(customer.Item);
+                switch (customer.OperationType)
+                {
+                    case OperationType.Insert:
+                        customer.Item.EncryptedPassword = HashPassword(customer.Item.Password);
+                        customerResponse.Success = dataLayer.RegisterUser(customer.Item);
+                        break;
+                    case OperationType.ChangePassword:
+                        customerResponse.Success = CustomerChangePassword(customer.Item);
+                        break;
+                    default:
+                        break;
+                }
             }
             catch (Exception exception)
             {
@@ -56,6 +67,31 @@ namespace ECommerce
                 exception.LogException();
             }
             return customerResponse;
+        }
+
+        /// <summary>
+        /// Permite actualizar la contraseña de un usuario
+        /// </summary>
+        /// <param name="customer"></param>
+        /// <returns></returns>
+        public bool CustomerChangePassword(CustomerDTO customer)
+        {
+            bool isPasswordUpdate = default(bool);
+            try
+            {
+                var customerItem = CustomerGetItem(new RequestDTO<CustomerDTO> { Item = customer });
+                if (customerItem.Success && !string.IsNullOrEmpty(customer.Password) && customerItem.Result.EncryptedPassword == customer.EncryptedPassword)
+                {
+                    customer.Identifier = customerItem.Result.Identifier;
+                    customer.EncryptedPassword = HashPassword(customer.Password);
+                    isPasswordUpdate = dataLayer.CustomerChangePassword(customer);
+                }
+            }
+            catch (Exception exception)
+            {
+                exception.LogException();
+            }
+            return isPasswordUpdate;
         }
 
         /// <summary>

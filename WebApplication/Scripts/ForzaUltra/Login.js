@@ -3,11 +3,6 @@
     $('#btnValidateLogin').click(function (event) {
         event.preventDefault();
 
-        if ($('#usrname') !== '') {
-
-        }
-        
-
     });
 
 });

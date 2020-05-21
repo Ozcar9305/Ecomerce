@@ -28,7 +28,8 @@
         {
             return loginLogic.CustomerExecute(new RequestDTO<CustomerDTO>
             {
-                Item = customer
+                Item = customer,
+                OperationType = OperationType.Insert
             });
         } 
     }

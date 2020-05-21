@@ -17,6 +17,15 @@ namespace WebApplication
         {
             if (!Page.IsPostBack)
             {
+
+                //bool loginOk = new LoginLogic().ValidatePassword("Hola123", "1000:hcZKnVJpuaOQdupclRpdYUsKp2e0vTll:+OTRoXqjMrq4XO87tC0YzUHa1aM=");
+                //bool changePasswordOk = new LoginLogic().CustomerChangePassword(new CustomerDTO
+                //{
+                //    EncryptedPassword = "1000:q6fher+Uz7wAmR9T7fUcLw1MhAbzZZ9m:4tdSJ8Zs/d4Yx7a1sjgAF04vvbo=",
+                //    Password = "Hola123",
+                //    Email = "jgallegosledon@gmail.com"
+                //});
+
                 //Prueba de CategoryListForMainPage
                 //var categoryResponse = new ProductCategoryLogic().CategoryListForMainPage(4);
 

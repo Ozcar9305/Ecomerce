@@ -89,16 +89,19 @@
                                 </a>
                                 <h5>
                                     <strong>
-                                        <a  class="dark-grey-text">{{Description}}
-                      <%--<span class="badge badge-pill danger-color">NEW</span>--%>
-                                        </a>
+                                        <a  class="dark-grey-text">{{Description}}</a>
                                     </strong>
                                 </h5>
-
                                 <h4 class="font-weight-bold blue-text">
                                     <strong>${{numberFormat Price}}</strong>
                                 </h4>
-                                <input type="button" class="addToCart" data-category="{{ProductCategoryId}}" value="Agregar al carrito" />
+
+                                <%--{{#if (lt HolaMundo 0)}}--%>
+                                <input type="button" class="addToCart" 
+                                    data-category="{{ProductCategoryIdentifier}}" 
+                                    data-product="{{Identifier}}"   
+                                    value="Agregar al carrito" />
+                                <%--{{/if}}--%>
                             </div>
                             <!--Card content-->
 
@@ -118,6 +121,61 @@
     </script>
 
     <script type="text/javascript">
+
+        Handlebars.registerHelper({
+            eq: function (v1, v2) {
+                return v1 === v2;
+            },
+            ne: function (v1, v2) {
+                return v1 !== v2;
+            },
+            lt: function (v1, v2) {
+                return v1 < v2;
+            },
+            gt: function (v1, v2) {
+                return v1 > v2;
+            },
+            lte: function (v1, v2) {
+                return v1 <= v2;
+            },
+            gte: function (v1, v2) {
+                return v1 >= v2;
+            },
+            and: function () {
+                return Array.prototype.slice.call(arguments).every(Boolean);
+            },
+            or: function () {
+                return Array.prototype.slice.call(arguments, 0, -1).some(Boolean);
+            }
+        });
+
+        Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
+
+            switch (operator) {
+                case '==':
+                    return (v1 == v2) ? options.fn(this) : options.inverse(this);
+                case '===':
+                    return (v1 === v2) ? options.fn(this) : options.inverse(this);
+                case '!=':
+                    return (v1 != v2) ? options.fn(this) : options.inverse(this);
+                case '!==':
+                    return (v1 !== v2) ? options.fn(this) : options.inverse(this);
+                case '<':
+                    return (v1 < v2) ? options.fn(this) : options.inverse(this);
+                case '<=':
+                    return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+                case '>':
+                    return (v1 > v2) ? options.fn(this) : options.inverse(this);
+                case '>=':
+                    return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+                case '&&':
+                    return (v1 && v2) ? options.fn(this) : options.inverse(this);
+                case '||':
+                    return (v1 || v2) ? options.fn(this) : options.inverse(this);
+                default:
+                    return options.inverse(this);
+            }
+        });
 
         Handlebars.registerHelper('numberFormat', function (value, options) {
             // Helper parameters
@@ -152,7 +210,9 @@
                 dataType: "json",
                 async: false,
                 success: function (response) {
+                    response.d.Result.HolaMundo = 13;
                     console.log(response.d);
+
                     var compile = Handlebars.compile($catalogMainPageTemplate);
                     $catalogMainPage.empty();
                     $catalogMainPage.append(compile(response.d));

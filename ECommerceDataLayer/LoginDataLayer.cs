@@ -6,6 +6,7 @@ namespace ECommerceDataLayer
     using System.Linq;
     using System.Data;
     using System.Data.SqlClient;
+    using System;
 
     public class LoginDataLayer
     {
@@ -35,6 +36,19 @@ namespace ECommerceDataLayer
                 customer = command.Select(reader => reader.ToCustomer())?.FirstOrDefault();
             }
             return customer;
+        }
+
+        public bool CustomerChangePassword(CustomerDTO item)
+        {
+            bool isPasswordUpdated = default(bool);
+            using (SqlCommand command = new SqlCommand("Usp_CustomerPassword_UPD"))
+            {
+                command.Parameters.Add("@CustomerId", SqlDbType.Int).Value = item.Identifier;
+                command.Parameters.Add("@Email", SqlDbType.VarChar).Value = item.Email;
+                command.Parameters.Add("@EncryptedPassword", SqlDbType.VarChar).Value = item.EncryptedPassword;
+                isPasswordUpdated = command.ExecuteQuery();
+            }
+            return isPasswordUpdated;
         }
     }
 }
