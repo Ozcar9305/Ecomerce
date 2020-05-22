@@ -60,5 +60,19 @@ namespace WebApplication.ForzaUltra
             var response = new ProductCatalogLogic().ProductCatalogGetItem(productIdentifier);
             return response;
         }
+
+        [WebMethod]
+        public static ResponseDTO<ProductCatalogDTO> Delete (int productIdentifier)
+        {
+            var response = new ProductCatalogLogic().ProductCatalogExecute(new RequestDTO<ProductCatalogDTO>
+            {
+                OperationType = OperationType.Delete,
+                Item = new ProductCatalogDTO
+                {
+                    Identifier = productIdentifier
+                }
+            });
+            return response;
+        }
     }
 }

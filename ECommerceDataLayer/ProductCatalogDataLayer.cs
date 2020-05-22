@@ -67,17 +67,17 @@ namespace ECommerceDataLayer
                 command.Parameters.Add("@ProductImage", SqlDbType.VarChar).Value = productCatalog.ImageName;
 
                 string execCommand = $"exec {command.CommandText}";
-                foreach(SqlParameter parameter in command.Parameters)
-                {
-                    if(parameter.DbType == DbType.AnsiString)
-                    {
-                        execCommand += $"{parameter.ParameterName} = '{parameter.Value}',\n";
-                    }
-                    else
-                    {
-                        execCommand += $"{parameter.ParameterName} = {parameter.Value},\n";
-                    }
-                }
+                //foreach(SqlParameter parameter in command.Parameters)
+                //{
+                //    if(parameter.DbType == DbType.AnsiString)
+                //    {
+                //        execCommand += $"{parameter.ParameterName} = '{parameter.Value}',\n";
+                //    }
+                //    else
+                //    {
+                //        execCommand += $"{parameter.ParameterName} = {parameter.Value},\n";
+                //    }
+                //}
                 product = command.Select(reader => reader.ToProductCatalog()).FirstOrDefault();
             }
             return product;

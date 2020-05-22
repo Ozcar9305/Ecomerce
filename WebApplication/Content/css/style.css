@@ -46,6 +46,10 @@ body,
     background: #212121 !important;
     color: white !important;
 }
-.close{
+.close > span {
     color:white!important;
+}
+
+.modal-title {
+    color: white !important;
 }

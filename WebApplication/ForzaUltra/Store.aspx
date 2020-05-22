@@ -184,9 +184,11 @@
                         async: false,
                         success: function (ressult) {
                             var response = ressult.d;
-                            if (response.success) {
+                            if (response.Success) {
                                 $.publish('cart-elements-count:onChange');
                                 toastr.success("Se agrego un elemento a tu carrito de compras.");
+                            } else {
+                                toastr.error("Error al agregar el producto")
                             }
                         },
                         failure: function () {

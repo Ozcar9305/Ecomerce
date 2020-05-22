@@ -46,6 +46,7 @@ BEGIN
 	ON product.ProductCategoryId = category.ProductCategoryId
 	WHERE product.ProductCatalogId = COALESCE(@ProductCatalogId, product.ProductCatalogId)
 	AND PATINDEX('%' + @WordFilter + '%', dbo.fnRemoveAccents(CONCAT(product.[ProductShortName], product.[ProductDescription], category.[ProductCategoryName], category.[ProductCategoryDescription]))) > 0
+	AND product.ProductStatus = 1
 	ORDER BY product.ProductCatalogId ASC
 	OFFSET (@PageNumber-1) * @PageSize ROWS
 	FETCH NEXT @PageSize ROWS ONLY

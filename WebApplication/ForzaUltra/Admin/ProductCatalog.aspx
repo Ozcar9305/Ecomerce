@@ -11,7 +11,6 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <h2>Administración de Productos</h2>
-                        <hr />
                     </div>
                     <div class="col-lg-6">
                         <a class="btn btn-sm btn-danger pull-right" id="btnNewProcut" data-toggle="modal" data-target="#basicExampleModal"><i class="fa fa-plus-circle"></i>&nbsp;Nuevo</a>
@@ -78,27 +77,27 @@
                     </div>
                     <div class="form-inline" style="width: 100%!important">
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" value="1">
+                            <input type="checkbox" class="form-check-input" id="size_id_1" value="1">
                             <label class="form-check-label" for="materialUnchecked">CH&nbsp&nbsp</label>
                         </div>
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" value="2">
+                            <input type="checkbox" class="form-check-input" id="size_id_2" value="2">
                             <label class="form-check-label" for="materialUnchecked">M&nbsp&nbsp</label>
                         </div>
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" value="3">
+                            <input type="checkbox" class="form-check-input" id="size_id_3" value="3">
                             <label class="form-check-label" for="materialUnchecked">G&nbsp&nbsp</label>
                         </div>
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" value="4">
+                            <input type="checkbox" class="form-check-input" id="size_id_4" value="4">
                             <label class="form-check-label" for="materialUnchecked">EG&nbsp&nbsp</label>
                         </div>
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" value="5">
+                            <input type="checkbox" class="form-check-input" id="size_id_5" value="5">
                             <label class="form-check-label" for="materialUnchecked">UNITALLA&nbsp&nbsp</label>
                         </div>
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" value="6">
+                            <input type="checkbox" class="form-check-input" id="size_id_6" value="6">
                             <label class="form-check-label" for="materialUnchecked" aria-checked="true">NA</label>
                         </div>
                     </div>
@@ -152,6 +151,7 @@
                                     <td>{{numberFormat Price}}</td>
                                     <td class="text-center">
                                         <a><i class="fa fa-pencil-square edit-product" style="width: 25px; height: 25px;" data-idproduct="{{Identifier}}" aria-hidden="true"></i></a>
+                                        <a><i class="fa fa-trash-o delete-product" style="width:25px; height:25px;" data-idProduct="{{Identifier}}" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>
                                 {{/each}}
@@ -262,7 +262,7 @@
                 $('#txtProductName').val('');
                 $('#txtDescription').val('');
                 $('#txtProductPrice').val('');
-
+                $('#ddlCategory').val(0);
                 $('.form-check-input:checkbox').each(function () {
                     $(this).prop('checked', false);
                 });
@@ -375,6 +375,7 @@
             function bindEvents() {
                 $btnNewProcut.bind('click', btnNewProduct_onClick);
                 $btnSaveObjectProduct.bind('click', btnSaveObjectProduct_onClick);
+
             }
 
             function edit_onClick() {
@@ -389,6 +390,7 @@
                     success: function (response) {
                         if (response.d.Success) {
                             $modalProductCatalogMerge.modal('show');
+                            clearProductModal();
                             getListCategory();
                             console.log(response.d);
                             $('#mergeProductModalTitle').html('Editar');
@@ -397,6 +399,11 @@
                             $('#txtDescription').val(response.d.Result.Description);
                             $('#txtProductPrice').val(response.d.Result.Price);
                             $('#ddlCategory').val(response.d.Result.ProductCategoryIdentifier);
+                            if (response.d.Result.Sizes.length > 0) {
+                                $.each(response.d.Result.Sizes, function (key, value) {
+                                    $('#size_id_' + value.Identifier).prop("checked", value.Status);
+                                });
+                            }
                         }
                     },
                     failure: function () {
@@ -404,6 +411,29 @@
                     }
                 });
             }
+
+            function delete_onClick() {
+                var idProduct = $(this).attr('data-idProduct');
+                $.ajax({
+                    type: "POST",
+                    url: "ProductCatalog.aspx/Delete",
+                    data: JSON.stringify({ 'productIdentifier': idProduct }),
+                    contentType: "application/json;charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    success: function (response) {
+                        if (response.d.Success) {
+                            toastr.success("El producto ha sido eliminado.")
+                            request.Paging.PageNumber = 1;
+                            getData();
+                        }
+                    },
+                    failure: function () {
+                        toastr.error("Error al eliminar el producto");
+                    }
+                });
+            }
+                 
 
             function getData() {
                 $.ajax({
@@ -420,6 +450,7 @@
                             $griProductCatalog.empty();
                             $griProductCatalog.append(compile(response.d));
                             $('.edit-product').bind('click', edit_onClick);
+                            $('.delete-product').bind('click', delete_onClick);
                         }
                     },
                     failure: function () {
