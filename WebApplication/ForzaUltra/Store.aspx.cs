@@ -25,7 +25,47 @@ namespace WebApplication.ForzaUltra
         [WebMethod]
         public static ResponseListDTO<ProductCategoryDTO> GetStoreGetList()
         {
+            HttpContext.Current.Session["SessionInit"] = false;
             var response = new ProductCategoryLogic().CategoryListForMainPage(4);
+            return response;
+        }
+
+        [WebMethod]
+        public static ResponseDTO<CartDTO> CartItemExecute(CartDTO item)
+        {
+            item.Customer = new CustomerDTO
+            {
+                Identifier = 1
+            };
+
+            var request = new RequestDTO<CartDTO>
+            {
+                Item = item,
+                OperationType = OperationType.Insert
+            };
+
+            var response = new CartLogic().CartItemExecute(request);
+            if (response.Success)
+            {
+                HttpContext.Current.Session["CURRENT_CART_GUID"] = response.Result.Identifier;
+            }
+            return response;
+        }
+
+        [WebMethod]
+        public static ResponseListDTO<CartDTO> CartGetFilteredList()
+        {
+            var response = new CartLogic().CartGetFilteredList(new RequestDTO<CartDTO>
+            {
+                Item = new CartDTO
+                {
+                    Customer = new CustomerDTO
+                    {
+                        Identifier = 1
+                    },
+                    Identifier = HttpContext.Current.Session["CURRENT_CART_GUID"].ToString() ?? string.Empty
+                }
+            });
             return response;
         }
     }

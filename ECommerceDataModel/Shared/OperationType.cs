@@ -25,6 +25,11 @@
         /// <summary>
         /// Update
         /// </summary>
-        Update = 4
+        Update = 4,
+
+        /// <summary>
+        /// Change password
+        /// </summary>
+        ChangePassword = 5
     }
 }

@@ -49,6 +49,7 @@ namespace ECommerce
                 {
                     case OperationType.Insert:
                         cartResponse.Result = dataLayer.CartAddItem(cartRequest.Item);
+                        cartResponse.Success = !string.IsNullOrEmpty(cartResponse.Result.Identifier);
                         break;
                     case OperationType.Update:
                         cartResponse.Success = dataLayer.CartUpdateItem(cartRequest.Item);

@@ -151,9 +151,7 @@
                                     <td>{{Description}}</td>
                                     <td>{{numberFormat Price}}</td>
                                     <td class="text-center">
-                                        <a>
-                                            <i class="fa fa-pencil-square edit-product" style="width: 25px; height: 25px;" data-idproduct="{{Identifier}}" aria-hidden="true"></i>
-                                        </a>
+                                        <a><i class="fa fa-pencil-square edit-product" style="width: 25px; height: 25px;" data-idproduct="{{Identifier}}" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>
                                 {{/each}}
@@ -245,18 +243,19 @@
                 }
             }
 
+            $('.custom-file-input').bind('change', function (e) {
+                readURL(this);
+                var fileName = document.getElementById("customFileLang").files[0].name;
+                console.log(document.getElementById("customFileLang").files[0]);
+                var nextSibling = e.target.nextElementSibling
+                nextSibling.innerText = fileName;
+                $('#fileNameProductCatalog').val(fileName);
+            });
+
             function btnNewProduct_onClick() {
                 $modalProductCatalogMerge.modal('show');
                 getListCategory();
-                clearProductModal();
-                $('.custom-file-input').bind('change', function (e) {
-                    readURL(this);
-                    var fileName = document.getElementById("customFileLang").files[0].name;
-                    console.log(document.getElementById("customFileLang").files[0]);
-                    var nextSibling = e.target.nextElementSibling
-                    nextSibling.innerText = fileName;
-                    $('#fileNameProductCatalog').val(fileName);
-                });
+                clearProductModal();    
             }
 
             function clearProductModal() {
