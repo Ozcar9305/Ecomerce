@@ -28,7 +28,13 @@ namespace WebApplication.ForzaUltra.Controles.Login
         {
             if (!Page.IsPostBack)
             {
-                
+                //Establecer las cookies de usuario y contraseña
+                if(Request.Cookies["forzaUltraUser"] != null && Request.Cookies["forzaUltraPwd"] != null)
+                {
+                    usrname.Text = Request.Cookies["forzaUltraUser"].Value;
+                    psw.Text = Request.Cookies["forzaUltraPwd"].Value;
+                    chkRememberMe.Checked = true;
+                }
             }
         }
 
