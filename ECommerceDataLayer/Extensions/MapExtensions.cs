@@ -80,6 +80,14 @@ namespace ECommerceDataLayer.Extensions
             };
         }
 
+        public static OrderDTO ToOrder(this IDataReader reader)
+        {
+            return new OrderDTO
+            {
+                Identifier = reader.Get<long>("OrderId")
+            };
+        }
+
         public static int ToTotalRecords(this IDataReader reader)
         {
             return reader.Get<int>("TotalCount");

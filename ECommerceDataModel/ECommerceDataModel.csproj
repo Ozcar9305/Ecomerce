@@ -45,6 +45,7 @@
     <Compile Include="CartDTO.cs" />
     <Compile Include="CustomerDTO.cs" />
     <Compile Include="Enum\CustomerRole.cs" />
+    <Compile Include="OrderDTO.cs" />
     <Compile Include="ProductCatalogDTO.cs" />
     <Compile Include="ProductCategoryDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
