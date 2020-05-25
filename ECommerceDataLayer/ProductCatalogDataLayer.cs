@@ -29,6 +29,21 @@ namespace ECommerceDataLayer
             return response;
         }
 
+        public ResponseListDTO<ProductCatalogDTO> ProductCatalogGetListByCategory(RequestDTO<ProductCatalogDTO> product)
+        {
+            var productListResponse = new ResponseListDTO<ProductCatalogDTO>();
+            using(SqlCommand command = new SqlCommand("Usp_ProductCatalogByCategory_GETL"))
+            {
+                command.Parameters.Add("@ProductCategoryId", SqlDbType.BigInt).Value = product.Item.ProductCategoryIdentifier;
+                command.Parameters.Add("PageSize", SqlDbType.Int).Value = product.Paging.PageSize;
+                command.Parameters.Add("PageNumber", SqlDbType.Int).Value = product.Paging.PageNumber;
+                productListResponse.Result = command.Select(reader => reader.ToProductCatalog());
+                productListResponse.Paging = new PagingDTO();
+                productListResponse.Paging.TotalRecords = command.Select(reader => reader.ToTotalRecords()).FirstOrDefault();
+            }
+            return productListResponse;
+        }
+
         public ResponseListDTO<ProductCatalogDTO> ProductCatalogForMainPage(long productCategoryIdentifier, PagingDTO paging)
         {
             var response = new ResponseListDTO<ProductCatalogDTO> { Paging = new PagingDTO() };

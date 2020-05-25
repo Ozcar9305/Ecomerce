@@ -17,8 +17,18 @@ namespace WebApplication
         {
             if (!Page.IsPostBack)
             {
-
-                var url = Request.Url;
+                //var productList = new ProductCatalogLogic().ProductCatalogGetListByCategory(new RequestDTO<ProductCatalogDTO>
+                //{
+                //    Item = new ProductCatalogDTO
+                //    {
+                //        ProductCategoryIdentifier = 1
+                //    },
+                //    Paging = new PagingDTO
+                //    {
+                //        PageSize = 10,
+                //        PageNumber = 1
+                //    }
+                //});
 
                 //bool loginOk = new LoginLogic().ValidatePassword("Hola123", "1000:hcZKnVJpuaOQdupclRpdYUsKp2e0vTll:+OTRoXqjMrq4XO87tC0YzUHa1aM=");
                 //bool changePasswordOk = new LoginLogic().CustomerChangePassword(new CustomerDTO
