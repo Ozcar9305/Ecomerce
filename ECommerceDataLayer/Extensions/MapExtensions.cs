@@ -48,6 +48,10 @@ namespace ECommerceDataLayer.Extensions
                 EncryptedPassword = reader.Get<string>("EncryptedPassword"),
                 ShippingAddress = reader.Get<string>("ShippingAddress"),
                 Role = (CustomerRole)reader.Get<int>("CustomerRoleId"),
+                BillingInformation = new BillingInformation
+                {
+                    RFC = reader.Get<string>("Rfc")
+                },
                 Status = reader.Get<bool>("StatusId")
             };
         }

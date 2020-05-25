@@ -89,9 +89,7 @@
                                 </a>
                                 <h5>
                                     <strong>
-                                        <a class="dark-grey-text">{{Description}}
-                      <%--<span class="badge badge-pill danger-color">NEW</span>--%>
-                                        </a>
+                                        <a class="dark-grey-text">{{Description}}</a>
                                     </strong>
                                 </h5>
 
@@ -149,7 +147,7 @@
                 $catalogMainPage = $('#catalogMainPage');
 
             function product_onClick(e) {
-                var session = "True"; <%--'<%= HttpContext.Current.Session["SessionInit"] %>';                --%>
+                var session = "True"; <%--'<%= HttpContext.Current.Session["SessionInit"] %>';--%>
                 var categoryIentifier = $(this).attr('data-category');
                 var productIdentifier = $(this).attr('data-identifier');
                 var productPrice = $(this).attr('data-price');
@@ -184,7 +182,7 @@
                         async: false,
                         success: function (ressult) {
                             var response = ressult.d;
-                            if (response.success) {
+                            if (response.Success) {
                                 $.publish('cart-elements-count:onChange');
                                 toastr.success("Se agrego un elemento a tu carrito de compras.");
                             }

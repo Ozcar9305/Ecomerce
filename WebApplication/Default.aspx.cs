@@ -18,6 +18,8 @@ namespace WebApplication
             if (!Page.IsPostBack)
             {
 
+                var url = Request.Url;
+
                 //bool loginOk = new LoginLogic().ValidatePassword("Hola123", "1000:hcZKnVJpuaOQdupclRpdYUsKp2e0vTll:+OTRoXqjMrq4XO87tC0YzUHa1aM=");
                 //bool changePasswordOk = new LoginLogic().CustomerChangePassword(new CustomerDTO
                 //{
@@ -84,12 +86,12 @@ namespace WebApplication
                 //    OperationType = ECommerceDataModel.Shared.OperationType.Insert
                 //});
 
-                //var cartListResponse = new ResponseListDTO<CartDTO>(); 
+                //var cartListResponse = new ResponseListDTO<CartDTO>();
                 //cartListResponse = new CartLogic().CartGetFilteredList(new RequestDTO<CartDTO>
                 //{
                 //    Item = new CartDTO
                 //    {
-                //        Identifier = "B80DAAC4-686D-4337-BCE8-6234325EBBFC",
+                //        Identifier = "4EB95B6C-6E88-4261-852B-BA85B7708CB9",
                 //        Customer = new CustomerDTO { Identifier = 1 }
                 //    }
                 //});

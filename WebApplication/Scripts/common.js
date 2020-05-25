@@ -1,4 +1,6 @@
-﻿/**
+﻿console.log('common.js');
+
+/**
  * Permite capturar unicamente texto en un input quitando caracteres especiales
  * */
 jQuery.fn.ForceLetterOnly = function () {
@@ -22,4 +24,12 @@ function GetUriValues(param) {
             return urlparam[1];
         }
     }
-}  
+}
+
+/**
+ * Permite validar que el valor ingresado sea un correo electronico
+ */
+function isEmail(email) {
+    var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    return regex.test(email);
+}

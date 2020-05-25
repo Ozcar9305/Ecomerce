@@ -21,6 +21,7 @@ namespace ECommerceDataLayer
                 command.Parameters.Add("@EncryptedPassword", SqlDbType.VarChar).Value = customer.EncryptedPassword;
                 command.Parameters.Add("@ShippingAddress", SqlDbType.VarChar).Value = customer.ShippingAddress;
                 command.Parameters.Add("@CustomerRoleId", SqlDbType.Int).Value = (int)customer.Role;
+                command.Parameters.Add("@Rfc", SqlDbType.VarChar).Value = customer.BillingInformation.RFC;
                 isCustomerRegistered = command.ExecuteQuery();
             }
             return isCustomerRegistered;

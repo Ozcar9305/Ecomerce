@@ -965,6 +965,7 @@
     <Content Include="ForzaUltra\Cart.aspx" />
     <Content Include="ForzaUltra\Controles\Login\Login.ascx" />
     <Content Include="ForzaUltra\Admin\ProductCatalog.aspx" />
+    <Content Include="ForzaUltra\Resources\ForgotPasswordEmailBody.txt" />
     <Content Include="ForzaUltra\NewPassword.aspx" />
     <Content Include="ForzaUltra\RegisterForm.aspx" />
     <Content Include="ForzaUltra\Store.aspx" />
