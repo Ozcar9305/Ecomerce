@@ -1,4 +1,5 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="WebApplication.SiteMaster" %>
+
 <%@ Register Src="~/ForzaUltra/Controles/Login/Login.ascx" TagPrefix="ECommerce" TagName="Login" %>
 
 <!DOCTYPE html>
@@ -11,7 +12,7 @@
     <title>Forza Ultra</title>
 
     <asp:PlaceHolder runat="server">
-        <%: Scripts.Render("~/Scripts/jquery-3.3.1.min.js") %>
+        <%: Scripts.Render("https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js") %>
         <%: Styles.Render("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css") %>
         <%: Scripts.Render("~/bundles/modernizr") %>
         <%: Styles.Render("~/Content/css/bootstrap.min.css") %>
@@ -29,9 +30,12 @@
         <%: Styles.Render("~/Content/jqpagination.css") %>
         <%: Scripts.Render(string.Format("~/Scripts/common.js?{0}", System.DateTime.Now.Ticks)) %>
         <%--<%: Scripts.Render("~/Scripts/masterPage.js") %>--%>
+        <%: Scripts.Render("~/Scripts/masterPage.js") %>
         <%: Scripts.Render("~/Scripts/jquery.jqpagination.js") %>
         <%: Scripts.Render("~/Scripts/jquery.tinypubsub.min.js") %>
         <%: Scripts.Render("~/Scripts/ForzaUltra/Cart.js") %>
+        <%: Styles.Render("~/Content/jquery.loadingModal.min.css") %>
+        <%: Scripts.Render("~/Scripts/jquery.loadingModal.min.js") %>
     </asp:PlaceHolder>
 
     <style type="text/css">
@@ -61,20 +65,40 @@
                 height: 100vh;
             }
         }
+
+        .pageLoading {
+            display: block !important;
+            background: rgba(33,33,33,0.3) !important;
+            color: #fff !important;
+            width: 100% !important;
+            height: 100% !important;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            z-index: 9999 !important;
+        }
     </style>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
+    <script type="text/javascript">        
+        //var countRequest = 0;
+        //$(document).ajaxStart(function () {
+        //    countRequest++;
+        //    $('#pageLoading').show();
+        //    $('#pageLoading').addClass('pageLoading');
+        //});
 
-            $('#lnkLogin').click(function (e) {
-                $("#loginModal").modal();
-            });
+        //$(document).ajaxComplete(function () {
+        //    countRequest -= 1;
+        //    if (countRequest == 0) {
+        //        $('#pageLoading').hide();
+        //        $('#pageLoading').removeClass('pageLoading');
+        //    }
+        //});
 
-        });
     </script>
 
 </head>
-    
+
 <body>
     
     <form id="frmStore" runat="server">
@@ -140,9 +164,18 @@
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
         </main>
+
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
         </asp:ContentPlaceHolder>
     </form>
+    <div id="pageLoading" class="pageLoading text-center">
+        <div class="spinner-border text-danger" style="margin-top: 20%!important" role="status">
+            <span class="sr-only">Loading...</span><br />
+        </div>
+        <div class="text-center">
+            <span>Cargando ...</span>
+        </div>
+    </div>
 </body>
 
 </html>

@@ -965,6 +965,7 @@
     <Content Include="ForzaUltra\Cart.aspx" />
     <Content Include="ForzaUltra\Controles\Login\Login.ascx" />
     <Content Include="ForzaUltra\Admin\ProductCatalog.aspx" />
+    <Content Include="ForzaUltra\Customer\ProductCatalog.aspx" />
     <Content Include="ForzaUltra\Resources\ForgotPasswordEmailBody.txt" />
     <Content Include="ForzaUltra\NewPassword.aspx" />
     <Content Include="ForzaUltra\RegisterForm.aspx" />
@@ -1060,6 +1061,8 @@
     <Content Include="Scripts\common.js" />
     <Content Include="Scripts\ForzaUltra\Admin\Categories.js" />
     <Content Include="Scripts\ForzaUltra\Cart.js" />
+    <Content Include="Scripts\ForzaUltra\CartCheckout.js" />
+    <Content Include="Scripts\ForzaUltra\Customer\ProductCatalog.js" />
     <Content Include="Scripts\ForzaUltra\Login.js" />
     <Content Include="Scripts\ForzaUltra\NewPasswordForm.js" />
     <Content Include="Scripts\ForzaUltra\RegisterForm.js" />
@@ -1156,6 +1159,13 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ForzaUltra\Admin\ProductCatalog.aspx.designer.cs">
+      <DependentUpon>ProductCatalog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ForzaUltra\Customer\ProductCatalog.aspx.cs">
+      <DependentUpon>ProductCatalog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ForzaUltra\Customer\ProductCatalog.aspx.designer.cs">
       <DependentUpon>ProductCatalog.aspx</DependentUpon>
     </Compile>
     <Compile Include="ForzaUltra\NewPassword.aspx.cs">
