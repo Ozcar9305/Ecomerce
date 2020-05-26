@@ -18,7 +18,6 @@
         <%: Styles.Render("~/Content/css/bootstrap.min.css") %>
         <%: Styles.Render("~/Content/bootstrap-select.css") %>
         <%: Styles.Render("~/Content/css/mdb.css") %>
-
         <%: Scripts.Render("~/Scripts/handlebars.min-v4.7.3.js") %>
         <%: Scripts.Render("/js/bootstrap.min.js") %>
         <%: Styles.Render("//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css") %>
@@ -30,6 +29,7 @@
         <%: Styles.Render("~/Content/jquery.loadingModal.min.css") %>
         <%: Styles.Render("~/Content/jqpagination.css") %>
         <%: Scripts.Render(string.Format("~/Scripts/common.js?{0}", System.DateTime.Now.Ticks)) %>
+        <%--<%: Scripts.Render("~/Scripts/masterPage.js") %>--%>
         <%: Scripts.Render("~/Scripts/masterPage.js") %>
         <%: Scripts.Render("~/Scripts/jquery.jqpagination.js") %>
         <%: Scripts.Render("~/Scripts/jquery.tinypubsub.min.js") %>

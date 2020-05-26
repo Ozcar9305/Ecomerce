@@ -1,16 +1,18 @@
-﻿using ECommerce.Helpers;
-using ECommerceDataModel;
-using ECommerceDataModel.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ECommerce
+﻿ namespace ECommerce
 {
+    using ECommerce.Helpers;
+    using ECommerceDataLayer;
+    using ECommerceDataModel;
+    using ECommerceDataModel.Shared;
+    using System;
+
     public class OrderLogic
     {
+        /// <summary>
+        /// Acceso a datos de orden
+        /// </summary>
+        private readonly OrderDataLayer orderDataLayer = new OrderDataLayer();
+
         /// <summary>
         /// Agregar nueva orden de pedido
         /// </summary>
@@ -21,7 +23,8 @@ namespace ECommerce
             var orderResponse = new ResponseDTO<OrderDTO>();
             try
             {
-
+                orderResponse.Result = orderDataLayer.OrderInsert(order.Item);
+                orderResponse.Success = orderResponse.Result.Identifier > default(long);
             }
             catch (Exception exception)
             {
