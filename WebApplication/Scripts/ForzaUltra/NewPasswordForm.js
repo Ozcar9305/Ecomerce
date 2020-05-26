@@ -1,19 +1,18 @@
 ﻿
 let serviceUri = '';
+let $token = '';
+
 $(document).ready(function () {
-        
+
     serviceUri = window.location.href + '/';
 
     let $registerForm = $('#frmRegister');
-    $('#txtFirstName').ForceLetterOnly();
-    $('#txtLastName').ForceLetterOnly();
-
+    $token = GetUriValues("tk");
+    
     $registerForm.validate({
         errorClass: "formValidateError",
         errorElement: "label",
         rules: {
-            firstName: "required",
-            lastName: "required",
             email: {
                 required: true,
                 email: true
@@ -24,8 +23,6 @@ $(document).ready(function () {
             }
         },
         messages: {
-            firstName: "Por favor ingresa tu Nombre",
-            lastName: "Por favor ingresa tu apellido",
             email: "Por favor ingresa un correo eléctronico valido",
             password: "Ingresa una contraseña",
             confirmPassword: "El valor de este campo debe ser igual a la contraseña"
@@ -38,32 +35,35 @@ $(document).ready(function () {
         }
     });
 
-    $('#btnRegisterUser').click(function () {
-        if ($registerForm.valid()) {
-            registerUser();
+    $('#btnRegisterUser').click(function ()
+    {
+        console.log('token: ' + $token);
+        if ($token != undefined) {
+            if ($registerForm.valid()) {
+                changePassword();
+            }
         }
+        else {
+            swal('Error', 'No es posible actualizar tu contraseña en este momento, por favor intente nuevamente desde tu correo electronico', 'danger');
+        }
+
     });
 });
 
 
-function registerUser() {
+function changePassword()
+{
+    console.log('changePassword');
+    console.log('UpdateCustomerPassword: ' + window.location.href.split("?")[0] + '/' + 'UpdateCustomerPassword');
 
     var customerObject = new Object();
-    customerObject.FirstName = $('#txtFirstName').val().trim();
-    customerObject.LastName = $('#txtLastName').val().trim();
-    customerObject.Password = $('#password').val().trim();
-    customerObject.ShippingAddress = $('#txtAddress').val().trim();
-    customerObject.PhoneNumber = $('#txtPhone').val().trim();
     customerObject.Email = $('#txtEmail').val().trim();
-    customerObject.Role = parseInt(1);
+    customerObject.Password = $('#password').val().trim();
+    customerObject.EncryptedPassword = $token + '=';
 
-    var billing = new Object();
-    billing.Rfc = $('#txtRfc').val();
-    customerObject.BillingInformation = billing; 
-    
     $.ajax({
         type: "POST",
-        url: serviceUri + 'RegisterUser',
+        url: window.location.href.split("?")[0] + '/' + 'UpdateCustomerPassword',
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         data: JSON.stringify({ 'customer': customerObject }),
@@ -71,21 +71,21 @@ function registerUser() {
             var data = response.d;
             if (data.Success) {
                 swal({
-                    title: "Gracias por tu registro!",
-                    text: "Ahora puedes comenzar a comprar en ForzaUltra",
+                    title: "Forza Ultra",
+                    text: "Tu contraseña ha sido actualizada",
                     type: "success"
                 });
             }
             else {
                 swal({
                     title: "Ha ocurrido un error",
-                    text: "No pudimos completar tu registro, por favor intenta de nuevo más tarde",
+                    text: "No pudimos actualizar tu contraseña, por favor intenta de nuevo más tarde desde tu correo eléctronico",
                     type: "danger"
                 });
             }
         },
         failure: function (xhr, textStatus, errorThrown) {
-            console.log("Fail[LoadCategoryChangeStatus]" + xhr + " " + textStatus + " " + errorThrown);
+            console.log("Fail[UpdateCustomerPassword]" + xhr + " " + textStatus + " " + errorThrown);
         }
     });
-};
+}; 

@@ -29,6 +29,7 @@
         <%: Scripts.Render("~/Scripts/toastr.js") %>
         <%: Styles.Render("~/Content/jquery.loadingModal.min.css") %>
         <%: Styles.Render("~/Content/jqpagination.css") %>
+        <%: Scripts.Render(string.Format("~/Scripts/common.js?{0}", System.DateTime.Now.Ticks)) %>
         <%: Scripts.Render("~/Scripts/masterPage.js") %>
         <%: Scripts.Render("~/Scripts/jquery.jqpagination.js") %>
         <%: Scripts.Render("~/Scripts/jquery.tinypubsub.min.js") %>
@@ -36,25 +37,6 @@
         <%: Styles.Render("~/Content/jquery.loadingModal.min.css") %>
         <%: Scripts.Render("~/Scripts/jquery.loadingModal.min.js") %>
     </asp:PlaceHolder>
-
-    <%--"stylesheet">--%>
-    <!-- Font Awesome -->
-    <%--<link rel="stylesheet" href="Content/css/all.css">--%>
-    <!-- Bootstrap core CSS -->
-    <%--<link href="../Content/bootstrap.min.css" rel="stylesheet" runat="server" />--%>
-    <!-- Material Design Bootstrap -->
-    <%--<link href="Content/css/mdb.min.css" rel="stylesheet">--%>
-
-    <%--<link href="Content/css/modules/animations-extended.css" rel="stylesheet" />--%>
-
-    <%--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">--%>
-    <!-- Google Fonts -->
-    <%--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">--%>
-    <!-- Bootstrap core CSS -->
-    <%--<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">--%>
-    <!-- Material Design Bootst-->
-    <%--<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.16.0/css/mdb.min.css" rel=lesheet">--%>
-    <!-- Your custom styles (optional) -->
 
     <style type="text/css">
         html,
@@ -118,10 +100,10 @@
 </head>
 
 <body>
-    <ECommerce:Login runat="server" ID="Login" />
+    
     <form id="frmStore" runat="server">
-
-
+        <ECommerce:Login runat="server" ID="Login" />
+        
         <!-- Navbar -->
         <nav class="navbar forza-navbar forza-navbar-font fixed-top navbar-expand-lg navbar-light scrolling-navbar">
             <div class="container">
@@ -139,12 +121,11 @@
 
                 <!-- Links -->
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
                     <!-- Left -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
                             <a class="nav-link waves-effect" href="#">Tienda
-              <span class="sr-only">(current)</span>
+                                <span class="sr-only">(current)</span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -179,6 +160,7 @@
         <!-- Navbar -->
 
         <main>
+            <asp:HiddenField runat="server" ID="hdfMasterServiceUri" Value="Site.Master" />
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
         </main>

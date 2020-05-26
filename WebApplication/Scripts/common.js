@@ -1,4 +1,6 @@
-﻿/**
+﻿console.log('common.js');
+
+/**
  * Permite capturar unicamente texto en un input quitando caracteres especiales
  * */
 jQuery.fn.ForceLetterOnly = function () {
@@ -9,3 +11,25 @@ jQuery.fn.ForceLetterOnly = function () {
         });
     });
 };
+
+/**
+ * Permite obtener valores del query string de la url
+ * Param: Nombre del parametro en el query string
+ **/
+function GetUriValues(param) {
+    var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for (var i = 0; i < url.length; i++) {
+        var urlparam = url[i].split('=');
+        if (urlparam[0] == param) {
+            return urlparam[1];
+        }
+    }
+}
+
+/**
+ * Permite validar que el valor ingresado sea un correo electronico
+ */
+function isEmail(email) {
+    var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    return regex.test(email);
+}

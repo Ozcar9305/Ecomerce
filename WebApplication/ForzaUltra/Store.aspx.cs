@@ -44,38 +44,11 @@ namespace WebApplication.ForzaUltra
                 OperationType = OperationType.Insert
             };
 
-
-            if (HttpContext.Current.Session["CURRENT_CART_GUID"] != null)
-            {
-                var list = new CartLogic().CartGetFilteredList(new RequestDTO<CartDTO>
-                {
-                    Item = new CartDTO
-                    {
-                        Identifier = item.Identifier,
-                        Customer = item.Customer
-                    }
-                });
-
-                if (list.Success)
-                {
-                    var exist = list.Result.FirstOrDefault(x => x.ProductCatalog.Identifier == item.ProductCatalog.Identifier && x.ProductCategory.Identifier == item.ProductCategory.Identifier);
-                    if (exist != null)
-                    {
-                        request.OperationType = OperationType.Update;
-                        request.Item.Quantity += exist.Quantity;
-                    }
-                }
-
-                request.Item.Identifier = HttpContext.Current.Session["CURRENT_CART_GUID"].ToString();
-            }
-
             var response = new CartLogic().CartItemExecute(request);
-
             if (response.Success)
             {
                 HttpContext.Current.Session["CURRENT_CART_GUID"] = response.Result.Identifier;
             }
-
             return response;
         }
 

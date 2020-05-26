@@ -12,7 +12,8 @@
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
                 async: false,
-                success: function (ressult) {
+                success: function (ressult)
+                {
                     var response = ressult.d;
                     if (response.Success) {
                         $cart_lements_count.html(response.Result.length);
