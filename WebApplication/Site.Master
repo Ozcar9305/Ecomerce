@@ -100,10 +100,10 @@
 </head>
 
 <body>
-    
+
     <form id="frmStore" runat="server">
         <ECommerce:Login runat="server" ID="Login" />
-        
+
         <!-- Navbar -->
         <nav class="navbar forza-navbar forza-navbar-font fixed-top navbar-expand-lg navbar-light scrolling-navbar">
             <div class="container">
@@ -124,12 +124,12 @@
                     <!-- Left -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link waves-effect" href="#">Tienda
+                            <a class="nav-link waves-effect" href="<%:ResolveUrl("~/ForzaUltra/Store.aspx") %>">Tienda
                                 <span class="sr-only">(current)</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link waves-effect" href="https://mdbootstrap.com/docs/jquery/" target="_blank">Productos</a>
+                            <a class="nav-link waves-effect" href="<%:ResolveUrl("~/ForzaUltra/Customer/ProductCatalog.aspx") %>">Productos</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link waves-effect" href="https://mdbootstrap.com/education/bootstrap/" target="_blank">Contacto
@@ -140,15 +140,16 @@
                     <!-- Right -->
                     <ul class="navbar-nav nav-flex-icons">
                         <li class="nav-item">
-                            <a class="nav-link waves-effect">
+                            <a class="nav-link" style="font-family: sans-serif!important">
                                 <span class="badge red z-depth-1 mr-1" id="cart-elements-count">0&nbsp;</span>
                                 <i class="fa fa-shopping-cart"></i>
                                 <span class="clearfix d-none d-sm-inline-block">Carrito </span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link waves-effect" id="lnkLogin" data-toggle="modal" data-target="#modalLoginForm">
-                                <i class="fa fa-sign-in">&nbsp;Login</i>
+                            <a class="nav-link" id="lnkLogin" data-toggle="modal" data-target="#modalLoginForm" style="font-family: sans-serif!important">
+                                <i class="fa fa-sign-in"></i>
+                                <span class="clearfix d-none d-sm-inline-block">&nbsp;Login</span>
                             </a>
                         </li>
                     </ul>
@@ -167,6 +168,134 @@
 
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
         </asp:ContentPlaceHolder>
+
+        <!-- Footer -->
+        <footer class="page-footer font-small unique-color-dark pt-4" style="background:#212121!important">
+
+            <!-- Footer Links -->
+            <div class="container text-center text-md-left">
+
+                <!-- Grid row -->
+                <div class="row">
+
+                    <!-- Grid column -->
+                    <div class="col-lg-12 text-center">
+
+                        <!-- Content -->
+                        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">ESTOS SON ALGUNOS DE NUESTROS CLIENTES</h5>
+                        <img src="/Images/ForzaUltra/Site/fu_customers.png" />
+                    </div>
+                    <!-- Grid column -->
+
+                    <hr class="clearfix w-100 d-md-none">
+
+                    <!-- Grid column -->
+                    <%--<div class="col-md-2 mx-auto">
+
+                        <!-- Links -->
+                        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="#!">Link 1</a>
+                            </li>
+                            <li>
+                                <a href="#!">Link 2</a>
+                            </li>
+                            <li>
+                                <a href="#!">Link 3</a>
+                            </li>
+                            <li>
+                                <a href="#!">Link 4</a>
+                            </li>
+                        </ul>
+
+                    </div>--%>
+                    <!-- Grid column -->
+
+                    <%--<hr class="clearfix w-100 d-md-none">--%>
+
+                    <!-- Grid column -->
+<%--                    <div class="col-md-2 mx-auto">
+
+                        <!-- Links -->
+                        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="#!">Link 1</a>
+                            </li>
+                            <li>
+                                <a href="#!">Link 2</a>
+                            </li>
+                            <li>
+                                <a href="#!">Link 3</a>
+                            </li>
+                            <li>
+                                <a href="#!">Link 4</a>
+                            </li>
+                        </ul>
+
+                    </div>--%>
+                    <!-- Grid column -->
+
+                    <hr class="clearfix w-100 d-md-none">
+
+                    <!-- Grid column -->
+                    <%--<div class="col-md-2 mx-auto">
+
+                        <!-- Links -->
+                        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="#!">Link 1</a>
+                            </li>
+                            <li>
+                                <a href="#!">Link 2</a>
+                            </li>
+                            <li>
+                                <a href="#!">Link 3</a>
+                            </li>
+                            <li>
+                                <a href="#!">Link 4</a>
+                            </li>
+                        </ul>
+
+                    </div>--%>
+                    <!-- Grid column -->
+
+                </div>
+                <!-- Grid row -->
+
+            </div>
+            <!-- Footer Links -->
+
+            <hr>
+
+            <!-- Social buttons -->
+            <ul class="list-unstyled list-inline text-center">
+                <li class="list-inline-item">
+                    <a class="btn-floating btn-fb mx-1">
+                        <i class="fa fa-facebook-square" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a class="btn-floating btn-tw mx-1" title="Twitter" href="https://twitter.com/forzaultracorp">
+                        <i class="fa fa-twitter-square" aria-hidden="true"></i>
+                    </a>
+                </li>
+            </ul>
+            <!-- Social buttons -->
+
+            <!-- Copyright -->
+            <div class="footer-copyright text-center py-3">
+                Copyright ©  2019  by "Forza Ultra.com"  ·  All Rights reserved  ·  E-Mail: administracion@forzaultra.com
+            </div>
+            <!-- Copyright -->
+
+        </footer>
+        <!-- Footer -->
     </form>
     <div id="pageLoading" class="pageLoading text-center">
         <div class="spinner-border text-danger" style="margin-top: 20%!important" role="status">

@@ -995,8 +995,10 @@
     <Content Include="Content\font\roboto\Roboto-Thin.ttf" />
     <Content Include="Content\font\roboto\Roboto-Thin.woff" />
     <Content Include="Content\font\roboto\Roboto-Thin.woff2" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Images\ForzaUltra\Site\fu_banner.jpg" />
+    <Content Include="Images\ForzaUltra\Site\fu_customers.png" />
     <Content Include="Images\ForzaUltra\Site\fu_logo.png" />
     <Content Include="Images\ForzaUltra\Site\logo-inicio.png" />
     <Content Include="Images\ForzaUltra\Upload\tn_img0124.png" />

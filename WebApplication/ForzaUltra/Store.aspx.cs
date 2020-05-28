@@ -25,7 +25,6 @@ namespace WebApplication.ForzaUltra
         [WebMethod]
         public static ResponseListDTO<ProductCategoryDTO> GetStoreGetList()
         {
-            HttpContext.Current.Session["SessionInit"] = false;
             var response = new ProductCategoryLogic().CategoryListForMainPage(4);
             return response;
         }
@@ -35,7 +34,7 @@ namespace WebApplication.ForzaUltra
         {
             item.Customer = new CustomerDTO
             {
-                Identifier = 1
+                Identifier = int.Parse(HttpContext.Current.Session["SessionCustomerIdentifier"].ToString())
             };
 
             var request = new RequestDTO<CartDTO>
@@ -47,7 +46,7 @@ namespace WebApplication.ForzaUltra
             var response = new CartLogic().CartItemExecute(request);
             if (response.Success)
             {
-                HttpContext.Current.Session["CURRENT_CART_GUID"] = response.Result.Identifier;
+                HttpContext.Current.Session["SessionCartIdentifier"] = response.Result.Identifier;
             }
             return response;
         }
@@ -61,9 +60,9 @@ namespace WebApplication.ForzaUltra
                 {
                     Customer = new CustomerDTO
                     {
-                        Identifier = 1
+                        Identifier = int.Parse(HttpContext.Current.Session["SessionCustomerIdentifier"].ToString())
                     },
-                    Identifier = HttpContext.Current.Session["CURRENT_CART_GUID"].ToString() ?? string.Empty
+                    Identifier = HttpContext.Current.Session["SessionCartIdentifier"].ToString() ?? string.Empty
                 }
             });
             return response;
