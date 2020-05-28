@@ -36,7 +36,6 @@ namespace WebApplication.ForzaUltra
             return response;
         }
 
-
         [WebMethod]
         public static ResponseDTO<CartDTO> DeleteCartItem(string cartId, int customerId, int productId, int categoryId)
         {
