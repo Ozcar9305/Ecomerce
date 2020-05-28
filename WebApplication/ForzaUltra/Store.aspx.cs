@@ -29,9 +29,18 @@ namespace WebApplication.ForzaUltra
             return response;
         }
 
-        [WebMethod]
+        [WebMethod(EnableSession=true)]
         public static ResponseDTO<CartDTO> CartItemExecute(CartDTO item)
         {
+            if(HttpContext.Current.Session["CURRENT_CART_GUID"] != null)
+            {
+                if (!string.IsNullOrEmpty(HttpContext.Current.Session["CURRENT_CART_GUID"].ToString()) &&
+                    !string.IsNullOrWhiteSpace(HttpContext.Current.Session["CURRENT_CART_GUID"].ToString())) 
+                {
+                    item.Identifier = HttpContext.Current.Session["CURRENT_CART_GUID"].ToString();
+                }
+            }
+
             item.Customer = new CustomerDTO
             {
                 Identifier = int.Parse(HttpContext.Current.Session["SessionCustomerIdentifier"].ToString())
