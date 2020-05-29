@@ -23,6 +23,8 @@ namespace ECommerceDataModel
 
         public CustomerRole Role { get; set; }
 
+        public BillingInformation BillingInformation { get; set;}
+
         public bool Status { get; set; }
     }
 }

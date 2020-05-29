@@ -56,6 +56,10 @@ function registerUser() {
     customerObject.PhoneNumber = $('#txtPhone').val().trim();
     customerObject.Email = $('#txtEmail').val().trim();
     customerObject.Role = parseInt(1);
+
+    var billing = new Object();
+    billing.Rfc = $('#txtRfc').val();
+    customerObject.BillingInformation = billing; 
     
     $.ajax({
         type: "POST",

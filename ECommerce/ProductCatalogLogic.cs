@@ -74,6 +74,26 @@
         }
 
         /// <summary>
+        /// Permite obtener un listado de productos filtrados por categoria
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
+        public ResponseListDTO<ProductCatalogDTO> ProductCatalogGetListByCategory(RequestDTO<ProductCatalogDTO> product)
+        {
+            var productListResponse = new ResponseListDTO<ProductCatalogDTO>();
+            try
+            {
+                productListResponse = dataLayer.ProductCatalogGetListByCategory(product);
+                productListResponse.Success = productListResponse.Result.Any();
+            }
+            catch (Exception exception)
+            {
+                exception.LogException();
+            }
+            return productListResponse;
+        }
+
+        /// <summary>
         /// Permite insertar o actualizar la informacion de un producto
         /// </summary>
         /// <param name="product"></param>

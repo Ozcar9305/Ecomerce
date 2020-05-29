@@ -21,21 +21,24 @@ namespace WebApplication.ForzaUltra
         [WebMethod]
         public static ResponseListDTO<CartDTO> CartItemGetList()
         {
-            var response = new CartLogic().CartGetFilteredList(new RequestDTO<CartDTO>
+            var response = new ResponseListDTO<CartDTO>();
+            if (HttpContext.Current.Session["SessionInit"] != null && bool.Parse(HttpContext.Current.Session["SessionInit"].ToString()))
             {
-                Item = new CartDTO
+                response = new CartLogic().CartGetFilteredList(new RequestDTO<CartDTO>
                 {
-                    Customer = new CustomerDTO
+                    Item = new CartDTO
                     {
-                        Identifier = 1
-                    },
-                    Identifier = "D107605D-23A9-4204-81D0-1A7E6825679A"
-                }
-            });
-
+                        Customer = new CustomerDTO
+                        {
+                            Identifier = int.Parse(HttpContext.Current.Session["SessionCustomerIdentifier"].ToString())
+                        },
+                        Identifier = HttpContext.Current.Session["SessionCartIdentifier"].ToString()
+                    }
+                });
+                response.SessionInit = true;
+            }
             return response;
         }
-
 
         [WebMethod]
         public static ResponseDTO<CartDTO> DeleteCartItem(string cartId, int customerId, int productId, int categoryId)
@@ -64,8 +67,8 @@ namespace WebApplication.ForzaUltra
                 {
                     Identifier = cartId,
                     Customer = new CustomerDTO { Identifier = customerId },
-                    ProductCatalog = new ProductCatalogDTO { Identifier = productId ,Sizes = new List<SizesDTO> { new SizesDTO { Identifier = size} } },
-                    ProductCategory = new ProductCategoryDTO { Identifier = categoryId},
+                    ProductCatalog = new ProductCatalogDTO { Identifier = productId, Sizes = new List<SizesDTO> { new SizesDTO { Identifier = size } } },
+                    ProductCategory = new ProductCategoryDTO { Identifier = categoryId },
                     Quantity = quantity
                 }
             });

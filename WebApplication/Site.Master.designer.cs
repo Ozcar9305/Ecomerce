@@ -15,6 +15,15 @@ namespace WebApplication
     {
 
         /// <summary>
+        /// frmStore control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm frmStore;
+
+        /// <summary>
         /// Login control.
         /// </summary>
         /// <remarks>
@@ -24,13 +33,13 @@ namespace WebApplication
         protected global::WebApplication.ForzaUltra.Controles.Login.Login Login;
 
         /// <summary>
-        /// frmStore control.
+        /// hdfMasterServiceUri control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm frmStore;
+        protected global::System.Web.UI.WebControls.HiddenField hdfMasterServiceUri;
 
         /// <summary>
         /// MainContent control.

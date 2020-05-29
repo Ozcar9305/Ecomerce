@@ -7,7 +7,7 @@
         function cart_elements_onChange(event) {
             $.ajax({
                 type: "POST",
-                url: "Store.aspx/CartGetFilteredList",
+                url: "/ForzaUltra/Store.aspx/CartGetFilteredList",
                 data: "",
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
@@ -16,6 +16,8 @@
                     var response = ressult.d;
                     if (response.Success) {
                         $cart_lements_count.html(response.Result.length);
+                    } else if (response.SessionInit) {
+                        $cart_lements_count.html(0);
                     }
                 },
                 failure: function () {

@@ -25,17 +25,25 @@ namespace WebApplication.ForzaUltra
         [WebMethod]
         public static ResponseListDTO<ProductCategoryDTO> GetStoreGetList()
         {
-            HttpContext.Current.Session["SessionInit"] = false;
             var response = new ProductCategoryLogic().CategoryListForMainPage(4);
             return response;
         }
 
-        [WebMethod]
+        [WebMethod(EnableSession=true)]
         public static ResponseDTO<CartDTO> CartItemExecute(CartDTO item)
         {
+            if(HttpContext.Current.Session["CURRENT_CART_GUID"] != null)
+            {
+                if (!string.IsNullOrEmpty(HttpContext.Current.Session["CURRENT_CART_GUID"].ToString()) &&
+                    !string.IsNullOrWhiteSpace(HttpContext.Current.Session["CURRENT_CART_GUID"].ToString())) 
+                {
+                    item.Identifier = HttpContext.Current.Session["CURRENT_CART_GUID"].ToString();
+                }
+            }
+
             item.Customer = new CustomerDTO
             {
-                Identifier = 1
+                Identifier = int.Parse(HttpContext.Current.Session["SessionCustomerIdentifier"].ToString())
             };
 
             var request = new RequestDTO<CartDTO>
@@ -44,55 +52,33 @@ namespace WebApplication.ForzaUltra
                 OperationType = OperationType.Insert
             };
 
-
-            if (HttpContext.Current.Session["CURRENT_CART_GUID"] != null)
-            {
-                var list = new CartLogic().CartGetFilteredList(new RequestDTO<CartDTO>
-                {
-                    Item = new CartDTO
-                    {
-                        Identifier = item.Identifier,
-                        Customer = item.Customer
-                    }
-                });
-
-                if (list.Success)
-                {
-                    var exist = list.Result.FirstOrDefault(x => x.ProductCatalog.Identifier == item.ProductCatalog.Identifier && x.ProductCategory.Identifier == item.ProductCategory.Identifier);
-                    if (exist != null)
-                    {
-                        request.OperationType = OperationType.Update;
-                        request.Item.Quantity += exist.Quantity;
-                    }
-                }
-
-                request.Item.Identifier = HttpContext.Current.Session["CURRENT_CART_GUID"].ToString();
-            }
-
             var response = new CartLogic().CartItemExecute(request);
-
             if (response.Success)
             {
-                HttpContext.Current.Session["CURRENT_CART_GUID"] = response.Result.Identifier;
+                HttpContext.Current.Session["SessionCartIdentifier"] = response.Result.Identifier;
             }
-
             return response;
         }
 
         [WebMethod]
         public static ResponseListDTO<CartDTO> CartGetFilteredList()
         {
-            var response = new CartLogic().CartGetFilteredList(new RequestDTO<CartDTO>
+            var response = new ResponseListDTO<CartDTO>();
+            if (HttpContext.Current.Session["SessionInit"] != null && bool.Parse(HttpContext.Current.Session["SessionInit"].ToString()))
             {
-                Item = new CartDTO
+                response = new CartLogic().CartGetFilteredList(new RequestDTO<CartDTO>
                 {
-                    Customer = new CustomerDTO
+                    Item = new CartDTO
                     {
-                        Identifier = 1
-                    },
-                    Identifier = HttpContext.Current.Session["CURRENT_CART_GUID"].ToString() ?? string.Empty
-                }
-            });
+                        Customer = new CustomerDTO
+                        {
+                            Identifier = int.Parse(HttpContext.Current.Session["SessionCustomerIdentifier"].ToString())
+                        },
+                        Identifier = HttpContext.Current.Session["SessionCartIdentifier"].ToString() ?? string.Empty
+                    }
+                });
+                response.SessionInit = true;
+            }
             return response;
         }
     }

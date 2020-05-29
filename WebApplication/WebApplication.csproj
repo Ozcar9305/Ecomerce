@@ -966,6 +966,8 @@
     <Content Include="ForzaUltra\Controles\Login\Login.ascx" />
     <Content Include="ForzaUltra\Admin\ProductCatalog.aspx" />
     <Content Include="ForzaUltra\Customer\ProductCatalog.aspx" />
+    <Content Include="ForzaUltra\Resources\ForgotPasswordEmailBody.txt" />
+    <Content Include="ForzaUltra\NewPassword.aspx" />
     <Content Include="ForzaUltra\RegisterForm.aspx" />
     <Content Include="ForzaUltra\Store.aspx" />
     <Content Include="Global.asax" />
@@ -993,8 +995,11 @@
     <Content Include="Content\font\roboto\Roboto-Thin.ttf" />
     <Content Include="Content\font\roboto\Roboto-Thin.woff" />
     <Content Include="Content\font\roboto\Roboto-Thin.woff2" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Images\ForzaUltra\Site\fu_banner.jpg" />
+    <Content Include="Images\ForzaUltra\Site\fu_customers.png" />
     <Content Include="Images\ForzaUltra\Site\fu_logo.png" />
     <Content Include="Images\ForzaUltra\Site\logo-inicio.png" />
     <Content Include="Images\ForzaUltra\Upload\tn_img0124.png" />
@@ -1062,6 +1067,7 @@
     <Content Include="Scripts\ForzaUltra\CartCheckout.js" />
     <Content Include="Scripts\ForzaUltra\Customer\ProductCatalog.js" />
     <Content Include="Scripts\ForzaUltra\Login.js" />
+    <Content Include="Scripts\ForzaUltra\NewPasswordForm.js" />
     <Content Include="Scripts\ForzaUltra\RegisterForm.js" />
     <Content Include="Scripts\ForzaUltra\Store.js" />
     <Content Include="Scripts\handlebars.min-v4.7.3.js" />
@@ -1165,6 +1171,13 @@
     <Compile Include="ForzaUltra\Customer\ProductCatalog.aspx.designer.cs">
       <DependentUpon>ProductCatalog.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ForzaUltra\NewPassword.aspx.cs">
+      <DependentUpon>NewPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ForzaUltra\NewPassword.aspx.designer.cs">
+      <DependentUpon>NewPassword.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ForzaUltra\RegisterForm.aspx.cs">
       <DependentUpon>RegisterForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1205,9 +1218,7 @@
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
