@@ -49,14 +49,39 @@ namespace WebApplication.ForzaUltra.Customer
                     Identifier = int.Parse(HttpContext.Current.Session["SessionCustomerIdentifier"].ToString())
                 };
 
-                response = new CartLogic().CartItemExecute(new RequestDTO<CartDTO>
+                var request = new RequestDTO<CartDTO>
                 {
                     Item = item,
                     OperationType = OperationType.Insert
-                });
+                };
 
+                if (HttpContext.Current.Session["SessionCartIdentifier"] != null)
+                {
+                    var currentCartItems = new CartLogic().CartGetFilteredList(new RequestDTO<CartDTO>
+                    {
+                        Item = new CartDTO
+                        {
+                            Customer = new CustomerDTO
+                            {
+                                Identifier = int.Parse(HttpContext.Current.Session["SessionCustomerIdentifier"].ToString())
+                            },
+                            Identifier = HttpContext.Current.Session["SessionCartIdentifier"].ToString()
+                        }
+                    });
 
-                if (response.Success)
+                    var product = currentCartItems.Result.FirstOrDefault(p => (p.ProductCatalog.Identifier == item.ProductCatalog.Identifier
+                   && p.ProductCategory.Identifier == item.ProductCategory.Identifier));
+
+                    if (product != null)
+                    {
+                        request.Item.Quantity += 1;
+                        request.OperationType = OperationType.Update;
+                    }
+                }
+
+                response = new CartLogic().CartItemExecute(request);
+
+                if (response.Success && request.OperationType == OperationType.Insert)
                 {
                     HttpContext.Current.Session["SessionCartIdentifier"] = response.Result.Identifier;
                 }

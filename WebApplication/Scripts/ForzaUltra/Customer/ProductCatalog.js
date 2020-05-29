@@ -53,7 +53,7 @@
                     } else if (!response.SessionInit) {
                         $("#loginModal").modal();                        
                     } else {
-                        toastr.error("Error al agregar el producto")
+                        toastr.error("Error al agregar el producto");
                     }
                 },
                 failure: function () {
@@ -147,6 +147,7 @@
 
         return {
             initialize: function () {
+                $.publish('cart-elements-count:onChange');
                 category_get_list();
                 setSubscriptions();
             }

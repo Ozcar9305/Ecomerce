@@ -50,7 +50,7 @@ $('#btnSave').click(function () {
 function loadCategoryList() {
     $.ajax({
         type: "POST",
-        url: serviceUri + 'CategoryGetList',
+        url:  '../Admin/Categories.aspx/CategoryGetList',
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (response) {

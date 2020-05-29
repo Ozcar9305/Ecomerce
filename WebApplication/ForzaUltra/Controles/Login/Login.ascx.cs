@@ -4,6 +4,7 @@ namespace WebApplication.ForzaUltra.Controles.Login
     using System;
     using System.Configuration;
     using System.IO;
+    using System.Linq;
     using System.Net.Mail;
     using System.Web;
     using ECommerce;
@@ -29,7 +30,7 @@ namespace WebApplication.ForzaUltra.Controles.Login
             if (!Page.IsPostBack)
             {
                 //Establecer las cookies de usuario y contraseña
-                if(Request.Cookies["forzaUltraUser"] != null && Request.Cookies["forzaUltraPwd"] != null)
+                if (Request.Cookies["forzaUltraUser"] != null && Request.Cookies["forzaUltraPwd"] != null)
                 {
                     usrname.Text = Request.Cookies["forzaUltraUser"].Value;
                     psw.Text = Request.Cookies["forzaUltraPwd"].Value;
@@ -146,13 +147,25 @@ namespace WebApplication.ForzaUltra.Controles.Login
             if (customerResponse.Success)
             {
                 //Validar la contraseña del usuario
-                if(loginLogic.ValidatePassword(psw.Text.Trim(), customerResponse.Result.EncryptedPassword))
+                if (loginLogic.ValidatePassword(psw.Text.Trim(), customerResponse.Result.EncryptedPassword))
                 {
                     Session["SessionInit"] = true;
                     Session["SessionEmail"] = customerResponse.Result.Email;
                     Session["SessionCustomerIdentifier"] = customerResponse.Result.Identifier;
                     Session["SessionCustomerRole"] = customerResponse.Result.Role;
-                    Session["SessionCartIdentifier"] = string.Empty;
+                    Session["SeccionFullName"] = string.Format("{0} {1}", customerResponse.Result.FirstName, customerResponse.Result.LastName);
+
+                    var cartItemResponse = new CartLogic().CartGetFilteredList(new RequestDTO<CartDTO>
+                    {
+                        Item = new CartDTO
+                        {
+                            Identifier = string.Empty,
+                            Customer = new CustomerDTO { Identifier = customerResponse.Result.Identifier }
+                        }
+                    });
+
+
+                    Session["SessionCartIdentifier"] = (cartItemResponse.Success && cartItemResponse.Result.Count > 0) ? cartItemResponse.Result.FirstOrDefault().Identifier : string.Empty;
 
                     if (chkRememberMe.Checked)
                     {
@@ -171,7 +184,7 @@ namespace WebApplication.ForzaUltra.Controles.Login
                     }
 
                     //Redirigir al usuario a la pantalla de categoriaas
-                    if(customerResponse.Result.Role == ECommerceDataModel.Enum.CustomerRole.Admin)
+                    if (customerResponse.Result.Role == ECommerceDataModel.Enum.CustomerRole.Admin)
                     {
                         Server.Transfer("~/ForzaUltra/Admin/Categories.aspx");
                     }
@@ -204,7 +217,7 @@ namespace WebApplication.ForzaUltra.Controles.Login
 
             if (relativeUrl.StartsWith("/"))
                 relativeUrl = relativeUrl.Insert(0, "~");
-            
+
             if (!relativeUrl.StartsWith("~/"))
                 relativeUrl = relativeUrl.Insert(0, "~/");
 

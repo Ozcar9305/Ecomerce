@@ -80,21 +80,35 @@
     </style>
 
     <script type="text/javascript">        
-        //var countRequest = 0;
-        //$(document).ajaxStart(function () {
-        //    countRequest++;
-        //    $('#pageLoading').show();
-        //    $('#pageLoading').addClass('pageLoading');
-        //});
+        $(document).ready(function () {
+            var sessionInit = <%= (HttpContext.Current.Session["SessionInit"] == null) ? string.Format("\'{0}\'","False") :  string.Format("\'{0}\'",HttpContext.Current.Session["SessionInit"]) %>;
+            var sessionEmail = <%= (HttpContext.Current.Session["SeccionFullName"] == null) ? string.Format("\'{0}\'"," ") : string.Format("\'{0}\'",HttpContext.Current.Session["SeccionFullName"])%>;
+            var sessionRole = <%= (HttpContext.Current.Session["SessionCustomerRole"] == null ) ? string.Format("\'{0}\'","Cliente") : string.Format("\'{0}\'",HttpContext.Current.Session["SessionCustomerRole"]) %>;
 
-        //$(document).ajaxComplete(function () {
-        //    countRequest -= 1;
-        //    if (countRequest == 0) {
-        //        $('#pageLoading').hide();
-        //        $('#pageLoading').removeClass('pageLoading');
-        //    }
-        //});
+            console.log(sessionInit, sessionEmail, sessionRole);
 
+            if (sessionRole === 'Admin') {
+                $('#menuAdmin').show();
+                $('#menuCustomer').hide();
+                $('#shooping-cart').hide();
+            }
+
+            if (sessionInit !== 'False') {
+                $('#lnkLogin').hide();
+                $('#lnkLogout').show();
+                $('#lnkLogout > span').html(sessionEmail);
+            }
+
+            $('#shooping-cart').bind('click', function () {
+                if (sessionInit !== 'False') {
+                    window.location.href = '/ForzaUltra/Cart.aspx';
+                } else {
+                    $("#loginModal").modal();
+                }
+            });
+
+
+        });
     </script>
 
 </head>
@@ -122,7 +136,7 @@
                 <!-- Links -->
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left -->
-                    <ul class="navbar-nav mr-auto">
+                    <ul class="navbar-nav mr-auto" id="menuCustomer">
                         <li class="nav-item active">
                             <a class="nav-link waves-effect" href="<%:ResolveUrl("~/ForzaUltra/Store.aspx") %>">Tienda
                                 <span class="sr-only">(current)</span>
@@ -137,10 +151,21 @@
                         </li>
                     </ul>
 
+                    <ul class="navbar-nav mr-auto" id="menuAdmin" style="display: none!important;">
+                        <li class="nav-item active">
+                            <a class="nav-link waves-effect" href="<%:ResolveUrl("~/ForzaUltra/Admin/Categories.aspx") %>">Categorias
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect" href="<%:ResolveUrl("~/ForzaUltra/Admin/ProductCatalog.aspx") %>">Productos</a>
+                        </li>
+                    </ul>
+
                     <!-- Right -->
                     <ul class="navbar-nav nav-flex-icons">
                         <li class="nav-item">
-                            <a class="nav-link" style="font-family: sans-serif!important">
+                            <a class="nav-link" id="shooping-cart" style="font-family: sans-serif!important">
                                 <span class="badge red z-depth-1 mr-1" id="cart-elements-count">0&nbsp;</span>
                                 <i class="fa fa-shopping-cart"></i>
                                 <span class="clearfix d-none d-sm-inline-block">Carrito </span>
@@ -150,6 +175,10 @@
                             <a class="nav-link" id="lnkLogin" data-toggle="modal" data-target="#modalLoginForm" style="font-family: sans-serif!important">
                                 <i class="fa fa-sign-in"></i>
                                 <span class="clearfix d-none d-sm-inline-block">&nbsp;Login</span>
+                            </a>
+                            <a class="nav-link" id="lnkLogout" style="font-family: sans-serif!important; display: none">
+                                <i class="fa fa-sign-out">&nbsp;</i>
+                                <span class="clearfix d-none d-sm-inline-block"></span>
                             </a>
                         </li>
                     </ul>
@@ -170,7 +199,7 @@
         </asp:ContentPlaceHolder>
 
         <!-- Footer -->
-        <footer class="page-footer font-small unique-color-dark pt-4" style="background:#212121!important">
+        <footer class="page-footer font-small unique-color-dark pt-4" style="background: #212121!important">
 
             <!-- Footer Links -->
             <div class="container text-center text-md-left">
@@ -216,7 +245,7 @@
                     <%--<hr class="clearfix w-100 d-md-none">--%>
 
                     <!-- Grid column -->
-<%--                    <div class="col-md-2 mx-auto">
+                    <%--                    <div class="col-md-2 mx-auto">
 
                         <!-- Links -->
                         <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>

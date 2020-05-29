@@ -63,17 +63,22 @@ namespace WebApplication.ForzaUltra
         [WebMethod]
         public static ResponseListDTO<CartDTO> CartGetFilteredList()
         {
-            var response = new CartLogic().CartGetFilteredList(new RequestDTO<CartDTO>
+            var response = new ResponseListDTO<CartDTO>();
+            if (HttpContext.Current.Session["SessionInit"] != null && bool.Parse(HttpContext.Current.Session["SessionInit"].ToString()))
             {
-                Item = new CartDTO
+                response = new CartLogic().CartGetFilteredList(new RequestDTO<CartDTO>
                 {
-                    Customer = new CustomerDTO
+                    Item = new CartDTO
                     {
-                        Identifier = int.Parse(HttpContext.Current.Session["SessionCustomerIdentifier"].ToString())
-                    },
-                    Identifier = HttpContext.Current.Session["SessionCartIdentifier"].ToString() ?? string.Empty
-                }
-            });
+                        Customer = new CustomerDTO
+                        {
+                            Identifier = int.Parse(HttpContext.Current.Session["SessionCustomerIdentifier"].ToString())
+                        },
+                        Identifier = HttpContext.Current.Session["SessionCartIdentifier"].ToString() ?? string.Empty
+                    }
+                });
+                response.SessionInit = true;
+            }
             return response;
         }
     }
