@@ -47,9 +47,7 @@
     <main id="catalogMainPage">
     </main>
 
-    <a>
-        <img class="img-fluid z-depth-1" src="https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg" alt="video"
-            data-toggle="modal" data-target="#modal1"></a>
+   
     <!--Modal: Name-->
     <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -68,7 +66,7 @@
 
                 <!--Footer-->
                 <div class="modal-footer justify-content-center">                    
-                    <button type="button" class="btn btn-outline-primary btn-rounded btn-md ml-4" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-sm btn-link" data-dismiss="modal">Cerrar</button>
                 </div>
 
             </div>
@@ -83,9 +81,9 @@
         <div class="container">
 
             <!--Navbar-->
-            <nav class="navbar navbar-expand-lg navbar-light lighten-3 mt-3 mb-5" style="box-shadow: none">
+            <nav class="navbar navbar-expand-lg navbar-light lighten-3 mt-3 mb-5" style="box-shadow: none;text-align:center!important">
                 <!-- Navbar brand -->
-                <span class="navbar-brand dark-grey-text"><strong>{{Name}}</strong></span>
+                <span class="navbar-brand dark-grey-text h3" style="width:100%!important"><strong>{{Name}}</strong></span>
             </nav>
             <!--/.Navbar-->
 
@@ -249,6 +247,13 @@
                     toastr.error("Error al consultar los datos");
                 }
             });
+
+            function loadMedia() {
+                $('#modal1').modal('show');
+            }
+
+            loadMedia();
+
         })();
     </script>
 </asp:Content>

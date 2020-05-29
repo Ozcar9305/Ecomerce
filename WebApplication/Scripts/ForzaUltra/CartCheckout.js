@@ -139,6 +139,7 @@
 
         return {
             initialize: function () {
+                $.publish('cart-elements-count:onChange');
                 get_cart_items();
                 setSubscriptions();                
             }

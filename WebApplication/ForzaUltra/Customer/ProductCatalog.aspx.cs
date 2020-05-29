@@ -25,14 +25,69 @@ namespace WebApplication.ForzaUltra.Customer
         }
 
         [WebMethod]
-        public static ResponseListDTO<ProductCatalogDTO> ProductCatalogGetList(int productId, string wordFilter, int pageNumber, int pageSize, bool all)
+        public static ResponseListDTO<ProductCatalogDTO> ProductCatalogGetList(int productId, int categoryId, string wordFilter, int pageNumber, int pageSize, bool all)
         {
-            var response = new ProductCatalogLogic().ProductCatalogGetFilteredList(new RequestDTO<ProductCatalogDTO>
+            var response = new ProductCatalogLogic().ProductCatalogGetListByCategory(new RequestDTO<ProductCatalogDTO>
             {
-                Item = new ProductCatalogDTO { Identifier = productId },
+                Item = new ProductCatalogDTO { Identifier = productId, ProductCategoryIdentifier = categoryId },
                 WordFilter = wordFilter,
                 Paging = new PagingDTO { PageNumber = pageNumber, PageSize = pageSize, All = all }
             });
+            return response;
+        }
+
+        [WebMethod]
+        public static ResponseDTO<CartDTO> CartItemExecute(CartDTO item)
+        {
+            var response = new ResponseDTO<CartDTO>();
+            if (HttpContext.Current.Session["SessionInit"] != null && bool.Parse(HttpContext.Current.Session["SessionInit"].ToString()))
+            {
+                item.Identifier = (HttpContext.Current.Session["SessionCartIdentifier"] == null) ? string.Empty : HttpContext.Current.Session["SessionCartIdentifier"].ToString();
+
+                item.Customer = new CustomerDTO
+                {
+                    Identifier = int.Parse(HttpContext.Current.Session["SessionCustomerIdentifier"].ToString())
+                };
+
+                var request = new RequestDTO<CartDTO>
+                {
+                    Item = item,
+                    OperationType = OperationType.Insert
+                };
+
+                if (HttpContext.Current.Session["SessionCartIdentifier"] != null)
+                {
+                    var currentCartItems = new CartLogic().CartGetFilteredList(new RequestDTO<CartDTO>
+                    {
+                        Item = new CartDTO
+                        {
+                            Customer = new CustomerDTO
+                            {
+                                Identifier = int.Parse(HttpContext.Current.Session["SessionCustomerIdentifier"].ToString())
+                            },
+                            Identifier = HttpContext.Current.Session["SessionCartIdentifier"].ToString()
+                        }
+                    });
+
+                    var product = currentCartItems.Result.FirstOrDefault(p => (p.ProductCatalog.Identifier == item.ProductCatalog.Identifier
+                   && p.ProductCategory.Identifier == item.ProductCategory.Identifier));
+
+                    if (product != null)
+                    {
+                        request.Item.Quantity += 1;
+                        request.OperationType = OperationType.Update;
+                    }
+                }
+
+                response = new CartLogic().CartItemExecute(request);
+
+                if (response.Success && request.OperationType == OperationType.Insert)
+                {
+                    HttpContext.Current.Session["SessionCartIdentifier"] = response.Result.Identifier;
+                }
+
+                response.SessionInit = true;
+            }
             return response;
         }
     }
