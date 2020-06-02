@@ -9,6 +9,8 @@ namespace ECommerceDataModel
 
         public long ProductCategoryIdentifier { get; set; }
 
+        public string ProductCategory { get; set; }
+
         public string ShortName { get; set; }
 
         public string Description { get; set; }

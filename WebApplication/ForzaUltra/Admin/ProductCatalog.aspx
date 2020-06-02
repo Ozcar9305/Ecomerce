@@ -5,121 +5,122 @@
     <br />
     <br />
     <br />
-    <div class="row">
-        <div class="container">
-            <div class="col-lg-12">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <h2>Administración de Productos</h2>
+    <div class="container">
+        <div class="row">
+            <div class="container">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <h2>Administración de Productos</h2>
+                        </div>
+                        <div class="col-lg-6">
+                            <a class="btn btn-sm btn-danger pull-right" id="btnNewProcut" data-toggle="modal" data-target="#basicExampleModal"><i class="fa fa-plus-circle"></i>&nbsp;Nuevo</a>
+                        </div>
                     </div>
-                    <div class="col-lg-6">
-                        <a class="btn btn-sm btn-danger pull-right" id="btnNewProcut" data-toggle="modal" data-target="#basicExampleModal"><i class="fa fa-plus-circle"></i>&nbsp;Nuevo</a>
-                    </div>
+                    <hr />
                 </div>
-                <hr />
             </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="container">
-            <div class="col-lg-12">
-                <div id="griProductCatalog">
+        <div class="row">
+            <div class="container">
+                <div class="col-lg-12">
+                    <div id="griProductCatalog">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="container">
+                <div class="col-lg-12 text-center">
+                    <div class="pagination">
+                        <a href="#" class="first" data-action="first">&laquo;</a>
+                        <a href="#" class="previous" data-action="previous">&lsaquo;</a>
+                        <input type="text" readonly="readonly" data-max-page="40" />
+                        <a href="#" class="next" data-action="next">&rsaquo;</a>
+                        <a href="#" class="last" data-action="last">&raquo;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Button trigger modal -->
+        <div class="modal fade" id="mergeProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header nav-item-forza">
+                        <h5 class="modal-title" id="mergeProductModalTitle">Nuevo producto</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <%--<label for="recipient-name" class="col-form-label">Nombre:</label>--%>
+                            <input type="hidden" id="productIdentifier" />
+                            <input type="text" class="form-control" id="txtProductName" placeholder="Nombre">
+                        </div>
+                        <div class="form-group">
+                            <%--<label for="recipient-name" class="col-form-label">Descripción:</label>--%>
+                            <input type="text" class="form-control" id="txtDescription" placeholder="Descripción">
+                        </div>
+                        <div class="form-group">
+                            <%--<label for="recipient-name" class="col-form-label">Categoría:</label>--%>
+                            <select id="ddlCategory" class="custom-select">
+                                <option value="" disabled selected>Selecciona una categoría</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <%--<label for="message-text" class="col-form-label">Precio:</label>--%>
+                            <input type="number" class="form-control" id="txtProductPrice" placeholder="Precio" />
+                        </div>
+                        <div class="form-inline">
+                            <label for="message-text" class="col-form-label">Seleccionar tallas disponibles:</label>
+                        </div>
+                        <div class="form-inline" style="width: 100%!important">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="size_id_1" value="1">
+                                <label class="form-check-label" for="materialUnchecked">CH&nbsp&nbsp</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="size_id_2" value="2">
+                                <label class="form-check-label" for="materialUnchecked">M&nbsp&nbsp</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="size_id_3" value="3">
+                                <label class="form-check-label" for="materialUnchecked">G&nbsp&nbsp</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="size_id_4" value="4">
+                                <label class="form-check-label" for="materialUnchecked">EG&nbsp&nbsp</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="size_id_5" value="5">
+                                <label class="form-check-label" for="materialUnchecked">UNITALLA&nbsp&nbsp</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="size_id_6" value="6">
+                                <label class="form-check-label" for="materialUnchecked" aria-checked="true">NA</label>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="customFileLang" lang="es" accept="image/x-png,image/jpeg">
+                            <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
+                        </div>
+                        <div class="form-group">
+                            <img id="imageProductPreview" src="#" hidden />
+                            <input type="hidden" id="imageProductPreviewBytes" />
+                            <input type="hidden" id="fileNameProductCatalog" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-outline-primary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-sm btn-outline-danger" id="btnSaveObjectProduct">Guardar</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="container">
-            <div class="col-lg-12 text-center">
-                <div class="pagination">
-                    <a href="#" class="first" data-action="first">&laquo;</a>
-                    <a href="#" class="previous" data-action="previous">&lsaquo;</a>
-                    <input type="text" readonly="readonly" data-max-page="40" />
-                    <a href="#" class="next" data-action="next">&rsaquo;</a>
-                    <a href="#" class="last" data-action="last">&raquo;</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Button trigger modal -->
-    <div class="modal fade" id="mergeProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header nav-item-forza">
-                    <h5 class="modal-title" id="mergeProductModalTitle">Nuevo producto</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <%--<label for="recipient-name" class="col-form-label">Nombre:</label>--%>
-                        <input type="hidden" id="productIdentifier" />
-                        <input type="text" class="form-control" id="txtProductName" placeholder="Nombre">
-                    </div>
-                    <div class="form-group">
-                        <%--<label for="recipient-name" class="col-form-label">Descripción:</label>--%>
-                        <input type="text" class="form-control" id="txtDescription" placeholder="Descripción">
-                    </div>
-                    <div class="form-group">
-                        <%--<label for="recipient-name" class="col-form-label">Categoría:</label>--%>
-                        <select id="ddlCategory" class="custom-select">
-                            <option value="" disabled selected>Selecciona una categoría</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <%--<label for="message-text" class="col-form-label">Precio:</label>--%>
-                        <input type="number" class="form-control" id="txtProductPrice" placeholder="Precio" />
-                    </div>
-                    <div class="form-inline">
-                        <label for="message-text" class="col-form-label">Seleccionar tallas disponibles:</label>
-                    </div>
-                    <div class="form-inline" style="width: 100%!important">
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="size_id_1" value="1">
-                            <label class="form-check-label" for="materialUnchecked">CH&nbsp&nbsp</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="size_id_2" value="2">
-                            <label class="form-check-label" for="materialUnchecked">M&nbsp&nbsp</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="size_id_3" value="3">
-                            <label class="form-check-label" for="materialUnchecked">G&nbsp&nbsp</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="size_id_4" value="4">
-                            <label class="form-check-label" for="materialUnchecked">EG&nbsp&nbsp</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="size_id_5" value="5">
-                            <label class="form-check-label" for="materialUnchecked">UNITALLA&nbsp&nbsp</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="size_id_6" value="6">
-                            <label class="form-check-label" for="materialUnchecked" aria-checked="true">NA</label>
-                        </div>
-                    </div>
-                    <br />
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="customFileLang" lang="es" accept="image/x-png,image/jpeg">
-                        <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
-                    </div>
-                    <div class="form-group">
-                        <img id="imageProductPreview" src="#" hidden />
-                        <input type="hidden" id="imageProductPreviewBytes" />
-                        <input type="hidden" id="fileNameProductCatalog" />
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-outline-primary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-sm btn-outline-danger" id="btnSaveObjectProduct">Guardar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script type="text/x-handlebars-template" id="mergeProductTemplate">
     </script>
 
@@ -139,6 +140,7 @@
                                     <th scope="col">Nombre</th>
                                     <th scope="col">Descripción</th>
                                     <th scope="col">Precio</th>
+                                    <th scope="col">Categoría</th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
@@ -149,9 +151,10 @@
                                     <td>{{ShortName}}</td>
                                     <td>{{Description}}</td>
                                     <td>{{numberFormat Price}}</td>
+                                    <td>{{ProductCategory}}</td>
                                     <td class="text-center">
                                         <a><i class="fa fa-pencil-square edit-product" style="width: 25px; height: 25px;" data-idproduct="{{Identifier}}" aria-hidden="true"></i></a>
-                                        <a><i class="fa fa-trash-o delete-product" style="width:25px; height:25px;" data-idProduct="{{Identifier}}" aria-hidden="true"></i></a>
+                                        <a><i class="fa fa-trash-o delete-product" style="width: 25px; height: 25px;" data-idproduct="{{Identifier}}" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>
                                 {{/each}}
@@ -255,7 +258,7 @@
             function btnNewProduct_onClick() {
                 $modalProductCatalogMerge.modal('show');
                 getListCategory();
-                clearProductModal();    
+                clearProductModal();
             }
 
             function clearProductModal() {
@@ -434,7 +437,7 @@
                     }
                 });
             }
-                 
+
 
             function getData() {
                 $.ajax({
