@@ -1,14 +1,10 @@
-﻿using ECommerceDataModel;
-using ECommerceDataModel.Enum;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace ECommerceDataLayer.Extensions
 {
+    using ECommerceDataModel;
+    using ECommerceDataModel.Enum;
+    using System.Data;
+
     public static class MapExtensions
     {
         public static ProductCategoryDTO ToProductCategory(this IDataReader reader)
@@ -82,9 +78,12 @@ namespace ECommerceDataLayer.Extensions
 
         public static OrderDTO ToOrder(this IDataReader reader)
         {
-            return new OrderDTO
+            return new OrderDTO 
             {
-                Identifier = reader.Get<long>("OrderId")
+                Identifier = reader.Get<long>("OrderId"),
+                Count = reader.Get<int>("ItemsCount"),
+                TotalAmount = reader.Get<decimal>("ItemsTotalAmount"),
+                Customer = reader.ToCustomer()
             };
         }
 

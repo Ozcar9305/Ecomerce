@@ -17,12 +17,41 @@
         {
             if (!Page.IsPostBack)
             {
-                Response.Redirect("~/ForzaUltra/Store.aspx");
+                testLogic();
+                //Response.Redirect("~/ForzaUltra/Store.aspx");
             }
         }
 
         private void testLogic()
         {
+            //new OrderLogic().sendCustomerEmail(1);
+
+            //var order = new OrderLogic().orderGetFilteredList(new RequestDTO<OrderDTO>
+            //{
+            //    Item = new OrderDTO
+            //    {
+            //        Identifier = 1
+            //    }
+            //});
+
+            //var orderResult = new OrderLogic().OrderExecute(new RequestDTO<OrderDTO>
+            //{
+            //    Item = new OrderDTO
+            //    {
+            //        Customer = new CustomerDTO
+            //        {
+            //            Identifier = 1
+            //        },
+            //        CartItems = new List<CartDTO>
+            //        {
+            //            new CartDTO
+            //            {
+            //                Identifier = "90509998-30F7-412C-8644-6EEDB76F31BA"
+            //            }
+            //        }
+            //    }
+            //});
+
             //var productList = new ProductCatalogLogic().ProductCatalogGetListByCategory(new RequestDTO<ProductCatalogDTO>
             //{
             //    Item = new ProductCatalogDTO
