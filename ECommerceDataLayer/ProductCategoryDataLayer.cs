@@ -14,13 +14,19 @@ namespace ECommerceDataLayer
 
     public class ProductCategoryDataLayer
     {
-        public ResponseListDTO<ProductCategoryDTO> ProductCategoryGetList()
+        public ResponseListDTO<ProductCategoryDTO> ProductCategoryGetList(RequestDTO<ProductCategoryDTO> category)
         {
             var response = new ResponseListDTO<ProductCategoryDTO> { Result = new List<ProductCategoryDTO>(),  Paging = new PagingDTO() };
             using (SqlCommand command = new SqlCommand("Usp_ProductCategory_GETL"))
             {
+                command.Parameters.Add("@WordFilter", SqlDbType.VarChar).Value = category.WordFilter; 
+                command.Parameters.Add("@PageSize", SqlDbType.Int).Value = category.Paging.PageSize;
+                command.Parameters.Add("@PageNumber", SqlDbType.Int).Value = category.Paging.PageNumber;
+                command.Parameters.Add("@All", SqlDbType.Bit).Value = category.Paging.All;
                 response.Result = command.Select(reader => reader.ToProductCategory());
                 response.Paging.TotalRecords = command.Select(reader => reader.ToTotalRecords()).FirstOrDefault();
+                response.Paging.PageNumber = category.Paging.PageNumber;
+                response.Paging.PageSize = category.Paging.PageSize;
             }
             return response;
         }

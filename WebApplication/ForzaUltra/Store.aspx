@@ -47,7 +47,7 @@
     <main id="catalogMainPage">
     </main>
 
-   
+
     <!--Modal: Name-->
     <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -65,7 +65,7 @@
                 </div>
 
                 <!--Footer-->
-                <div class="modal-footer justify-content-center">                    
+                <div class="modal-footer justify-content-center">
                     <button type="button" class="btn btn-sm btn-link" data-dismiss="modal">Cerrar</button>
                 </div>
 
@@ -81,9 +81,9 @@
         <div class="container">
 
             <!--Navbar-->
-            <nav class="navbar navbar-expand-lg navbar-light lighten-3 mt-3 mb-5" style="box-shadow: none;text-align:center!important">
+            <nav class="navbar navbar-expand-lg navbar-light lighten-3 mt-3 mb-5" style="box-shadow: none; text-align: center!important">
                 <!-- Navbar brand -->
-                <span class="navbar-brand dark-grey-text h3" style="width:100%!important"><strong>{{Name}}</strong></span>
+                <span class="navbar-brand dark-grey-text h3" style="width: 100%!important"><strong>{{Name}}</strong></span>
             </nav>
             <!--/.Navbar-->
 
@@ -97,11 +97,11 @@
                     <div class="col-lg-3 col-md-6 mb-4">
 
                         <!--Card-->
-                        <div class="card">
+                        <div class="card h-100">
 
                             <!--Card image-->
                             <div class="view overlay">
-                                <img src="../Images/ForzaUltra/Upload/{{ImageName}}" class="card-img-top"
+                                <img src="../Images/ForzaUltra/Upload/{{ImageName}}" class="card-img-top" height="200" width="150" style="object-fit: contain!important"
                                     alt="">
                                 <a>
                                     <div class="mask rgba-white-slight"></div>
@@ -175,53 +175,51 @@
                 $catalogMainPage = $('#catalogMainPage');
 
             function product_onClick(e) {
-                var session = "True"; <%--'<%= HttpContext.Current.Session["SessionInit"] %>';--%>
                 var categoryIentifier = $(this).attr('data-category');
                 var productIdentifier = $(this).attr('data-identifier');
                 var productPrice = $(this).attr('data-price');
 
-                if (session === 'False') {
-                    $("#loginModal").modal();
-                } else {
-                    var item = {
-                        Identifier: '',
-                        ProductCategory: {
-                            Identifier: categoryIentifier
-                        },
-                        ProductCatalog: {
-                            Identifier: productIdentifier,
-                            Price: productPrice,
-                            Sizes: [
-                                {
-                                    Identifier: 5
-                                }
-                            ]
-                        },
-                        Quantity: 1
-                    };
 
-                    $.ajax({
-                        type: "POST",
-                        url: "Store.aspx/CartItemExecute",
-                        data: "",
-                        contentType: "application/json;charset=utf-8",
-                        dataType: "json",
-                        data: JSON.stringify({ "item": item }),
-                        async: false,
-                        success: function (ressult) {
-                            var response = ressult.d;
-                            if (response.Success) {
-                                $.publish('cart-elements-count:onChange');
-                                toastr.success("Se agrego un elemento a tu carrito de compras.");
-                            } else {
-                                toastr.error("Error al agregar el producto")
+                var item = {
+                    Identifier: '',
+                    ProductCategory: {
+                        Identifier: categoryIentifier
+                    },
+                    ProductCatalog: {
+                        Identifier: productIdentifier,
+                        Price: productPrice,
+                        Sizes: [
+                            {
+                                Identifier: 5
                             }
-                        },
-                        failure: function () {
-                            toastr.error("Error al agregar el producto.");
+                        ]
+                    },
+                    Quantity: 1
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/ForzaUltra/Customer/ProductCatalog.aspx/CartItemExecute",
+                    data: "",
+                    contentType: "application/json;charset=utf-8",
+                    dataType: "json",
+                    data: JSON.stringify({ "item": item }),
+                    async: false,
+                    success: function (ressult) {
+                        var response = ressult.d;
+                        if (response.Success) {
+                            $.publish('cart-elements-count:onChange');
+                            toastr.success("Se agrego un elemento a tu carrito de compras.");
+                        } else if (!response.SessionInit) {
+                            $("#loginModal").modal();
+                        } else {
+                            toastr.error("Error al agregar el producto");
                         }
-                    });
-                }
+                    },
+                    failure: function () {
+                        toastr.error("Error al agregar el producto.");
+                    }
+                });
             }
 
             function bindEvents() {

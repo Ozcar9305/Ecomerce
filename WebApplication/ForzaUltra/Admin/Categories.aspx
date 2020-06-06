@@ -4,42 +4,45 @@
     <br />
     <br />
     <br />
+    <br />
     <div class="container">
         <div class="row">
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <h2>Administración de Categorias</h2>
-                    </div>
-                    <div class="col-lg-6">
-                        <a class="btn btn-sm btn-danger pull-right" id="btnAddCategory" data-toggle="modal" data-target="#basicExampleModal"><i class="fa fa-plus-circle"></i>&nbsp;Nuevo</a>
-                    </div>
+                <div class="col-lg-12">
+                    <h4><strong>Administración de Categorias</strong></h4>
                 </div>
-                <hr />
             </div>
         </div>
+        <hr />
         <div class="row">
-            <br />
+            <div class="col-lg-4">
+                <div class="input-group form-sm">
+                    <input class="form-control my-0 py-1 red-border" type="search" id="wordFilter" placeholder="Producto / Categoría" aria-label="Search">
+                    <div class="input-group-append">
+                        <a class="input-group-text  lighten-3" id="btnSearch"><i class="fa fa-search"
+                            aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <a class="btn btn-sm btn-danger pull-right" id="btnAddCategory" data-toggle="modal" data-target="#basicExampleModal"><i class="fa fa-plus-circle"></i>&nbsp;Nuevo</a>
+            </div>
         </div>
         <div class="row" id="dvgrid" runat="server">
-            <div class="container">
-                <div class="col-lg-12">
-                    <div class="col-lg-12">
-                        <div class="table-responsive text-nowrap">
-                            <table id="tblCategories" class="table table-bordered table-striped text-center">
-                                <thead class="thead thead-dark">
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Categor&iacute;a</th>
-                                        <th scope="col">Descripci&oacute;n</th>
-                                        <th scope="col">&nbsp;</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+            <div class="col-lg-12" style="min-height:55%!important">
+                <div class="table-responsive text-nowrap" >
+                    <table id="tblCategories" class="table table-bordered table-striped text-center">
+                        <thead class="thead thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Categor&iacute;a</th>
+                                <th scope="col">Descripci&oacute;n</th>
+                                <th scope="col">&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -56,6 +59,9 @@
                 </div>
             </div>
         </div>
+        <br />
+        <br />
+        <br />
         <%--Modal de alta y edicion--%>
         <div class="modal fade" id="divModalCategory" role="dialog">
             <div class="modal-dialog modal-sm">

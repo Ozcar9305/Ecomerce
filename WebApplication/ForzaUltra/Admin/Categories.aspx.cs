@@ -2,6 +2,7 @@
 {
     using ECommerce;
     using ECommerceDataModel;
+    using ECommerceDataModel.Enum;
     using ECommerceDataModel.Shared;
     using System;
     using System.Web;
@@ -19,9 +20,14 @@
         /// <param name="sender"></param>
         /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
-        {
+        {           
             if (!Page.IsPostBack)
             {
+                if (Session["SessionCustomerRole"] == null || Convert.ToInt32(Session["SessionCustomerRole"]) != (int)CustomerRole.Admin)
+                {
+                    Response.Redirect("/ForzaUltra/Store.aspx");
+                }
+
                 hdnCurrentPage.Value = HttpContext.Current.Request.Url.AbsoluteUri;
                 hdnCategoryIdentifier.Value = "0";
             }
@@ -31,9 +37,9 @@
         /// Carga el gridview de categorias
         /// </summary>
         [WebMethod()]
-        public static ResponseListDTO<ProductCategoryDTO> CategoryGetList()
+        public static ResponseListDTO<ProductCategoryDTO> CategoryGetList(RequestDTO<ProductCategoryDTO> category)
         {
-            return categoryLogic.CategoryGetList();
+            return categoryLogic.CategoryGetList(category);
         }
 
         /// <summary>

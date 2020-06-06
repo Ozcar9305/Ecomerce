@@ -7,6 +7,7 @@ namespace WebApplication.ForzaUltra.Controles.Login
     using System.Linq;
     using System.Net.Mail;
     using System.Web;
+    using System.Web.Services;
     using ECommerce;
     using ECommerce.Helpers;
     using ECommerceDataModel;
@@ -228,5 +229,6 @@ namespace WebApplication.ForzaUltra.Controles.Login
                 url.Scheme, url.Host, port, VirtualPathUtility.ToAbsolute(relativeUrl));
         }
 
+        
     }
 }
