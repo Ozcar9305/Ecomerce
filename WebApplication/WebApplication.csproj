@@ -968,6 +968,8 @@
     <Content Include="ForzaUltra\Cart.aspx" />
     <Content Include="ForzaUltra\Controles\Login\Login.ascx" />
     <Content Include="ForzaUltra\Admin\ProductCatalog.aspx" />
+    <Content Include="ForzaUltra\Customer\Nosotros.aspx" />
+    <Content Include="ForzaUltra\Customer\Privacy.aspx" />
     <Content Include="ForzaUltra\Customer\ProductCatalog.aspx" />
     <Content Include="ForzaUltra\Resources\ForgotPasswordEmailBody.txt" />
     <Content Include="ForzaUltra\NewPassword.aspx" />
@@ -1001,6 +1003,7 @@
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Images\ForzaUltra\Site\fu-nosotros.jpg" />
     <Content Include="Images\ForzaUltra\Site\fu_banner.jpg" />
     <Content Include="Images\ForzaUltra\Site\fu_customers.png" />
     <Content Include="Images\ForzaUltra\Site\fu_logo.png" />
@@ -1167,6 +1170,20 @@
     </Compile>
     <Compile Include="ForzaUltra\Admin\ProductCatalog.aspx.designer.cs">
       <DependentUpon>ProductCatalog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ForzaUltra\Customer\Nosotros.aspx.cs">
+      <DependentUpon>Nosotros.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ForzaUltra\Customer\Nosotros.aspx.designer.cs">
+      <DependentUpon>Nosotros.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ForzaUltra\Customer\Privacy.aspx.cs">
+      <DependentUpon>Privacy.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ForzaUltra\Customer\Privacy.aspx.designer.cs">
+      <DependentUpon>Privacy.aspx</DependentUpon>
     </Compile>
     <Compile Include="ForzaUltra\Customer\ProductCatalog.aspx.cs">
       <DependentUpon>ProductCatalog.aspx</DependentUpon>

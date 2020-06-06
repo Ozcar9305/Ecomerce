@@ -19,7 +19,6 @@ function loadCategoryAndProductList() {
 
         },
         failure: function (response) {
-            window.location = ;
         },
         complete: function () {
             desbloquearPantalla();

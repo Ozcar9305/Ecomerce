@@ -65,6 +65,16 @@
             {
                 productList = dataLayer.ProductCatalogGetFilteredList(product);
                 productList.Success = productList.Result.Any();
+
+                if (productList.Success)
+                {
+                    var categoryDataLayer = new ProductCategoryDataLayer();
+                    foreach(var p in productList.Result)
+                    {
+                        var response = categoryDataLayer.ProductCategoryGetItem(p.ProductCategoryIdentifier);
+                        p.ProductCategory = response.Description ?? string.Empty;
+                    }
+                }
             }
             catch (Exception exception)
             {
