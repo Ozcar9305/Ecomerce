@@ -31,9 +31,38 @@
                 orderResponse.Success = orderResponse.Result.Identifier > default(long);
                 if (orderResponse.Success)
                 {
+                    orderResponse = orderGetFilteredList(new RequestDTO<OrderDTO>
+                    {
+                        Item = new OrderDTO
+                        {
+                            Identifier = orderResponse.Result.Identifier
+                        }
+                    });
+
+                    //Ejecutar envio de correo al administrador y cliente
                     Task taskCustomerEmail = Task.Run(() => sendCustomerEmail(orderResponse.Result.Identifier));
                     Task taskAdminEmail = Task.Run(() => sendAdminEmail(orderResponse.Result.Identifier));
                 }
+            }
+            catch (Exception exception)
+            {
+                exception.LogException();
+            }
+            return orderResponse;
+        }
+
+        /// <summary>
+        /// Obtiene el detalle de la orden generada
+        /// </summary>
+        /// <param name="order"></param>
+        /// <returns></returns>
+        public ResponseDTO<OrderDTO> orderGetFilteredList(RequestDTO<OrderDTO> order)
+        {
+            var orderResponse = new ResponseDTO<OrderDTO>();
+            try
+            {
+                orderResponse.Result = orderDataLayer.OrderGetFilteredList(order);
+                orderResponse.Success = orderResponse.Result.Identifier > default(long) && orderResponse.Result.CartItems.Any();
             }
             catch (Exception exception)
             {
@@ -153,26 +182,6 @@
             {
                 exception.LogException();
             }
-        }
-
-        /// <summary>
-        /// Obtiene el detalle de la orden generada
-        /// </summary>
-        /// <param name="order"></param>
-        /// <returns></returns>
-        private ResponseDTO<OrderDTO> orderGetFilteredList(RequestDTO<OrderDTO> order)
-        {
-            var orderResponse = new ResponseDTO<OrderDTO>();
-            try
-            {
-                orderResponse.Result = orderDataLayer.OrderGetFilteredList(order);
-                orderResponse.Success = orderResponse.Result.Identifier > default(long) && orderResponse.Result.CartItems.Any();
-            }
-            catch (Exception exception)
-            {
-                exception.LogException();
-            }
-            return orderResponse;
         }
 
     }

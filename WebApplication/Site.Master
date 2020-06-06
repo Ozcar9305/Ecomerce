@@ -201,6 +201,8 @@
         <!-- Footer -->
         <footer class="page-footer font-small unique-color-dark pt-4" style="background: #212121!important">
 
+            <asp:Button runat="server" ID="btntest" Text="test" OnClick="btntest_Click" />
+
             <!-- Footer Links -->
             <div class="container text-center text-md-left">
 

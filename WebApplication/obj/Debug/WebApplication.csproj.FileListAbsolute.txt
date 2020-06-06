@@ -241,3 +241,5 @@ C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\WebApplication\obj\Debug\We
 C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\WebApplication\obj\Debug\WebApplication.csproj.CopyComplete
 C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\WebApplication\obj\Debug\WebApplication.dll
 C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\WebApplication\obj\Debug\WebApplication.pdb
+C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\WebApplication\bin\PayPal.dll
+C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\WebApplication\bin\PayPal.xml
