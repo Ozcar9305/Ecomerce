@@ -71,7 +71,15 @@
     <script type="text/x-handlebars-template" id="shopping-cart-footer-content">
         <div class="pull-right" style="margin: 10px">
             <a class="btn btn-sm btn-success pull-right">
-                <i class="fa fa-money" aria-hidden="true"></i>&nbsp;Pagar</a>
+                <i class="fa fa-money" aria-hidden="true"></i>&nbsp;Pagar
+            </a>
+            <button class="paypal-button">
+                <span class="paypal-button-title">Pagar con
+                </span>
+                <span class="paypal-logo">
+                    <i>Pay</i><i>Pal</i>
+                </span>
+            </button>
             <div class="pull-right" style="margin: 5px">
                 Total: <b>${{numberFormat Total}}</b>
             </div>

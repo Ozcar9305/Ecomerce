@@ -131,6 +131,12 @@
                 $("#mi-modal").modal('hide');
             });
 
+            function getCartItems() {
+                $.publish('cart-elements-count:onChange');
+            }
+
+            getCartItems();
+
         });
     </script>
 

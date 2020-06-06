@@ -169,7 +169,7 @@
 
         (function () {
 
-
+            
 
             var $catalogMainPageTemplate = $('#catalogMainPageTemplate').html(),
                 $catalogMainPage = $('#catalogMainPage');
@@ -251,7 +251,6 @@
             }
 
             loadMedia();
-
         })();
     </script>
 </asp:Content>

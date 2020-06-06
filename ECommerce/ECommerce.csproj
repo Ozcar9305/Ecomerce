@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CartLogic.cs" />
+    <Compile Include="Helpers\EmailHelper.cs" />
     <Compile Include="Helpers\ExceptionClassExtension.cs" />
     <Compile Include="LoginLogic.cs" />
     <Compile Include="MailLogic.cs" />
@@ -55,6 +56,11 @@
     <Compile Include="ProductCategoryLogic.cs" />
     <Compile Include="ProductSizeLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\PurchaseOrderEmail.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PurchaseOrderEmail.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ECommerceDataLayer\ECommerceDataLayer.csproj">
@@ -68,6 +74,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\PurchaseOrderEmail.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>PurchaseOrderEmail.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

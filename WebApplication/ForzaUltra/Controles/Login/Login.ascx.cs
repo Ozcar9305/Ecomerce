@@ -95,7 +95,12 @@ namespace WebApplication.ForzaUltra.Controles.Login
                         if (!string.IsNullOrEmpty(content))
                         {
                             string emailBody = string.Format(content, newPasswordUrl);
-                            send(emailBody);
+                            new EmailHelper().SendEmail(new MailDTO
+                            {
+                                EmailSubject = "Recuperación de contraseña ForzaUltra",
+                                EmailBody = emailBody,
+                                EmailTo = customerResponse.Result.Email
+                            });
                         }
                     }
                 }
@@ -108,26 +113,6 @@ namespace WebApplication.ForzaUltra.Controles.Login
             {
                 ex.LogException();
             }
-        }
-
-        /// <summary>
-        /// Envia el correo electronico
-        /// </summary>
-        private void send(string emailMessage)
-        {
-            MailMessage mail = new MailMessage();
-            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-
-            mail.From = new MailAddress("jgallegosledon@gmail.com");
-            mail.To.Add("jgallegosledon@hotmail.com");
-            mail.Subject = "Recuperación de contraseña Forza Ultra";
-            mail.Body = emailMessage;
-            mail.IsBodyHtml = true;
-
-            SmtpServer.Port = 587;
-            SmtpServer.Credentials = new System.Net.NetworkCredential("jgallegosledon@gmail.com", "dul200988");
-            SmtpServer.EnableSsl = true;
-            SmtpServer.Send(mail);
         }
 
         /// <summary>
