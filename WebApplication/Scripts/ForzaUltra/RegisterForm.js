@@ -38,15 +38,13 @@ $(document).ready(function () {
         }
     });
 
-    $('#btnRegisterUser').click(function (event) {
-        event.preventDefault();
+    $('#btnRegisterUser').click(function () {
         if ($registerForm.valid()) {
             registerUser();
         }
     });
 
-    $('#btnGoBack').click(function (event) {
-        event.preventDefault();
+    $('#btnGoBack').click(function () {
         window.history.back();
     });
 

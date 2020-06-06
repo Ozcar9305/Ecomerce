@@ -31,13 +31,12 @@
 
     </style>
     <form id="frmRegister">
-        <br />
         <div class="body-content">
             <div class="container borderForm">
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
-                        <div class="row">
-                            <div class="col-md-12 text-center" style="background-color:gray; border-bottom:5px solid crimson;">
+                        <div class="row" style="background-color:gray; border-bottom:5px solid crimson;">
+                            <div class="col-md-12 text-center">
                                 <img src="<%:ResolveUrl("~/Images/ForzaUltra/Site/fu_logo.png") %>" alt="Forza Ultra" width="200px" height="150px" />
                             </div>
                         </div>
@@ -104,7 +103,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12 text-center">
-                                    <input type="button" id="btnGoBack" value="Volver a la tienda" class="btn btn-default" />
+                                    <input id="btnGoBack" type="button" class="btn btn-default" value="&laquo; Volver a la tienda" />
                                     <input id="btnRegisterUser" name="register" type="button" class="btn btn-danger btn-send" value="Registrarme">
                                 </div>
                             </div>
