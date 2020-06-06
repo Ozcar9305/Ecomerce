@@ -97,10 +97,14 @@
         }
 
         function category_get_list() {
+
+            var filter = new Object();
+            filter.wordFilter = '';
+
             $.ajax({
                 type: "POST",
                 url: "ProductCatalog.aspx/CategoryGetList",
-                data: JSON.stringify({ "wordFilter": "" }),
+                data: JSON.stringify(filter),
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
                 async: false,

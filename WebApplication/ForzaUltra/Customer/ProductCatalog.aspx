@@ -18,7 +18,7 @@
 
     <script type="text/x-handlebars-template" id="category-list-template">
         {{#each Result}}
-        <a class="list-group-item text-dark" data-category-identifier="{{Identifier}}">{{Description}}</a>
+        <a class="list-group-item text-dark" data-category-identifier="{{Identifier}}">{{Name}}</a>
         {{/each}}
     </script>
 

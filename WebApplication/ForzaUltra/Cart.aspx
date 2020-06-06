@@ -73,13 +73,13 @@
             <a class="btn btn-sm btn-success pull-right">
                 <i class="fa fa-money" aria-hidden="true"></i>&nbsp;Pagar
             </a>
-            <%--<button class="paypal-button">
+            <button class="paypal-button">
                 <span class="paypal-button-title">Pagar con
                 </span>
                 <span class="paypal-logo">
                     <i>Pay</i><i>Pal</i>
                 </span>
-            </button>--%>
+            </button>
             <div class="pull-right" style="margin: 5px">
                 Total: <b>${{numberFormat Total}}</b>
             </div>
