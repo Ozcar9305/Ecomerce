@@ -38,11 +38,18 @@ $(document).ready(function () {
         }
     });
 
-    $('#btnRegisterUser').click(function () {
+    $('#btnRegisterUser').click(function (event) {
+        event.preventDefault();
         if ($registerForm.valid()) {
             registerUser();
         }
     });
+
+    $('#btnGoBack').click(function (event) {
+        event.preventDefault();
+        window.history.back();
+    });
+
 });
 
 
