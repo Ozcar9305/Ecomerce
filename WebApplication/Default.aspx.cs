@@ -5,11 +5,13 @@
     using ECommerceDataModel.Shared;
     using System;
     using System.Collections.Generic;
+    using System.Configuration;
     using System.Drawing;
     using System.Linq;
     using System.Web;
     using System.Web.UI;
     using System.Web.UI.WebControls;
+    using PayPal.Api;
 
     public partial class Default : Page
     {
@@ -17,12 +19,155 @@
         {
             if (!Page.IsPostBack)
             {
-                Response.Redirect("~/ForzaUltra/Store.aspx");
+                //testLogic();
+                //testPayPal();
+                //Response.Redirect("~/ForzaUltra/Store.aspx");
+            }
+        }
+
+        private void testPayPal()
+        {
+            var apiContext = Utils.Configuration.GetAPIContext();
+            string payerId = Request.Params["PayerID"];
+            if (string.IsNullOrEmpty(payerId))
+            {
+                //Obtenemos el detalle de la orden
+                var order = new OrderLogic().orderGetFilteredList(new RequestDTO<OrderDTO>
+                {
+                    Item = new OrderDTO
+                    {
+                        Identifier = 1
+                    }
+                });
+
+                //Generamos el listado de items por cobrar en paypal
+                var itemList = new ItemList();
+                if (order.Success && order.Result.CartItems.Any())
+                {
+                    //Inicializamos la lista de items
+                    itemList.items = new List<Item>();
+
+                    //Iteramos los registros del carrito de compras relacionado a la orden
+                    foreach(var cartItem in order.Result.CartItems)
+                    {
+                        string productSizeDescription = cartItem.ProductCatalog.Sizes.FirstOrDefault().Abreviature.Equals("Unitalla") ? "Unitalla" : string.Format("Talla {0}", cartItem.ProductCatalog.Sizes.FirstOrDefault().Abreviature);
+                        string productName = string.Format("{0} '{1}' {2}",
+                                                          cartItem.ProductCategory.Name.Remove(cartItem.ProductCategory.Name.Length - 1, 1),
+                                                          cartItem.ProductCatalog.ShortName,
+                                                          productSizeDescription);
+
+                        itemList.items.Add(new Item
+                        {
+                            name = productName,
+                            currency = "MXN",
+                            price = cartItem.ProductCatalog.Price.ToString(),
+                            quantity = cartItem.Quantity.ToString(),
+                            sku = string.Format("SKU-{0}{1}", cartItem.ProductCategory.Identifier, cartItem.ProductCatalog.Identifier)
+                        });
+                    }
+
+                    //Establecemos el tipo de pago
+                    var payer = new Payer() { payment_method = "paypal" };
+
+                    //Establecemos las urls de cancelacion de pago y regreso de pago
+                    var baseURI = Request.Url.Scheme + "://" + Request.Url.Authority + "/Default.aspx?";
+                    var guid = Convert.ToString((new Random()).Next(100000));
+                    var redirectUrl = baseURI + "guid=" + guid;
+                    var redirUrls = new RedirectUrls()
+                    {
+                        cancel_url = redirectUrl + "&cancel=true",
+                        return_url = redirectUrl
+                    };
+
+                    //Incluimos detalle de la compra (impuestos, costo de envio, subtotal)
+                    var details = new Details()
+                    {
+                        tax = "0",
+                        shipping = "0",
+                        subtotal = order.Result.TotalAmount.ToString()
+                    };
+
+                    //Establecemos el monto total de la compra, moneda y el detalle de la compra
+                    var amount = new Amount()
+                    {
+                        currency = "MXN",
+                        total = order.Result.TotalAmount.ToString(),
+                        details = details
+                    };
+
+                    //Se requiere incluir una transaccion
+                    var transactionList = new List<Transaction>
+                    {
+                        new Transaction
+                        {
+                            description = "Transaction description.",
+                            invoice_number = order.Result.Identifier.ToString().PadLeft(5, '0'),
+                            amount = amount,
+                            item_list = itemList
+                        }
+                    };
+
+                    //Generamos el objeto payment que incluye el tipo de pago, la transaccion y las urls de redireccion
+                    var payment = new Payment()
+                    {
+                        intent = "sale",
+                        payer = payer,
+                        transactions = transactionList,
+                        redirect_urls = redirUrls
+                    };
+
+                    //Creamos el pago
+                    var createdPayment = payment.Create(apiContext);
+
+                    //Se crean los links para que el cliente pueda aceptar o rechazar la compra
+                    var links = createdPayment.links.GetEnumerator();
+                    while (links.MoveNext())
+                    {
+                        var link = links.Current;
+                        if (link.rel.ToLower().Trim().Equals("approval_url"))
+                        {
+                            //this.flow.RecordRedirectUrl("Redirect to PayPal to approve the payment...", link.href);
+                        }
+                    }
+                    Session.Add(guid, createdPayment.id);
+                }
+            }
+            else
+            {
+
             }
         }
 
         private void testLogic()
         {
+            //new OrderLogic().sendCustomerEmail(1);
+
+            //var order = new OrderLogic().orderGetFilteredList(new RequestDTO<OrderDTO>
+            //{
+            //    Item = new OrderDTO
+            //    {
+            //        Identifier = 1
+            //    }
+            //});
+
+            //var orderResult = new OrderLogic().OrderExecute(new RequestDTO<OrderDTO>
+            //{
+            //    Item = new OrderDTO
+            //    {
+            //        Customer = new CustomerDTO
+            //        {
+            //            Identifier = 1
+            //        },
+            //        CartItems = new List<CartDTO>
+            //        {
+            //            new CartDTO
+            //            {
+            //                Identifier = "90509998-30F7-412C-8644-6EEDB76F31BA"
+            //            }
+            //        }
+            //    }
+            //});
+
             //var productList = new ProductCatalogLogic().ProductCatalogGetListByCategory(new RequestDTO<ProductCatalogDTO>
             //{
             //    Item = new ProductCatalogDTO

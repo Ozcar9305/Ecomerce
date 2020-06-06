@@ -80,7 +80,7 @@ namespace ECommerce
             try
             {
                 var customerItem = CustomerGetItem(new RequestDTO<CustomerDTO> { Item = customer });
-                if (customerItem.Success && !string.IsNullOrEmpty(customer.Password) && customerItem.Result.EncryptedPassword == customer.EncryptedPassword)
+                if (customerItem.Success && !string.IsNullOrEmpty(customer.Password) && (customerItem.Result.EncryptedPassword == customer.EncryptedPassword))
                 {
                     customer.Identifier = customerItem.Result.Identifier;
                     customer.EncryptedPassword = HashPassword(customer.Password);

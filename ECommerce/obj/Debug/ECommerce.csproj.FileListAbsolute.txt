@@ -29,6 +29,8 @@ C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\ECommerce\bin\Debug\ECommer
 C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\ECommerce\bin\Debug\ECommerceDataModel.pdb
 C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\ECommerce\bin\Debug\Newtonsoft.Json.xml
 C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\ECommerce\obj\Debug\ECommerce.csprojAssemblyReference.cache
+C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\ECommerce\obj\Debug\ECommerce.Resources.PurchaseOrderEmail.resources
+C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\ECommerce\obj\Debug\ECommerce.csproj.GenerateResource.cache
 C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\ECommerce\obj\Debug\ECommerce.csproj.CoreCompileInputs.cache
 C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\ECommerce\obj\Debug\ECommerce.csproj.CopyComplete
 C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\ECommerce\obj\Debug\ECommerce.dll
