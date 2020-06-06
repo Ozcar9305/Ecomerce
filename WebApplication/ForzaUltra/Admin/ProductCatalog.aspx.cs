@@ -1,5 +1,6 @@
 ﻿using ECommerce;
 using ECommerceDataModel;
+using ECommerceDataModel.Enum;
 using ECommerceDataModel.Shared;
 using Newtonsoft.Json;
 using System;
@@ -19,7 +20,10 @@ namespace WebApplication.ForzaUltra
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["SessionCustomerRole"] == null || Convert.ToInt32(Session["SessionCustomerRole"]) != (int)CustomerRole.Admin)
+            {
+                Response.Redirect("/ForzaUltra/Store.aspx");
+            }
         }
 
         [WebMethod]
@@ -62,7 +66,7 @@ namespace WebApplication.ForzaUltra
         }
 
         [WebMethod]
-        public static ResponseDTO<ProductCatalogDTO> Delete (int productIdentifier)
+        public static ResponseDTO<ProductCatalogDTO> Delete(int productIdentifier)
         {
             var response = new ProductCatalogLogic().ProductCatalogExecute(new RequestDTO<ProductCatalogDTO>
             {

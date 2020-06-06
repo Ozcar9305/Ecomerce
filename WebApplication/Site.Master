@@ -107,6 +107,29 @@
                 }
             });
 
+            $('#lnkLogout').bind('click', function () {
+                $("#mi-modal").modal('show');
+            });
+
+            $("#modal-btn-si").on("click", function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/ForzaUltra/Store.aspx/LogOut",
+                    contentType: "application/json;charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    success: function () {
+                    },
+                    failure: function () {
+                        toastr.error("Error al cerrar la sesión.");
+                    }
+                });
+                $("#mi-modal").modal('hide');
+            });
+
+            $("#modal-btn-no").on("click", function () {
+                $("#mi-modal").modal('hide');
+            });
 
         });
     </script>
@@ -189,7 +212,7 @@
         </nav>
         <!-- Navbar -->
 
-        <main style="min-height:100%!important">
+        <main>
             <asp:HiddenField runat="server" ID="hdfMasterServiceUri" Value="Site.Master" />
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
@@ -200,10 +223,27 @@
 
         <!-- Footer -->
 
-
+        <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myModalLabel">Cerrar sesión</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>¿Estás segura de que quieres cerrar sesión?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" id="modal-btn-no">No</button>
+                        <asp:Button ID="Button1" CssClass="btn btn-danger" runat="server" Text="Si" />
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Footer -->
     </form>
+    <br />
     <div id="pageLoading" class="pageLoading text-center">
         <div class="spinner-border text-danger" style="margin-top: 20%!important" role="status">
             <span class="sr-only">Loading...</span><br />
@@ -212,6 +252,12 @@
             <span>Cargando ...</span>
         </div>
     </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
     <footer class="page-footer font-small unique-color-dark pt-4" style="background: #000!important; margin-top: 15px!important;">
         <!-- Footer Links -->
         <div class="container text-center text-md-left">
@@ -259,13 +305,11 @@
                     <!-- Social buttons -->
                     <ul class="list-unstyled ">
                         <li class="list-inline-item">
-                            <a class="btn-floating btn-fb mx-1" href="/ForzaUltra/Customer/Privacy.aspx">
-                                Politicas
+                            <a class="btn-floating btn-fb mx-1" href="/ForzaUltra/Customer/Privacy.aspx">Politicas
                             </a>
                         </li>
                         <li class="list-inline-item">
-                            <a class="btn-floating btn-fb mx-1" href="/ForzaUltra/Customer/Nosotros.aspx">
-                                Nosotros
+                            <a class="btn-floating btn-fb mx-1" href="/ForzaUltra/Customer/Nosotros.aspx">Nosotros
                             </a>
                         </li>
                     </ul>

@@ -19,9 +19,18 @@ namespace WebApplication.ForzaUltra.Customer
         }
 
         [WebMethod()]
-        public static ResponseListDTO<ProductCategoryDTO> CategoryGetList()
-        {
-            return new ProductCategoryLogic().CategoryGetList();
+        public static ResponseListDTO<ProductCategoryDTO> CategoryGetList(string wordFilter)
+        {            
+            return new ProductCategoryLogic().CategoryGetList(new RequestDTO<ProductCategoryDTO>
+            {
+                WordFilter = wordFilter,
+                Paging = new PagingDTO
+                {
+                    All = true,
+                    PageNumber = 0,
+                    PageSize = 0
+                }
+            });
         }
 
         [WebMethod]

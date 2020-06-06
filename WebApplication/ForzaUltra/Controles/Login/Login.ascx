@@ -37,7 +37,7 @@
                 <button type="button" class="close" style="color: #fff!important;" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
             </div>
             <div class="modal-body" style="padding: 40px 50px;">
-                <form role="form">
+                <%--<form role="form">--%>
                     <div class="form-group">
                         <asp:Label ID="lblEmail" runat="server" AssociatedControlID="usrname" Text="Correo Electrónico"></asp:Label>
                         <asp:TextBox runat="server" class="form-control" ID="usrname" ClientIDMode="Static"></asp:TextBox>
@@ -60,7 +60,7 @@
                         ClientIDMode="Static"
                         OnClick="btnValidateLogin_Click"/>
                     <asp:HiddenField runat="server" ID="hdnLoginButtonAction" ClientIDMode="Static" value="Login" />
-                </form>
+                <%--</form>--%>
             </div>
             <div class="modal-footer">
                 <p>¿A&uacute;n no eres miembro? <a href='<%:ResolveUrl("~/ForzaUltra/RegisterForm.aspx") %>'>Registrate</a></p>

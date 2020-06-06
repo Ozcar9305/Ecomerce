@@ -81,5 +81,13 @@ namespace WebApplication.ForzaUltra
             }
             return response;
         }
+
+
+        [WebMethod]
+        public static void LogOut()
+        {
+            HttpContext.Current.Session.Clear();
+            HttpContext.Current.Response.Redirect("/ForzaUltra/Store.aspx");
+        }
     }
 }

@@ -20,7 +20,7 @@
             var categoryIentifier = $(this).attr('data-category');
             var productIdentifier = $(this).attr('data-identifier');
             var productPrice = $(this).attr('data-price');
-            
+
             var item = {
                 Identifier: '',
                 ProductCategory: {
@@ -51,7 +51,7 @@
                         $.publish('cart-elements-count:onChange');
                         toastr.success("Se agrego un elemento a tu carrito de compras.");
                     } else if (!response.SessionInit) {
-                        $("#loginModal").modal();                        
+                        $("#loginModal").modal();
                     } else {
                         toastr.error("Error al agregar el producto");
                     }
@@ -100,7 +100,7 @@
             $.ajax({
                 type: "POST",
                 url: "ProductCatalog.aspx/CategoryGetList",
-                data: "",
+                data: JSON.stringify({ "wordFilter": "" }),
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
                 async: false,

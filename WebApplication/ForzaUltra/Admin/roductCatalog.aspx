@@ -9,27 +9,25 @@
         <div class="row">
             <div class="container">
                 <div class="col-lg-12">
-                    <h4><strong>Administración de Productos</strong></h4>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <h2>Administración de Productos</h2>
+                        </div>
+                        <div class="col-lg-6">
+                            <a class="btn btn-sm btn-danger pull-right" id="btnNewProcut" data-toggle="modal" data-target="#basicExampleModal"><i class="fa fa-plus-circle"></i>&nbsp;Nuevo</a>
+                        </div>
+                    </div>
+                    <hr />
                 </div>
             </div>
         </div>
-        <hr />
+
         <div class="row">
-            <div class="col-lg-4">
-                <div class="input-group form-sm">
-                    <input class="form-control my-0 py-1 red-border" type="search" id="wordFilter" placeholder="Producto / Categoría" aria-label="Search">
-                    <div class="input-group-append">
-                        <a class="input-group-text  lighten-3" id="btnSearch"><i class="fa fa-search"
-                            aria-hidden="true"></i></a>
+            <div class="container">
+                <div class="col-lg-12">
+                    <div id="griProductCatalog">
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-8">
-                <a class="btn btn-sm btn-danger pull-right" id="btnNewProcut" data-toggle="modal" data-target="#basicExampleModal"><i class="fa fa-plus-circle"></i>&nbsp;Nuevo</a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12" id="griProductCatalog">
             </div>
         </div>
         <div class="row">
@@ -132,21 +130,22 @@
             </div>
             <br />
             <div class="row">
-                <div class="table-responsive text-nowrap">
+                <div class="col-lg-12">
+                    <div class="table-responsive text-nowrap">
 
-                    <table class="table table-bordered table-striped">
-                        <thead class="thead thead-dark">
-                            <tr>
-                                <th scope="col">No. Producto</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Descripción</th>
-                                <th scope="col">Precio</th>
-                                <th scope="col">Categoría</th>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {{#each Result}}                           
+                        <table class="table table-bordered table-striped">
+                            <thead class="thead thead-dark">
+                                <tr>
+                                    <th scope="col">No. Producto</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Descripción</th>
+                                    <th scope="col">Precio</th>
+                                    <th scope="col">Categoría</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each Result}}                           
                                 <tr>
                                     <th scope="row">{{Identifier}}</th>
                                     <td>{{ShortName}}</td>
@@ -158,10 +157,11 @@
                                         <a><i class="fa fa-trash-o delete-product" style="width: 25px; height: 25px;" data-idproduct="{{Identifier}}" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>
-                            {{/each}}
-                        </tbody>
-                    </table>
+                                {{/each}}
+                            </tbody>
+                        </table>
 
+                    </div>
                 </div>
             </div>
         </div>
@@ -204,9 +204,7 @@
                 $griProductCatalog = $('#griProductCatalog'),
                 $modalProductCatalogMerge = $('#mergeProductModal'),
                 $btnNewProcut = $('#btnNewProcut'),
-                $btnSaveObjectProduct = $('#btnSaveObjectProduct'),
-                $btnSearch = $('#btnSearch'),
-                $wordFilter = $('#wordFilter');
+                $btnSaveObjectProduct = $('#btnSaveObjectProduct');
 
             var request = {
                 Paging: {
@@ -378,23 +376,10 @@
                 });
             }
 
-            function search_onClick() {
-                request.WordFilter = $wordFilter.val();
-                request.Paging.PageNumber = 1;
-                getData();
-            }
-
             function bindEvents() {
                 $btnNewProcut.bind('click', btnNewProduct_onClick);
                 $btnSaveObjectProduct.bind('click', btnSaveObjectProduct_onClick);
-                $btnSearch.bind('click', search_onClick);
-                $wordFilter.bind('input', function () {
-                    if ($wordFilter.val() === '') {
-                        request.WordFilter = $wordFilter.val();
-                        request.Paging.PageNumber = 1;
-                        getData();
-                    }
-                });
+
             }
 
             function edit_onClick() {
@@ -483,7 +468,7 @@
                 $.ajax({
                     type: "POST",
                     url: "Categories.aspx/CategoryGetList",
-                    data: JSON.stringify({ "wordFilter": "" }),
+                    data: "",
                     contentType: "application/json;charset=utf-8",
                     dataType: "json",
                     async: false,

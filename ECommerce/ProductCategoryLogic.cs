@@ -14,13 +14,13 @@
         /// Obtiene un listado de categorias existentes
         /// </summary>
         /// <returns></returns>
-        public ResponseListDTO<ProductCategoryDTO> CategoryGetList()
+        public ResponseListDTO<ProductCategoryDTO> CategoryGetList(RequestDTO<ProductCategoryDTO> category)
         {
             var categoryResponse = new ResponseListDTO<ProductCategoryDTO> { Result = new List<ProductCategoryDTO>(), Paging = new PagingDTO() };
             try
             {
                 var categoryDataLayer = new ProductCategoryDataLayer();
-                var dataLayerResponse = categoryDataLayer.ProductCategoryGetList();
+                var dataLayerResponse = categoryDataLayer.ProductCategoryGetList(category);
                 categoryResponse.Result = dataLayerResponse?.Result;
                 categoryResponse.Paging = dataLayerResponse?.Paging;
                 categoryResponse.Success = categoryResponse.Result != null && categoryResponse.Result.Any();
@@ -66,7 +66,15 @@
             try
             {
                 var categoryDataLayer = new ProductCategoryDataLayer();
-                var categoryList = categoryDataLayer.ProductCategoryGetList()?.Result;
+                var categoryList = categoryDataLayer.ProductCategoryGetList(new RequestDTO<ProductCategoryDTO> {
+                    WordFilter = string.Empty,
+                    Paging = new PagingDTO
+                    {
+                        All = true,
+                        PageNumber = 0,
+                        PageSize = 0
+                    }
+                })?.Result;
                 if (categoryList.Any())
                 {
                     var productDataLayer = new ProductCatalogDataLayer();

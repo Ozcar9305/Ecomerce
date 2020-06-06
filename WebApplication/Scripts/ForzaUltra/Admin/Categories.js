@@ -2,7 +2,17 @@
 
 var paging = {
     PageNumber: 1,
-    PageSize: 10
+    PageSize: 10,
+    All: false
+};
+
+var category = {
+    WordFilter: '',
+    Paging: {
+        PageNumber: 1,
+        PageSize: 10,
+        All: false
+    }
 };
 
 function PaginatorInit(response) {
@@ -23,8 +33,26 @@ function PaginatorInit(response) {
 
 $(document).ready(function () {
 
+    var $btnSearch = $('#btnSearch'),
+        $wordFilter = $('#wordFilter');
+
+    function search_onClick() {
+        category.WordFilter = $wordFilter.val();
+        category.Paging.PageNumber = 1;
+        loadCategoryList();
+    }
+
+    $btnSearch.bind('click', search_onClick);
+    $wordFilter.bind('input', function () {
+        if ($wordFilter.val() === '') {
+            category.WordFilter = $wordFilter.val();
+            category.Paging.PageNumber = 1;
+            loadCategoryList();
+        }
+    });
+
     function pagination_onChange(event, response) {
-        paging.PageNumber = response.PageNumber;
+        category.Paging.PageNumber = response.PageNumber;
         loadCategoryList();
     }
 
@@ -50,8 +78,9 @@ $('#btnSave').click(function () {
 function loadCategoryList() {
     $.ajax({
         type: "POST",
-        url:  '../Admin/Categories.aspx/CategoryGetList',
+        url: '../Admin/Categories.aspx/CategoryGetList',
         contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ "category": category }),
         dataType: "json",
         success: function (response) {
             var data = response.d;
