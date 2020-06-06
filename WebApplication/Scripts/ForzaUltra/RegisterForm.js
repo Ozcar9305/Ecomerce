@@ -43,6 +43,11 @@ $(document).ready(function () {
             registerUser();
         }
     });
+
+    $('#btnGoBack').click(function () {
+        window.history.back();
+    });
+
 });
 
 
