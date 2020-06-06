@@ -82,7 +82,6 @@ namespace WebApplication.ForzaUltra
             return response;
         }
 
-
         [WebMethod]
         public static void LogOut()
         {
