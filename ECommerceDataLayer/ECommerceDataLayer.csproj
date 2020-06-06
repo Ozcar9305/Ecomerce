@@ -42,10 +42,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CartDataLayer.cs" />
+    <Compile Include="ExceptionDataLayer.cs" />
     <Compile Include="Extensions\DataBaseExtensions.cs" />
     <Compile Include="Extensions\MapExtensions.cs" />
+    <Compile Include="LoginDataLayer.cs" />
+    <Compile Include="OrderDataLayer.cs" />
     <Compile Include="ProductCatalogDataLayer.cs" />
     <Compile Include="ProductCategoryDataLayer.cs" />
+    <Compile Include="ProductSizeDataLayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

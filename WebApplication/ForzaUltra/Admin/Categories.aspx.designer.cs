@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebApplication.ForzaUltra {
-    
-    
-    public partial class Categories {
-        
+namespace WebApplication.ForzaUltra
+{
+
+
+    public partial class Categories
+    {
+
         /// <summary>
         /// dvgrid control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace WebApplication.ForzaUltra {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvgrid;
-        
+
         /// <summary>
         /// hdnCategoryIdentifier control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace WebApplication.ForzaUltra {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hdnCategoryIdentifier;
-        
+
         /// <summary>
         /// hdnCurrentPage control.
         /// </summary>

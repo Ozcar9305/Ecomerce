@@ -1,10 +1,15 @@
 ﻿namespace ECommerce
 {
+    using ECommerce.Helpers;
     using ECommerceDataLayer;
     using ECommerceDataModel;
     using ECommerceDataModel.Shared;
     using System;
+    using System.Configuration;
+    using System.IO;
     using System.Linq;
+    using System.Drawing;
+    using System.Drawing.Imaging;
 
     public class ProductCatalogLogic
     {
@@ -12,6 +17,11 @@
         /// Acceso a la capa de datos
         /// </summary>
         private readonly ProductCatalogDataLayer dataLayer = new ProductCatalogDataLayer();
+
+        /// <summary>
+        /// Acceso a capa logica de categorias
+        /// </summary>
+        private readonly ProductSizeLogic productSizeLogic = new ProductSizeLogic();
 
         /// <summary>
         /// Obtiene un producto apartir de su identificador
@@ -25,10 +35,18 @@
             {
                 productCatalogItem.Result = dataLayer.ProductCatalogGetItem(productIdentifier);
                 productCatalogItem.Success = productCatalogItem.Result.Identifier > default(long);
+                if (productCatalogItem.Success)
+                {
+                    productCatalogItem.Result.Sizes = productSizeLogic.ProductSizeGetFilteredList
+                    (
+                        productCatalogItem.Result.ProductCategoryIdentifier,
+                        productCatalogItem.Result.Identifier
+                    )?.Result;
+                }
             }
             catch (Exception exception)
             {
-                throw exception;
+                exception.LogException();
             }
             return productCatalogItem;
         }
@@ -47,12 +65,42 @@
             {
                 productList = dataLayer.ProductCatalogGetFilteredList(product);
                 productList.Success = productList.Result.Any();
+
+                if (productList.Success)
+                {
+                    var categoryDataLayer = new ProductCategoryDataLayer();
+                    foreach(var p in productList.Result)
+                    {
+                        var response = categoryDataLayer.ProductCategoryGetItem(p.ProductCategoryIdentifier);
+                        p.ProductCategory = response.Description ?? string.Empty;
+                    }
+                }
             }
             catch (Exception exception)
             {
-                throw;
+                exception.LogException();
             }
             return productList;
+        }
+
+        /// <summary>
+        /// Permite obtener un listado de productos filtrados por categoria
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
+        public ResponseListDTO<ProductCatalogDTO> ProductCatalogGetListByCategory(RequestDTO<ProductCatalogDTO> product)
+        {
+            var productListResponse = new ResponseListDTO<ProductCatalogDTO>();
+            try
+            {
+                productListResponse = dataLayer.ProductCatalogGetListByCategory(product);
+                productListResponse.Success = productListResponse.Result.Any();
+            }
+            catch (Exception exception)
+            {
+                exception.LogException();
+            }
+            return productListResponse;
         }
 
         /// <summary>
@@ -70,7 +118,7 @@
                     switch (product.OperationType)
                     {
                         case OperationType.Merge:
-                            response.Success = dataLayer.ProductCatalogMerge(product.Item);
+                            response = mergeProduct(product);                                                   
                             break;
                         case OperationType.Delete:
                             response.Success = dataLayer.ProductCatalogChangeStatus(product.Item.Identifier);
@@ -86,8 +134,26 @@
             }
             catch (Exception exception)
             {
-                throw exception;
+                exception.LogException();
             }
+            return response;
+        }
+
+        /// <summary>
+        /// Permite realizar la operacion merge sobre un producto
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
+        private ResponseDTO<ProductCatalogDTO> mergeProduct(RequestDTO<ProductCatalogDTO> product)
+        {
+            var response = new ResponseDTO<ProductCatalogDTO>();
+            response.Result = dataLayer.ProductCatalogMerge(product.Item);
+            if (product.Item.Identifier == default(long))
+            {
+                product.Item.Identifier = response.Result.Identifier;
+            }
+
+            response.Success = product.Item.Identifier > 0 && productSizeLogic.ProductSizeMerge(product).Success;
             return response;
         }
     }

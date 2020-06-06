@@ -1,6 +1,32 @@
 ﻿let serviceUri = '';
 
+var paging = {
+    PageNumber: 1,
+    PageSize: 10
+};
+
+function PaginatorInit(response) {
+    var $estatusPedidoSelectPickerTemplate = $('.pagination');
+    var maxPage = (response.PageSize > response.TotalRecords) ? 1 : (Math.floor(response.TotalRecords / response.PageSize)) + (((response.TotalRecords % response.PageSize) > 0) ? 1 : 0);
+
+    $estatusPedidoSelectPickerTemplate.jqPagination({
+        link_string: '/?page={page_number}',
+        max_page: maxPage,
+        paged: function (page) {
+            $('.log').prepend('<li>Requested page ' + page + '</li>');
+            if (page <= maxPage) {
+                $.publish('pagination-component:onChange', { PageNumber: page });
+            }
+        }
+    });
+}
+
 $(document).ready(function () {
+
+    function pagination_onChange(event, response) {
+        paging.PageNumber = response.PageNumber;
+        loadCategoryList();
+    }
 
     serviceUri = $('#hdnCurrentPage').val() + '.aspx/';
 
@@ -13,7 +39,7 @@ $(document).ready(function () {
     });
 
     loadCategoryList();
-    //alert('test');
+    $.subscribe('pagination-component:onChange', pagination_onChange);
 });
 
 $('#btnSave').click(function () {
@@ -24,13 +50,16 @@ $('#btnSave').click(function () {
 function loadCategoryList() {
     $.ajax({
         type: "POST",
-        url: serviceUri + 'CategoryGetList',
+        url:  '../Admin/Categories.aspx/CategoryGetList',
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (response) {
             var data = response.d;
             if (data.Success && data.Result.length > 0) {
 
+                data.Paging.PageNumber = paging.PageNumber;
+                data.Paging.PageSize = paging.PageSize;
+                PaginatorInit(data.Paging);
                 var categoryTable = $('#tblCategories tbody');
                 categoryTable.empty();
 
@@ -42,8 +71,12 @@ function loadCategoryList() {
                     tableContent += "   <td>" + item.Name + "</td>";
                     tableContent += "   <td>" + item.Description + "</td>";
                     tableContent += "   <td>";
-                    tableContent += "	    <span data-placement='top' data-toggle='tooltip' title='Editar'><button id='btnEdit' class='btn btn-default btn-xs edit' data-title='Editar' data-toggle='modal' data-target='#edit' data-category-id='" + item.Identifier + "'><span class='glyphicon glyphicon-pencil'></span></button></span>";
-                    tableContent += "	    <span data-placement='top' data-toggle='tooltip' title='Eliminar'><button id='btnDelete' class='btn btn-default btn-xs delete' data-title='Eliminar' data-target='#delete' data-category-id='" + item.Identifier + "'><span class='glyphicon glyphicon-trash'></span></button></span>";
+                    tableContent += "   <div class='btn-group'>";
+                    tableContent += "   <a><i class='fa fa-pencil-square edit' style='width:25px; height:25px;' data-category-id='" + item.Identifier + "' aria-hidden='true'></i></a>";
+                    tableContent += "   <a><i class='fa fa-trash-o delete' style='width:25px; height:25px;' data-category-id='" + item.Identifier + "' aria-hidden='true'></i></a>";
+                    //tableContent += "	    <span data-placement='top' data-toggle='tooltip' title='Editar'><button id='btnEdit' class='btn btn-sm btn-default btn-xs edit' data-title='Editar' data-toggle='modal' data-target='#edit' data-category-id='" + item.Identifier + "'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></button></span>";
+                    //tableContent += "	    <span data-placement='top' data-toggle='tooltip' title='Eliminar'><button id='btnDelete' class='btn btn-sm btn-default btn-xs delete' data-title='Eliminar' data-target='#delete' data-category-id='" + item.Identifier + "'><span><i class='fa fa-trash-o' aria-hidden='true'></i></span></button></span>";
+                    tableContent += "   </div>";
                     tableContent += "   </td>";
                     tableContent += "</tr>";
                 });
@@ -51,6 +84,7 @@ function loadCategoryList() {
 
                 //modal de edicion
                 $('.edit').off("click").on("click", function (e) {
+                    console.log('edit');
                     var categoryIdentifier = $(this).data('category-id');
                     loadCategoryDetail(categoryIdentifier);
                 });
@@ -62,11 +96,11 @@ function loadCategoryList() {
 
             }
             else {
-                alert("No hay categorias dadas de alta");
+                toastr.error("No hay categorias dadas de alta");
             }
         },
         failure: function (xhr, textStatus, errorThrown) {
-            alert("Fail[LoadCategoryList]" + xhr + " " + textStatus + " " + errorThrown);
+            toastr.error("Fail[LoadCategoryList]" + xhr + " " + textStatus + " " + errorThrown);
         }
     });
 };
@@ -94,11 +128,11 @@ function loadCategoryDetail(categoryIdentifier) {
                 $('#divModalCategory').modal('show');
             }
             else {
-                alert("No fue posible obtener el detalle de la categoria");
+                toastr.error("No fue posible obtener el detalle de la categoria");
             }
         },
         failure: function (xhr, textStatus, errorThrown) {
-            alert("Fail[LoadCategoryItem]" + xhr + " " + textStatus + " " + errorThrown);
+            toastr.error("Fail[LoadCategoryItem]" + xhr + " " + textStatus + " " + errorThrown);
         }
     });
 };
@@ -126,14 +160,14 @@ function mergeCategoryItem() {
                 $('#txtCategoryDescription').val('');
                 $('#spnModalTitle').text('Editar');
                 $('#divModalCategory').modal('hide');
-                alert('Informacion guardada correctamente', 'success');
+                toastr.success('Informacion guardada correctamente');
             }
             else {
-                alert("No fue posible obtener el detalle de la categoria");
+                toastr.error("No fue posible obtener el detalle de la categoria");
             }
         },
         failure: function (xhr, textStatus, errorThrown) {
-            alert("Fail[LoadCategoryItem]" + xhr + " " + textStatus + " " + errorThrown);
+            toastr.error("Fail[LoadCategoryItem]" + xhr + " " + textStatus + " " + errorThrown);
         }
     });
 
@@ -153,15 +187,15 @@ function changeStatusCategoryItem(categoryIdentifier) {
         success: function (response) {
             var data = response.d;
             if (data.Success) {
-                alert('Se ha eliminado el registro correctamente');
+                toastr.success('Se ha eliminado el registro correctamente');
                 loadCategoryList();
             }
             else {
-                alert("No fue posible eliminar el registro");
+                toastr.error("No fue posible eliminar el registro");
             }
         },
         failure: function (xhr, textStatus, errorThrown) {
-            alert("Fail[LoadCategoryChangeStatus]" + xhr + " " + textStatus + " " + errorThrown);
+            toastr.error("Fail[LoadCategoryChangeStatus]" + xhr + " " + textStatus + " " + errorThrown);
         }
     });
 }

@@ -5,8 +5,38 @@
 *.suo
 *.user
 *.userosscache
+*.cache
 *.sln.docstates
 .vs/
+*.obj
+*.exe
+*.exp
+*.pdb
+*.dll
+*.user
+*.aps
+*.pch
+*.vspscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.tlb
+*.tlh
+*.bak
+*.cache
+*.ilk
+*.log
+*.zip
+[Dd]ebug*/
+*.lib
+*.sbr
+Thumbs.db
+[Ll]ib/
+[Rr]elease*/
+[Tt]est[Rr]esults/
+_UpgradeReport_Files/
+_ReSharper.*/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -260,3 +290,4 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/.gitignore_old

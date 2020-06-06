@@ -9,6 +9,8 @@ namespace ECommerceDataModel
 
         public long ProductCategoryIdentifier { get; set; }
 
+        public string ProductCategory { get; set; }
+
         public string ShortName { get; set; }
 
         public string Description { get; set; }
@@ -26,5 +28,7 @@ namespace ECommerceDataModel
         public int DiscountAmount { get; set; }
 
         public bool Status { get; set; }
+
+        public string ImageBase64 { get; set; }
     }
 }

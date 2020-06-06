@@ -4,6 +4,8 @@
 
     public class ResponseListDTO<T>
     {
+        public bool SessionInit { get; set; }
+
         public bool Success { get; set; }
 
         public List<T> Result { get; set; }

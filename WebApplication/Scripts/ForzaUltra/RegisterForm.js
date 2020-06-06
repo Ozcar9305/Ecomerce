@@ -1,69 +1,91 @@
 ﻿
-//jQuery.validator.setDefaults({
-//    debug: true,
-//    success: "valid"
-//});
-
-$.validator.setDefaults({
-    submitHandler: function () {
-        registerUser();
-    },
-    success: "valid",
-    debug: true
-});
-
+let serviceUri = '';
 $(document).ready(function () {
         
-    $('#frmStore').validate({
+    serviceUri = window.location.href + '/';
+
+    let $registerForm = $('#frmRegister');
+    $('#txtFirstName').ForceLetterOnly();
+    $('#txtLastName').ForceLetterOnly();
+
+    $registerForm.validate({
+        errorClass: "formValidateError",
+        errorElement: "label",
         rules: {
-            txtFirstName: "required",
             firstName: "required",
             lastName: "required",
             email: {
                 required: true,
                 email: true
+            },
+            password: "required",
+            confirmPassword: {
+                equalTo: "#password"
             }
         },
         messages: {
             firstName: "Por favor ingresa tu Nombre",
             lastName: "Por favor ingresa tu apellido",
-            email: "Por favor ingresa un correo eléctronico valido"
-        }
-        //,
-        //errorElement: "em",
-        //errorPlacement: function (error, element) {
-        //    // Add the `invalid-feedback` class to the error element
-        //    error.addClass("invalid-feedback");
-
-        //    if (element.prop("type") === "checkbox") {
-        //        error.insertAfter(element.next("label"));
-        //    } else {
-        //        error.insertAfter(element);
-        //    }
-        //},
-        //highlight: function (element, errorClass, validClass) {
-        //    $(element).addClass("is-invalid").removeClass("is-valid");
-        //},
-        //unhighlight: function (element, errorClass, validClass) {
-        //    $(element).addClass("is-valid").removeClass("is-invalid");
-        //}
-        ,submitHandler: function () {
-            registerUser();
+            email: "Por favor ingresa un correo eléctronico valido",
+            password: "Ingresa una contraseña",
+            confirmPassword: "El valor de este campo debe ser igual a la contraseña"
+        },
+        highlight: function (element) {
+            $(element).parent().find('input').addClass('error')
+        },
+        unhighlight: function (element) {
+            $(element).parent().find('input').removeClass('error')
         }
     });
 
-    //$('#btnRegisterUser').click(function (event) {
-    //    event.preventDefault();
-    //    if ($('#frmStore').valid()) {
-    //        alert("ok 123");
-    //    }
-    //    else {
-    //        alert("not ok");
-    //    }
-    //});
+    $('#btnRegisterUser').click(function () {
+        if ($registerForm.valid()) {
+            registerUser();
+        }
+    });
 });
 
 
 function registerUser() {
-    alert("Success");
+
+    var customerObject = new Object();
+    customerObject.FirstName = $('#txtFirstName').val().trim();
+    customerObject.LastName = $('#txtLastName').val().trim();
+    customerObject.Password = $('#password').val().trim();
+    customerObject.ShippingAddress = $('#txtAddress').val().trim();
+    customerObject.PhoneNumber = $('#txtPhone').val().trim();
+    customerObject.Email = $('#txtEmail').val().trim();
+    customerObject.Role = parseInt(1);
+
+    var billing = new Object();
+    billing.Rfc = $('#txtRfc').val();
+    customerObject.BillingInformation = billing; 
+    
+    $.ajax({
+        type: "POST",
+        url: serviceUri + 'RegisterUser',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        data: JSON.stringify({ 'customer': customerObject }),
+        success: function (response) {
+            var data = response.d;
+            if (data.Success) {
+                swal({
+                    title: "Gracias por tu registro!",
+                    text: "Ahora puedes comenzar a comprar en ForzaUltra",
+                    type: "success"
+                });
+            }
+            else {
+                swal({
+                    title: "Ha ocurrido un error",
+                    text: "No pudimos completar tu registro, por favor intenta de nuevo más tarde",
+                    type: "danger"
+                });
+            }
+        },
+        failure: function (xhr, textStatus, errorThrown) {
+            console.log("Fail[LoadCategoryChangeStatus]" + xhr + " " + textStatus + " " + errorThrown);
+        }
+    });
 };

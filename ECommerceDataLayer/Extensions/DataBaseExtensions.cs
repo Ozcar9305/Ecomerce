@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ECommerceDataLayer.Extensions
+﻿namespace ECommerceDataLayer.Extensions
 {
     using System.Data;
     using System.ComponentModel;
@@ -17,7 +11,16 @@ namespace ECommerceDataLayer.Extensions
     /// </summary>
     public static class DataBaseExtensions
     {
-        private static string ConnectionString => System.Configuration.ConfigurationManager.ConnectionStrings["ECommerceString"].ToString();
+        /// <summary>
+        /// Cadena de conexion configurada en el web config
+        /// </summary>
+        private static string ConnectionString
+        {
+            get
+            {
+                return System.Configuration.ConfigurationManager.ConnectionStrings["ECommerceConnection"].ToString();
+            }
+        }
 
         /// <summary>
         /// Ejecuta un select en la base de datos
@@ -31,16 +34,19 @@ namespace ECommerceDataLayer.Extensions
             var resultList = new List<T>();
             if (command != null)
             {
-                command.Connection = new SqlConnection();
-                command.Connection.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ECommerceConnection"].ToString();
-                command.Connection.Open();
-
-                var reader = command.ExecuteReader();
-                while (reader.Read())
+                using (SqlConnection connection = new SqlConnection(ConnectionString))
                 {
-                    resultList.Add(projection(reader));
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Connection = connection;
+                    command.Connection.Open();
+
+                    var reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        resultList.Add(projection(reader));
+                    }
+                    reader.Close();
                 }
-                reader.Close();
             }
             return resultList;
         }
@@ -53,9 +59,16 @@ namespace ECommerceDataLayer.Extensions
         /// <returns></returns>
         public static T Escalar<T>(this SqlCommand command)
         {
-            var reader = command?.ExecuteScalar().ToString();
-            var converter = TypeDescriptor.GetConverter(typeof(T));
-            return (T)converter.ConvertFrom(reader);
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                command.Connection = connection;
+                command.Connection.Open();
+
+                var reader = command?.ExecuteScalar().ToString();
+                var converter = TypeDescriptor.GetConverter(typeof(T));
+                return (T)converter.ConvertFrom(reader);
+            }
         }
 
         /// <summary>
@@ -66,12 +79,16 @@ namespace ECommerceDataLayer.Extensions
         public static bool ExecuteQuery(this SqlCommand command)
         {
             bool isQueryExecuted = default(bool);
-            using(SqlConnection connection = new SqlConnection(ConnectionString))
+            if (command != null)
             {
-                command.Connection  = connection;
-                command.CommandType = CommandType.StoredProcedure;
-                command.CommandTimeout = 0;
-                isQueryExecuted = command?.ExecuteNonQuery() != default(int);
+                using (SqlConnection connection = new SqlConnection(ConnectionString))
+                {
+                    command.Connection = connection;
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandTimeout = 0;
+                    command.Connection.Open();
+                    isQueryExecuted = command?.ExecuteNonQuery() > default(int);
+                }
             }
             return isQueryExecuted;
         }
@@ -99,6 +116,6 @@ namespace ECommerceDataLayer.Extensions
                 return default(T);
             }
         }
-        
+
     }
 }

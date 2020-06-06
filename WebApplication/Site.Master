@@ -1,83 +1,292 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="WebApplication.SiteMaster" %>
+
 <%@ Register Src="~/ForzaUltra/Controles/Login/Login.ascx" TagPrefix="ECommerce" TagName="Login" %>
 
 <!DOCTYPE html>
 <html lang="en">
-<head runat="server">
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - Forza Ultra </title>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Forza Ultra</title>
 
     <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js") %>
+        <%: Styles.Render("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css") %>
         <%: Scripts.Render("~/bundles/modernizr") %>
-        <%--<%: Styles.Render("~/Content/css") %>--%>
+        <%: Styles.Render("~/Content/css/bootstrap.min.css") %>
+        <%: Styles.Render("~/Content/bootstrap-select.css") %>
+        <%: Styles.Render("~/Content/css/mdb.css") %>
+        <%: Scripts.Render("~/Scripts/handlebars.min-v4.7.3.js") %>
+        <%: Scripts.Render("/js/bootstrap.min.js") %>
+        <%: Styles.Render("//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css") %>
+        <%: Scripts.Render("//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js") %>
+        <%: Styles.Render("~/Content/css/style.css") %>
+        <%: Styles.Render("~/Content/toastr.css") %>
+        <%: Scripts.Render("~/Scripts/bootstrap-select.js") %>
+        <%: Scripts.Render("~/Scripts/toastr.js") %>
+        <%: Styles.Render("~/Content/jquery.loadingModal.min.css") %>
+        <%: Styles.Render("~/Content/jqpagination.css") %>
+        <%: Scripts.Render(string.Format("~/Scripts/common.js?{0}", System.DateTime.Now.Ticks)) %>
+        <%--<%: Scripts.Render("~/Scripts/masterPage.js") %>--%>
+        <%: Scripts.Render("~/Scripts/masterPage.js") %>
+        <%: Scripts.Render("~/Scripts/jquery.jqpagination.js") %>
+        <%: Scripts.Render("~/Scripts/jquery.tinypubsub.min.js") %>
+        <%: Scripts.Render("~/Scripts/ForzaUltra/Cart.js") %>
+        <%: Styles.Render("~/Content/jquery.loadingModal.min.css") %>
+        <%: Scripts.Render("~/Scripts/jquery.loadingModal.min.js") %>
     </asp:PlaceHolder>
 
-    <%--<webopt:bundlereference runat="server" path="~/Content/css" />--%>
-    
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    <link href="~/Content/Site.css" rel="stylesheet" />
-    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <style type="text/css">
+        html,
+        body,
+        header,
+        .carousel {
+            height: 60vh;
+        }
+
+        @media (max-width: 740px) {
+
+            html,
+            body,
+            header,
+            .carousel {
+                height: 100vh;
+            }
+        }
+
+        @media (min-width: 800px) and (max-width: 850px) {
+
+            html,
+            body,
+            header,
+            .carousel {
+                height: 100vh;
+            }
+        }
+
+        .pageLoading {
+            display: block !important;
+            background: rgba(33,33,33,0.3) !important;
+            color: #fff !important;
+            width: 100% !important;
+            height: 100% !important;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            z-index: 9999 !important;
+        }
+    </style>
+
+    <script type="text/javascript">        
+        $(document).ready(function () {
+            var sessionInit = <%= (HttpContext.Current.Session["SessionInit"] == null) ? string.Format("\'{0}\'","False") :  string.Format("\'{0}\'",HttpContext.Current.Session["SessionInit"]) %>;
+            var sessionEmail = <%= (HttpContext.Current.Session["SeccionFullName"] == null) ? string.Format("\'{0}\'"," ") : string.Format("\'{0}\'",HttpContext.Current.Session["SeccionFullName"])%>;
+            var sessionRole = <%= (HttpContext.Current.Session["SessionCustomerRole"] == null ) ? string.Format("\'{0}\'","Cliente") : string.Format("\'{0}\'",HttpContext.Current.Session["SessionCustomerRole"]) %>;
+
+            console.log(sessionInit, sessionEmail, sessionRole);
+
+            if (sessionRole === 'Admin') {
+                $('#menuAdmin').show();
+                $('#menuCustomer').hide();
+                $('#shooping-cart').hide();
+            }
+
+            if (sessionInit !== 'False') {
+                $('#lnkLogin').hide();
+                $('#lnkLogout').show();
+                $('#lnkLogout > span').html(sessionEmail);
+            }
+
+            $('#shooping-cart').bind('click', function () {
+                if (sessionInit !== 'False') {
+                    window.location.href = '/ForzaUltra/Cart.aspx';
+                } else {
+                    $("#loginModal").modal();
+                }
+            });
+
+
+        });
+    </script>
 
 </head>
-<body>
-    <form id="frmStore" runat="server">
-        <asp:ScriptManager runat="server">
-            <Scripts>
-                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
-                <%--Framework Scripts--%>
-                <asp:ScriptReference Name="MsAjaxBundle" />
-                <asp:ScriptReference Name="jquery" />
-                <asp:ScriptReference Name="bootstrap" />
-                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
-                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
-                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
-                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
-                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
-                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
-                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
-                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
-                <asp:ScriptReference Name="WebFormsBundle" />
-                <asp:ScriptReference Path="~/Scripts/jquery.validate.js" />
-                <%--Site Scripts--%>
-            </Scripts>
-        </asp:ScriptManager>
 
-        <%--Login--%>
+<body>
+
+    <form id="frmStore" runat="server">
         <ECommerce:Login runat="server" ID="Login" />
-        
-        <%--NavBar--%>
-        <div class="navbar navbar-inverse navbar-fixed-top">
+
+        <!-- Navbar -->
+        <nav class="navbar forza-navbar forza-navbar-font fixed-top navbar-expand-lg navbar-light scrolling-navbar">
             <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a href="../ForzaUltra/Store.aspx">Tienda</a></li>
-                        <li><a runat="server" href="~/About">Productos</a></li>
-                        <li><a runat="server" href="~/Contact">Contacto</a></li>
+
+                <!-- Brand -->
+                <a class="navbar-brand waves-effect" href="https://mdbootstrap.com/docs/jquery/" target="_blank">
+                    <strong class="blue-text"></strong>
+                </a>
+
+                <!-- Collapse -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Links -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Left -->
+                    <ul class="navbar-nav mr-auto" id="menuCustomer">
+                        <li class="nav-item active">
+                            <a class="nav-link waves-effect" href="<%:ResolveUrl("~/ForzaUltra/Store.aspx") %>">Tienda
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect" href="<%:ResolveUrl("~/ForzaUltra/Customer/ProductCatalog.aspx") %>">Productos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect" href="https://mdbootstrap.com/education/bootstrap/" target="_blank">Contacto
+                            </a>
+                        </li>
                     </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;&nbsp;Carrito</a></li>
-                        <li><a href="#" id="lnkLogin" data-toggle="modal" data-target="#modalLoginForm"><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;&nbsp;Login</a></li>
+
+                    <ul class="navbar-nav mr-auto" id="menuAdmin" style="display: none!important;">
+                        <li class="nav-item active">
+                            <a class="nav-link waves-effect" href="<%:ResolveUrl("~/ForzaUltra/Admin/Categories.aspx") %>">Categorias
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect" href="<%:ResolveUrl("~/ForzaUltra/Admin/ProductCatalog.aspx") %>">Productos</a>
+                        </li>
                     </ul>
+
+                    <!-- Right -->
+                    <ul class="navbar-nav nav-flex-icons">
+                        <li class="nav-item">
+                            <a class="nav-link" id="shooping-cart" style="font-family: sans-serif!important">
+                                <span class="badge red z-depth-1 mr-1" id="cart-elements-count">0&nbsp;</span>
+                                <i class="fa fa-shopping-cart"></i>
+                                <span class="clearfix d-none d-sm-inline-block">Carrito </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="lnkLogin" data-toggle="modal" data-target="#modalLoginForm" style="font-family: sans-serif!important">
+                                <i class="fa fa-sign-in"></i>
+                                <span class="clearfix d-none d-sm-inline-block">&nbsp;Login</span>
+                            </a>
+                            <a class="nav-link" id="lnkLogout" style="font-family: sans-serif!important; display: none">
+                                <i class="fa fa-sign-out">&nbsp;</i>
+                                <span class="clearfix d-none d-sm-inline-block"></span>
+                            </a>
+                        </li>
+                    </ul>
+
                 </div>
+
             </div>
-        </div>
-        <div class="body-content">
+        </nav>
+        <!-- Navbar -->
+
+        <main style="min-height:100%!important">
+            <asp:HiddenField runat="server" ID="hdfMasterServiceUri" Value="Site.Master" />
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
-            <hr />
-            <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - Powered by ZharpSystems</p>
-            </footer>
-        </div>
-        <script type="text/javascript" src='<%:ResolveUrl("~/Scripts/masterPage.js") %>'></script>
+        </main>
+
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+
+        <!-- Footer -->
+
+
+
+        <!-- Footer -->
     </form>
+    <div id="pageLoading" class="pageLoading text-center">
+        <div class="spinner-border text-danger" style="margin-top: 20%!important" role="status">
+            <span class="sr-only">Loading...</span><br />
+        </div>
+        <div class="text-center">
+            <span>Cargando ...</span>
+        </div>
+    </div>
+    <footer class="page-footer font-small unique-color-dark pt-4" style="background: #000!important; margin-top: 15px!important;">
+        <!-- Footer Links -->
+        <div class="container text-center text-md-left">
+
+            <!-- Grid row -->
+            <div class="row">
+
+                <!-- Grid column -->
+                <div class="col-offset-lg-1 col-lg-6">
+
+                    <!-- Content -->
+                    <h6 class="font-weight-bold text-uppercase mt-3 mb-4">ESTOS SON ALGUNOS DE NUESTROS CLIENTES</h6>
+                    <img src="/Images/ForzaUltra/Site/fu_customers.png" />
+                </div>
+                <!-- Grid column -->
+
+
+                <!-- Grid column -->
+                <div class="col-lg-3 mx-auto ">
+
+                    <!-- Links -->
+                    <h6 class="font-weight-bold text-uppercase mt-3 mb-4">SOCIAL NETWORKS</h6>
+
+                    <!-- Social buttons -->
+                    <ul class="list-unstyled list-inline ">
+                        <li class="list-inline-item">
+                            <a class="btn-floating btn-fb mx-1" title="Facebook" href="https://www.facebook.com/forzaultra">
+                                <i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a class="btn-floating btn-tw mx-1" title="Twitter" href="https://twitter.com/forzaultracorp">
+                                <i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- Social buttons -->
+                </div>
+
+                <div class="col-lg-2 mx-auto ">
+
+                    <!-- Links -->
+                    <h6 class="font-weight-bold text-uppercase mt-3 mb-4">SOLUTIONS</h6>
+
+                    <!-- Social buttons -->
+                    <ul class="list-unstyled ">
+                        <li class="list-inline-item">
+                            <a class="btn-floating btn-fb mx-1" href="/ForzaUltra/Customer/Privacy.aspx">
+                                Politicas
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a class="btn-floating btn-fb mx-1" href="/ForzaUltra/Customer/Nosotros.aspx">
+                                Nosotros
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- Social buttons -->
+                </div>
+
+            </div>
+            <!-- Grid row -->
+
+        </div>
+        <!-- Footer Links -->
+
+
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">
+            Copyright ©  2019  by "Forza Ultra.com"  ·  All Rights reserved  ·  E-Mail: administracion@forzaultra.com
+        </div>
+        <!-- Copyright -->
+
+    </footer>
 </body>
+
 </html>

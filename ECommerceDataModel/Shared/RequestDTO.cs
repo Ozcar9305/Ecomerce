@@ -9,5 +9,6 @@
         public string WordFilter { get; set; }
 
         public T Item { get; set; }
+        public  string ServerPath { get; set; }
     }
 }
