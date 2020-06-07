@@ -24,6 +24,7 @@ namespace ECommerceDataLayer.Extensions
             {
                 Identifier = reader.Get<long>("ProductCatalogId"),
                 ProductCategoryIdentifier = reader.Get<long>("ProductCategoryId"),
+                ProductCategory = reader.Get<string>("ProductCategoryName"),
                 ShortName = reader.Get<string>("ProductShortName"),
                 Description = reader.Get<string>("ProductDescription"),
                 AditionalDescription = reader.Get<string>("ProductDescriptionAditional"),

@@ -152,7 +152,7 @@
                                     <td>{{ShortName}}</td>
                                     <td>{{Description}}</td>
                                     <td>{{numberFormat Price}}</td>
-                                    <td>{{ProductCategory}}</td>
+                                    <td>{{ProductCategoryCate}}</td>
                                     <td class="text-center">
                                         <a><i class="fa fa-pencil-square edit-product" style="width: 25px; height: 25px;" data-idproduct="{{Identifier}}" aria-hidden="true"></i></a>
                                         <a><i class="fa fa-trash-o delete-product" style="width: 25px; height: 25px;" data-idproduct="{{Identifier}}" aria-hidden="true"></i></a>
@@ -310,7 +310,7 @@
                     return false;
                 }
                 if (parseInt($txtProductPrice.val()) === 0) {
-                    toastr.error("El Precio sdebe ser mayor a $0.00.");
+                    toastr.error("El Precio debe ser mayor a $0.00.");
                     $txtProductPrice.focus();
                     return false;
                 }
@@ -480,10 +480,17 @@
 
             function getListCategory() {
 
+                var category = new Object();
+                category.Identifier = 0;
+                category.WordFilter = '';
+                category.Paging = new Object();
+                category.Paging.PageNumber = 1;
+                category.Paging.PageSize = 100;
+
                 $.ajax({
                     type: "POST",
-                    url: "Categories.aspx/CategoryGetList",
-                    data: JSON.stringify({ "wordFilter": "" }),
+                    url: "ProductCatalog.aspx/CategoryGetList",
+                    data: JSON.stringify({'category': category}),
                     contentType: "application/json;charset=utf-8",
                     dataType: "json",
                     async: false,

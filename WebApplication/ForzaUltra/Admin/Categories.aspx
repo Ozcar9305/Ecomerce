@@ -73,16 +73,14 @@
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     </div>
                     <div class="modal-body" style="padding: 10px 15px;">
-                        <form role="form">
-                            <div class="form-group">
-                                <label for="txtCategoryName">Categor&iacute;a</label>
-                                <input type="text" id="txtCategoryName" class="form-control" />
-                            </div>
-                            <div class="form-group">
-                                <label for="txtCategoryDescription">Descripci&oacute;n</label>
-                                <input type="text" id="txtCategoryDescription" class="form-control" />
-                            </div>
-                        </form>
+                        <div class="form-group">
+                            <label for="txtCategoryName">Categor&iacute;a</label>
+                            <input type="text" id="txtCategoryName" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label for="txtCategoryDescription">Descripci&oacute;n</label>
+                            <input type="text" id="txtCategoryDescription" class="form-control" />
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-sm btn-outline-primary" data-dismiss="modal">Cancelar</button>
