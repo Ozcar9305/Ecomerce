@@ -152,7 +152,7 @@
                                     <td>{{ShortName}}</td>
                                     <td>{{Description}}</td>
                                     <td>{{numberFormat Price}}</td>
-                                    <td>{{ProductCategoryCate}}</td>
+                                    <td>{{ProductCategory}}</td>
                                     <td class="text-center">
                                         <a><i class="fa fa-pencil-square edit-product" style="width: 25px; height: 25px;" data-idproduct="{{Identifier}}" aria-hidden="true"></i></a>
                                         <a><i class="fa fa-trash-o delete-product" style="width: 25px; height: 25px;" data-idproduct="{{Identifier}}" aria-hidden="true"></i></a>

@@ -116,13 +116,17 @@
                     var compileFooter = Handlebars.compile($shopping_cart_footer_content);
                     $shopping_cart_body.empty();
                     $shopping_cart_footer.empty();
-                    if (response.Result.length === 0) {
+                    if (response.Result.length === 0)
+                    {
                         toastr.info("Tu carrito de compras esta vacío!");
-                    } else {
+                    }
+                    else
+                    {
                         $.each(response.Result, function (key, value) {
                             response.Total += value.ProductCatalog.Price * value.Quantity;
                         });
                     }
+
                     $shopping_cart_body.append(compile(response));
                     $shopping_cart_footer.append(compileFooter({ Total: response.Total }));
                     bindEvents(response.Result);

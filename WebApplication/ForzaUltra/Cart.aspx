@@ -70,7 +70,7 @@
     </script>
     <script type="text/x-handlebars-template" id="shopping-cart-footer-content">
         <div class="pull-right" style="margin: 10px">
-            <a class="btn btn-sm btn-success pull-right">
+            <a class="btn btn-sm btn-success pull-right payorder-button">
                 <i class="fa fa-money" aria-hidden="true"></i>&nbsp;Pagar
             </a>
             <button class="paypal-button">
