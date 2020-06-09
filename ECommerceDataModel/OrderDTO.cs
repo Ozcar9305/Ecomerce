@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Security.AccessControl;
 
 namespace ECommerceDataModel
 {
@@ -13,5 +14,7 @@ namespace ECommerceDataModel
         public decimal TotalAmount { get; set; }
 
         public int Count { get; set; }
+
+        public List<UrlDTO> PayPalUrlList { get; set; }
     }
 }

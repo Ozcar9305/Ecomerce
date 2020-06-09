@@ -58,6 +58,7 @@
     <Compile Include="Shared\ResponseDTO.cs" />
     <Compile Include="Shared\ResponseListDTO.cs" />
     <Compile Include="SizesDTO.cs" />
+    <Compile Include="UrlDTO.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
