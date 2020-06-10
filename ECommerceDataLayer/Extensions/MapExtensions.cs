@@ -62,7 +62,8 @@ namespace ECommerceDataLayer.Extensions
                 TotalAmount = reader.Get<decimal>("TotalAmount"),
                 ProductCatalog = ToProductCatalog(reader),
                 ProductCategory = ToProductCategory(reader),
-                Customer = ToCustomer(reader)
+                Customer = ToCustomer(reader),
+                SizeId = reader.Get<int>("SizeId")
             };
         }
 

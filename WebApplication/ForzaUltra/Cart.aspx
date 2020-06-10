@@ -38,13 +38,10 @@
                 </h4>
             </div>
             <div class="col-12 col-sm-12 col-md-2">
-                <select class="browser-default custom-select dropdown-sizes-for" data-cart-identifier="{{Identifier}}" data-customer-identifier="{{Customer.Identifier}}" data-product-identifier="{{ProductCatalog.Identifier}}" data-category-identifier="{{ProductCategory.Identifier}}">
-                    <option value="1">CH</option>
-                    <option value="2">M</option>
-                    <option value="3">G</option>
-                    <option value="4">EG</option>
-                    <option value="5">Unitalla</option>
-                    <option value="6">N/A</option>
+                <select class="custom-select dropdown-sizes-for" data-cart-identifier="{{Identifier}}" data-customer-identifier="{{Customer.Identifier}}" data-product-identifier="{{ProductCatalog.Identifier}}" data-category-identifier="{{ProductCategory.Identifier}}">
+                    {{#each ProductCatalog.Sizes}}
+                            <option value="{{Identifier}}">{{Abreviature}}</option>
+                    {{/each}}
                 </select>
             </div>
             <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
@@ -71,7 +68,7 @@
     <script type="text/x-handlebars-template" id="shopping-cart-footer-content">
         <div class="pull-right" style="margin: 10px">
             <a class="btn btn-sm btn-success pull-right payorder-button">
-                <i class="fa fa-money" aria-hidden="true"></i>&nbsp;Pagar
+                <i class="fa fa-money" aria-hidden="true"></i>&nbsp;Generar Orden
             </a>
             <button class="paypal-button">
                 <span class="paypal-button-title">Pagar con

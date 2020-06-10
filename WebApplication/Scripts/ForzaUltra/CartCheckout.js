@@ -88,10 +88,22 @@
             }
         }
 
+        function dropdown_sizes_onChange() {
+            var cart_identifier = $(this).attr('data-cart-identifier');
+            var customer_identifier = $(this).attr('data-customer-identifier');
+            var product_identifier = $(this).attr('data-product-identifier');
+            var category_identifier = $(this).attr('data-category-identifier');
+            var product_size = $('.dropdown-sizes-for[data-product-identifier="' + product_identifier + '"]').val();
+            var quantity = parseInt($('#quantity_for_' + product_identifier).val());
+
+            update_cart_item(cart_identifier, customer_identifier, product_identifier, category_identifier, quantity, product_size);
+        }
+
         function bindEvents(result) {
             $('.delete-cart-item').bind('click', delete_cart_item_onClick);
             $('.plus-size').bind('click', plus_size_onClick);
             $('.minus-size').bind('click', minus_size_onClick);
+            $('.dropdown-sizes-for').bind('change', dropdown_sizes_onChange);
             if (result.length > 0) {
                 $.each(result, function (key, value) {
                     var sizeIdentifier = (value.ProductCatalog.Sizes !== null && value.ProductCatalog.Sizes.length > 0) ? value.ProductCatalog.Sizes[0].Identifier : 5;
@@ -111,7 +123,7 @@
                 success: function (result) {
                     var response = result.d;
                     response.Total = 0;
-
+                    
                     var compile = Handlebars.compile($shopping_cart_items);
                     var compileFooter = Handlebars.compile($shopping_cart_footer_content);
                     $shopping_cart_body.empty();
@@ -124,12 +136,25 @@
                     {
                         $.each(response.Result, function (key, value) {
                             response.Total += value.ProductCatalog.Price * value.Quantity;
+                            $.each(value.ProductCatalog.Sizes, function (key, value2) {
+                                if (value.SizeId === value2.Identifier) {
+                                    value2.Selected = true;
+                                } else {
+                                    value2.Selected = false;
+                                }
+                            });
                         });
                     }
 
                     $shopping_cart_body.append(compile(response));
+                    console.log(response);
                     $shopping_cart_footer.append(compileFooter({ Total: response.Total }));
+                   
                     bindEvents(response.Result);
+                    $.each(response.Result, function (key, value) {
+                        var dll = $('.dropdown-sizes-for[data-product-identifier="' + value.ProductCatalog.Identifier + '"]');
+                        dll.val(value.SizeId);
+                    });
                 },
                 failure: function () {
                     toastr.error("Error al consultar los elementos del carrito de compras.");
