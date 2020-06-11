@@ -67,10 +67,10 @@
     </script>
     <script type="text/x-handlebars-template" id="shopping-cart-footer-content">
         <div class="pull-right" style="margin: 10px">
-            <a class="btn btn-sm btn-success pull-right payorder-button">
+            <a class="btn btn-sm btn-success pull-right payorder-button pay-order-forza" data-payment-type="1">
                 <i class="fa fa-money" aria-hidden="true"></i>&nbsp;Generar Orden
             </a>
-            <button class="paypal-button">
+            <button class="paypal-button pay-order-forza" data-payment-type="0">
                 <span class="paypal-button-title">Pagar con
                 </span>
                 <span class="paypal-logo">

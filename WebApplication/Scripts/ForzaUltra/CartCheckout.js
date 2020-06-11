@@ -5,7 +5,8 @@
         var $shopping_cart_body = $('#shopping-cart-body'),
             $shopping_cart_items = $('#shopping-cart-items').html(),
             $shopping_cart_footer = $('#shopping-cart-footer'),
-            $shopping_cart_footer_content = $('#shopping-cart-footer-content').html();
+            $shopping_cart_footer_content = $('#shopping-cart-footer-content').html(),
+            $cart_item_count = 0;
 
         function delete_cart_item_onClick(e) {
             var cart_identifier = $(this).attr('data-cart-identifier');
@@ -99,6 +100,43 @@
             update_cart_item(cart_identifier, customer_identifier, product_identifier, category_identifier, quantity, product_size);
         }
 
+        function pay_order_onClick() {
+
+            if ($cart_item_count > 0) {
+
+                let paymentType = parseInt($(this).attr('data-payment-type'));
+
+                $.ajax({
+                    type: "POST",
+                    url: "Cart.aspx/OrderExecute",
+                    data: JSON.stringify({ "paymentType": paymentType }),
+                    contentType: "application/json;charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    success: function (result) {
+                        var response = result.d;
+                        if (response.Success) {
+                            if (paymentType === 0) {
+                                let paypal_href = response.Result.PayPalUrlList.find(element => element.Rel === 'approval_url');
+                                console.log(paypal_href);
+                                window.location.href = paypal_href.HReference;
+                            } else {
+                                toastr.success("La orden se genero correctamente, se le ha envíado un correo y pronto un asesor de ventas se pondrá en contacto con usted.")
+                                get_cart_items();
+                            }
+                        } else {
+                            toastr.error("Error al generar la orden.");
+                        }
+                    },
+                    failure: function () {
+                        toastr.error("Error al generar la orden.");
+                    }
+                });
+            } else {
+                toastr.error("Es necesario agregar productos al carrito.");
+            }
+        }
+
         function bindEvents(result) {
             $('.delete-cart-item').bind('click', delete_cart_item_onClick);
             $('.plus-size').bind('click', plus_size_onClick);
@@ -110,6 +148,7 @@
                     $('.dropdown-sizes-for[data-product-identifier=' + value.ProductCatalog.Identifier + ']').children("option[value=" + sizeIdentifier + "]").attr('selected', 'selected');
                 });
             }
+            $('.pay-order-forza').bind('click', pay_order_onClick);
         }
 
         function get_cart_items() {
@@ -123,17 +162,16 @@
                 success: function (result) {
                     var response = result.d;
                     response.Total = 0;
-                    
+
                     var compile = Handlebars.compile($shopping_cart_items);
                     var compileFooter = Handlebars.compile($shopping_cart_footer_content);
                     $shopping_cart_body.empty();
                     $shopping_cart_footer.empty();
-                    if (response.Result.length === 0)
-                    {
+                    if (response.Result.length === 0) {
                         toastr.info("Tu carrito de compras esta vacío!");
                     }
-                    else
-                    {
+                    else {
+                        $cart_item_count = response.Result.length;
                         $.each(response.Result, function (key, value) {
                             response.Total += value.ProductCatalog.Price * value.Quantity;
                             $.each(value.ProductCatalog.Sizes, function (key, value2) {
@@ -149,7 +187,7 @@
                     $shopping_cart_body.append(compile(response));
                     console.log(response);
                     $shopping_cart_footer.append(compileFooter({ Total: response.Total }));
-                   
+
                     bindEvents(response.Result);
                     $.each(response.Result, function (key, value) {
                         var dll = $('.dropdown-sizes-for[data-product-identifier="' + value.ProductCatalog.Identifier + '"]');
@@ -170,7 +208,7 @@
             initialize: function () {
                 $.publish('cart-elements-count:onChange');
                 get_cart_items();
-                setSubscriptions();                
+                setSubscriptions();
             }
         };
     })();
