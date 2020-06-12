@@ -1,5 +1,5 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="WebApplication.SiteMaster" %>
-
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajax" %>
 <%@ Register Src="~/ForzaUltra/Controles/Login/Login.ascx" TagPrefix="ECommerce" TagName="Login" %>
 
 <!DOCTYPE html>
@@ -77,6 +77,43 @@
             left: 0 !important;
             z-index: 9999 !important;
         }
+
+        .modalBackground
+        {
+            background-color: Black;
+            filter: alpha(opacity=60);
+            opacity: 0.6;
+        }
+        .modalPopup
+        {
+            background-color: #FFFFFF;
+            width: 300px;
+            padding: 0;
+        }
+        .modalPopup .header
+        {
+            background-color: black;
+            height: 30px;
+            color: White;
+            line-height: 30px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .modalPopup .body
+        {
+            padding: 10px;
+            min-height: 50px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .modalPopup .footer
+        {
+            padding: 6px;
+        }
+
+
     </style>
 
     <script type="text/javascript">        
@@ -145,7 +182,28 @@
 <body>
 
     <form id="frmStore" runat="server">
+        <asp:ScriptManager ID="PageScriptManager" runat="server"></asp:ScriptManager>
         <ECommerce:Login runat="server" ID="Login" />
+
+        <asp:LinkButton ID="lnkFake" runat="server" />
+        <ajax:ModalPopupExtender ID="mpeTimeout" BehaviorID="mpeTimeout" runat="server" PopupControlID="pnlPopup"
+            TargetControlID="lnkFake" OkControlID="btnYes" CancelControlID="btnNo" BackgroundCssClass="modalBackground"
+            OnOkScript="ResetSession()">
+        </ajax:ModalPopupExtender>
+        <asp:Panel ID="pnlPopup" runat="server" CssClass="modalPopup" Style="display: none">
+            <div class="header">
+                Tu sesi&oacute;n esta por expirar
+            </div>
+            <div class="body">
+                Su sesi&oacute;n expirara en &nbsp;<span id="seconds"></span>&nbsp;segundos.<br />
+                ¿Desea continuar en la página?
+            </div>
+            <div class="footer" style="text-align: right">
+                <asp:Button ID="btnNo" runat="server" Text="No" CssClass="btn btn-default" />
+                <asp:Button ID="btnYes" runat="server" Text="Yes" CssClass="btn btn-danger" />
+            </div>
+        </asp:Panel>
+
 
         <!-- Navbar -->
         <nav class="navbar forza-navbar forza-navbar-font fixed-top navbar-expand-lg navbar-light scrolling-navbar">
@@ -247,7 +305,33 @@
             </div>
         </div>
 
-        <!-- Footer -->
+        <%--Session timeout script--%>
+        <script type="text/javascript">
+            function SessionExpireAlert(timeout) {
+                var seconds = timeout / 1000;
+                //document.getElementsByName("secondsIdle").innerHTML = seconds;
+                document.getElementsByName("seconds").innerHTML = seconds;
+                setInterval(function () {
+                    seconds--;
+                    document.getElementById("seconds").innerHTML = seconds;
+                    //document.getElementById("secondsIdle").innerHTML = seconds;
+                }, 1000);
+                setTimeout(function () {
+                    //Show Popup before 20 seconds of timeout.
+                    $find("mpeTimeout").show();
+                }, timeout - 20 * 1000);
+                setTimeout(function () {
+                    window.location = "ForzaUltra/Store.aspx";
+                }, timeout);
+            };
+
+            function ResetSession() {
+                //Redirect to refresh Session.
+                window.location = window.location.href;
+            }
+        </script>
+            
+
     </form>
     <br />
     <div id="pageLoading" class="pageLoading text-center">

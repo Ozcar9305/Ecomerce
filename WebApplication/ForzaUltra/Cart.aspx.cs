@@ -16,17 +16,17 @@ namespace WebApplication.ForzaUltra
 
     public partial class Cart : Page
     {
-        private static APIContext apiContext;
+        private static APIContext apiContext = Utils.Configuration.GetAPIContext();
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
-                apiContext = Utils.Configuration.GetAPIContext();
                 string payerId = Request.Params["PayerID"];
-                var guid = Request.Params["guid"];
+                string guid = Request.Params["guid"];
+                string cancel = Request.Params["cancel"];
 
-                if (!string.IsNullOrEmpty(payerId) && !string.IsNullOrEmpty(guid))
+                if (!string.IsNullOrEmpty(payerId) && !string.IsNullOrEmpty(guid) && string.IsNullOrEmpty(cancel))
                 {
                     var paymentId = Session[guid] as string;
                     var paymentExecution = new PaymentExecution() { payer_id = payerId };

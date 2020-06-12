@@ -210,6 +210,7 @@ C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\WebApplication\bin\roslyn\v
 C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\WebApplication\bin\roslyn\vbc.rsp
 C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\WebApplication\bin\roslyn\VBCSCompiler.exe
 C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\WebApplication\bin\roslyn\VBCSCompiler.exe.config
+C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\WebApplication\bin\AjaxControlToolkit.dll
 C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\WebApplication\bin\Antlr3.Runtime.dll
 C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\WebApplication\bin\AspNet.ScriptManager.bootstrap.dll
 C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\WebApplication\bin\AspNet.ScriptManager.jQuery.dll

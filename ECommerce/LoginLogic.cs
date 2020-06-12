@@ -60,7 +60,7 @@ namespace ECommerce
             try
             {
                 customerResponse.Result = dataLayer.GetCustomerByEmail(customer.Item);
-                customerResponse.Success = customerResponse.Result.Identifier > default(int);
+                customerResponse.Success = customerResponse.Result != null && customerResponse.Result.Identifier > default(int);
             }
             catch (Exception exception)
             {
