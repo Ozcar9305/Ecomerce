@@ -113,7 +113,10 @@
                     contentType: "application/json;charset=utf-8",
                     dataType: "json",
                     async: false,
-                    success: function (result) {
+                    success: function (result)
+                    {
+                        console.log('result', result);
+
                         var response = result.d;
                         if (response.Success) {
                             if (paymentType === 0) {

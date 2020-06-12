@@ -157,7 +157,7 @@ namespace WebApplication.ForzaUltra
                     {
                         name = productName,
                         currency = "MXN",
-                        price = cartItem.ProductCatalog.Price.ToString(),
+                        price = Math.Round(cartItem.ProductCatalog.Price, 2).ToString(),
                         quantity = cartItem.Quantity.ToString(),
                         sku = string.Format("SKU-{0}{1}", cartItem.ProductCategory.Identifier, cartItem.ProductCatalog.Identifier)
                     });
@@ -181,28 +181,28 @@ namespace WebApplication.ForzaUltra
                 {
                     tax = "0",
                     shipping = "0",
-                    subtotal = order.Result.TotalAmount.ToString()
+                    subtotal = Math.Round(order.Result.TotalAmount, 2).ToString()
                 };
 
                 //Establecemos el monto total de la compra, moneda y el detalle de la compra
                 var amount = new Amount()
                 {
                     currency = "MXN",
-                    total = order.Result.TotalAmount.ToString(),
+                    total = Math.Round(order.Result.TotalAmount, 2).ToString(),
                     details = details
                 };
 
                 //Se requiere incluir una transaccion
                 var transactionList = new List<Transaction>
+                {
+                    new Transaction
                     {
-                        new Transaction
-                        {
-                            description = string.Format("Compra ForzaUltra - {0}", DateTime.UtcNow),
-                            invoice_number = order.Result.Identifier.ToString().PadLeft(5, '0'),
-                            amount = amount,
-                            item_list = itemList
-                        }
-                    };
+                        description = string.Format("Compra ForzaUltra"),
+                        invoice_number = string.Format("{0}-{1}", guid, order.Result.Identifier),
+                        amount = amount,
+                        item_list = itemList
+                    }
+                };
 
                 //Generamos el objeto payment que incluye el tipo de pago, la transaccion y las urls de redireccion
                 var payment = new Payment()
@@ -233,7 +233,7 @@ namespace WebApplication.ForzaUltra
                 HttpContext.Current.Session.Add(guid, createdPayment.id);
             }
             catch (Exception ex)
-                {
+            {
                 payPalUrlsList = null;
                 ex.LogException();
             }
