@@ -14,9 +14,10 @@
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js") %>
         <%: Styles.Render("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css") %>
+        <%: Scripts.Render("https://unpkg.com/@popperjs/core@2/dist/umd/popper.js") %>
         <%: Scripts.Render("~/bundles/modernizr") %>
         <%: Styles.Render("~/Content/css/bootstrap.min.css") %>
-        <%: Styles.Render("~/Content/bootstrap-select.css") %>
+        <%--<%: Styles.Render("~/Content/bootstrap-select.css") %>--%>
         <%: Styles.Render("~/Content/css/mdb.css") %>
         <%: Scripts.Render("~/Scripts/handlebars.min-v4.7.3.js") %>
         <%: Scripts.Render("/js/bootstrap.min.js") %>

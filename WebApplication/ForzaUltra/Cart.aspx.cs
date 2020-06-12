@@ -95,7 +95,7 @@ namespace WebApplication.ForzaUltra
         }
 
         [WebMethod(EnableSession=true)]
-        public static ResponseDTO<OrderDTO> OrderExecute(string cartId, int customerId, ECommerceDataModel.Enum.PaymentType paymentType)
+        public static ResponseDTO<OrderDTO> OrderExecute(ECommerceDataModel.Enum.PaymentType paymentType)
         {
             var orderResponse = new ResponseDTO<OrderDTO>();
             orderResponse = new OrderLogic().OrderExecute(new RequestDTO<OrderDTO>
@@ -104,13 +104,13 @@ namespace WebApplication.ForzaUltra
                 {
                     Customer = new CustomerDTO
                     {
-                        Identifier = customerId
+                        Identifier = int.Parse(HttpContext.Current.Session["SessionCustomerIdentifier"].ToString())//customerId
                     },
                     CartItems = new List<CartDTO>
                     {
                         new CartDTO
                         {
-                            Identifier = cartId
+                            Identifier = HttpContext.Current.Session["SessionCartIdentifier"].ToString()//cartId
                         }
                     }
                 }
@@ -233,7 +233,7 @@ namespace WebApplication.ForzaUltra
                 HttpContext.Current.Session.Add(guid, createdPayment.id);
             }
             catch (Exception ex)
-            {
+                {
                 payPalUrlsList = null;
                 ex.LogException();
             }
