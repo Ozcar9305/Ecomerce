@@ -72,7 +72,7 @@
                     foreach(var p in productList.Result)
                     {
                         var response = categoryDataLayer.ProductCategoryGetItem(p.ProductCategoryIdentifier);
-                        p.ProductCategory = response.Description ?? string.Empty;
+                        p.ProductCategory = response.Name ?? string.Empty;
                     }
                 }
             }

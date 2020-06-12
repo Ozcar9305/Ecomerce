@@ -310,7 +310,7 @@
                     return false;
                 }
                 if (parseInt($txtProductPrice.val()) === 0) {
-                    toastr.error("El Precio sdebe ser mayor a $0.00.");
+                    toastr.error("El Precio debe ser mayor a $0.00.");
                     $txtProductPrice.focus();
                     return false;
                 }
@@ -480,10 +480,17 @@
 
             function getListCategory() {
 
+                var category = new Object();
+                category.Identifier = 0;
+                category.WordFilter = '';
+                category.Paging = new Object();
+                category.Paging.PageNumber = 1;
+                category.Paging.PageSize = 100;
+
                 $.ajax({
                     type: "POST",
-                    url: "Categories.aspx/CategoryGetList",
-                    data: JSON.stringify({ "wordFilter": "" }),
+                    url: "ProductCatalog.aspx/CategoryGetList",
+                    data: JSON.stringify({'category': category}),
                     contentType: "application/json;charset=utf-8",
                     dataType: "json",
                     async: false,

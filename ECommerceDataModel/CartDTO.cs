@@ -13,5 +13,7 @@
         public int Quantity { get; set; }
 
         public decimal TotalAmount { get; set; }
+
+        public int SizeId { get; set; }
     }
 }

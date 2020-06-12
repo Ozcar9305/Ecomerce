@@ -49,6 +49,7 @@
                 command.Parameters.Add("@ProductCategoryId", SqlDbType.BigInt).Value = item.ProductCategory.Identifier;
                 command.Parameters.Add("@ProductCatalogId", SqlDbType.BigInt).Value = item.ProductCatalog.Identifier;
                 command.Parameters.Add("@Quantity", SqlDbType.Int).Value = item.Quantity;
+                command.Parameters.Add("@SizeId", SqlDbType.Int).Value = item.ProductCatalog.Sizes.FirstOrDefault().Identifier;
                 isCartUpdated = command.ExecuteQuery();
             }
             return isCartUpdated;

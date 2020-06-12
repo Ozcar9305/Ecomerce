@@ -172,7 +172,7 @@ namespace WebApplication.ForzaUltra.Controles.Login
                     //Redirigir al usuario a la pantalla de categoriaas
                     if (customerResponse.Result.Role == ECommerceDataModel.Enum.CustomerRole.Admin)
                     {
-                        Server.Transfer("~/ForzaUltra/Admin/Categories.aspx");
+                        Response.Redirect("~/ForzaUltra/Admin/Categories.aspx", false);
                     }
                 }
                 else

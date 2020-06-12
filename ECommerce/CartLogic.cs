@@ -1,5 +1,4 @@
-﻿
-namespace ECommerce
+﻿namespace ECommerce
 {
     using System;
     using ECommerce.Helpers;
@@ -7,13 +6,20 @@ namespace ECommerce
     using ECommerceDataModel;
     using ECommerceDataModel.Shared;
     using System.Linq;
-    
+    using System.Collections.Generic;
+    using System.Drawing;
+
     public class CartLogic
     {
         /// <summary>
         /// Objeto de acceso a capa de datos
         /// </summary>
         private readonly CartDataLayer dataLayer = new CartDataLayer();
+
+        /// <summary>
+        /// Objecto de acceso a la capa de datos de la entidad categoria
+        /// </summary>
+        private readonly ProductSizeDataLayer productSizeDataLayer = new ProductSizeDataLayer();
 
         /// <summary>
         /// Permite obtener un listado de items guardados en el carrito de compras
@@ -27,6 +33,14 @@ namespace ECommerce
             {
                 cartListResponse.Result = dataLayer.CartGeFilteredtList(cartRequest.Item);
                 cartListResponse.Success = cartListResponse.Result.Any();
+                if (cartListResponse.Result.Count > 0)
+                {
+                    foreach (var item in cartListResponse.Result)
+                    {
+                        var sizes = productSizeDataLayer.ProductSizeGetFilteredList(item.ProductCategory.Identifier, item.ProductCatalog.Identifier) ?? new List<SizesDTO>();                        
+                        item.ProductCatalog.Sizes = sizes;
+                    }
+                }
             }
             catch (Exception exception)
             {

@@ -78,5 +78,11 @@ namespace WebApplication.ForzaUltra
             });
             return response;
         }
+
+        [WebMethod]
+        public static ResponseListDTO<ProductCategoryDTO> CategoryGetList(RequestDTO<ProductCategoryDTO> category)
+        {
+            return new ProductCategoryLogic().CategoryGetList(category);
+        }
     }
 }

@@ -14,9 +14,10 @@
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js") %>
         <%: Styles.Render("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css") %>
+        <%: Scripts.Render("https://unpkg.com/@popperjs/core@2/dist/umd/popper.js") %>
         <%: Scripts.Render("~/bundles/modernizr") %>
         <%: Styles.Render("~/Content/css/bootstrap.min.css") %>
-        <%: Styles.Render("~/Content/bootstrap-select.css") %>
+        <%--<%: Styles.Render("~/Content/bootstrap-select.css") %>--%>
         <%: Styles.Render("~/Content/css/mdb.css") %>
         <%: Scripts.Render("~/Scripts/handlebars.min-v4.7.3.js") %>
         <%: Scripts.Render("/js/bootstrap.min.js") %>
@@ -237,11 +238,11 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     </div>
                     <div class="modal-body">
-                        <p>¿Estás segura de que quieres cerrar sesión?</p>
+                        <p>¿Estás seguro de que quieres cerrar sesión?</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-light" id="modal-btn-no">No</button>
-                        <asp:Button ID="Button1" CssClass="btn btn-danger" runat="server" Text="Si" />
+                        <button type="button" class="btn btn-default" id="modal-btn-no">No</button>
+                        <asp:Button runat="server" ID="btnLogOut" CssClass="btn btn-danger" Text="Si" OnClick="btnLogOut_Click" />
                     </div>
                 </div>
             </div>
@@ -285,7 +286,7 @@
                 <div class="col-lg-3 mx-auto ">
 
                     <!-- Links -->
-                    <h6 class="font-weight-bold text-uppercase mt-3 mb-4">SOCIAL NETWORKS</h6>
+                    <h6 class="font-weight-bold text-uppercase mt-3 mb-4">Redes Sociales</h6>
 
                     <!-- Social buttons -->
                     <ul class="list-unstyled list-inline ">
@@ -306,7 +307,7 @@
                 <div class="col-lg-2 mx-auto ">
 
                     <!-- Links -->
-                    <h6 class="font-weight-bold text-uppercase mt-3 mb-4">SOLUTIONS</h6>
+                    <h6 class="font-weight-bold text-uppercase mt-3 mb-4">SOLUCIONES</h6>
 
                     <!-- Social buttons -->
                     <ul class="list-unstyled ">
@@ -333,6 +334,8 @@
         <!-- Copyright -->
         <div class="footer-copyright text-center py-3">
             Copyright ©  2019  by "Forza Ultra.com"  ·  All Rights reserved  ·  E-Mail: administracion@forzaultra.com
+            <br/>
+            Powered by ZharpSystems
         </div>
         <!-- Copyright -->
 

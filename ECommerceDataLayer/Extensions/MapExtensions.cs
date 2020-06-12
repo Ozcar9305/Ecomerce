@@ -24,6 +24,7 @@ namespace ECommerceDataLayer.Extensions
             {
                 Identifier = reader.Get<long>("ProductCatalogId"),
                 ProductCategoryIdentifier = reader.Get<long>("ProductCategoryId"),
+                ProductCategory = reader.Get<string>("ProductCategoryName"),
                 ShortName = reader.Get<string>("ProductShortName"),
                 Description = reader.Get<string>("ProductDescription"),
                 AditionalDescription = reader.Get<string>("ProductDescriptionAditional"),
@@ -61,7 +62,8 @@ namespace ECommerceDataLayer.Extensions
                 TotalAmount = reader.Get<decimal>("TotalAmount"),
                 ProductCatalog = ToProductCatalog(reader),
                 ProductCategory = ToProductCategory(reader),
-                Customer = ToCustomer(reader)
+                Customer = ToCustomer(reader),
+                SizeId = reader.Get<int>("SizeId")
             };
         }
 
