@@ -16,7 +16,7 @@ D:\Users\Ozcar\Proyects\GitRepository\Ecomerce\ECommerceDataModel\obj\Debug\ECom
 D:\Users\Ozcar\Proyects\GitRepository\Ecomerce\ECommerceDataModel\obj\Debug\ECommerceDataModel.pdb
 C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\ECommerceDataModel\bin\Debug\ECommerceDataModel.dll
 C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\ECommerceDataModel\bin\Debug\ECommerceDataModel.pdb
-C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\ECommerceDataModel\obj\Debug\ECommerceDataModel.csprojAssemblyReference.cache
 C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\ECommerceDataModel\obj\Debug\ECommerceDataModel.csproj.CoreCompileInputs.cache
 C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\ECommerceDataModel\obj\Debug\ECommerceDataModel.dll
 C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\ECommerceDataModel\obj\Debug\ECommerceDataModel.pdb
+C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\ECommerceDataModel\obj\Debug\ECommerceDataModel.csprojAssemblyReference.cache

@@ -12,6 +12,7 @@
     using System.Web.UI;
     using System.Web.UI.WebControls;
     using PayPal.Api;
+    using System.Globalization;
 
     public partial class Default : Page
     {
@@ -36,7 +37,7 @@
                 {
                     Item = new OrderDTO
                     {
-                        Identifier = 1
+                        Identifier = 10
                     }
                 });
 
@@ -60,7 +61,7 @@
                         {
                             name = productName,
                             currency = "MXN",
-                            price = cartItem.ProductCatalog.Price.ToString(),
+                            price = Math.Round(cartItem.ProductCatalog.Price, 2).ToString(new CultureInfo("es-MX")),
                             quantity = cartItem.Quantity.ToString(),
                             sku = string.Format("SKU-{0}{1}", cartItem.ProductCategory.Identifier, cartItem.ProductCatalog.Identifier)
                         });
@@ -84,14 +85,14 @@
                     {
                         tax = "0",
                         shipping = "0",
-                        subtotal = order.Result.TotalAmount.ToString()
+                        subtotal = Math.Round(order.Result.TotalAmount, 2).ToString(new CultureInfo("es-MX"))
                     };
 
                     //Establecemos el monto total de la compra, moneda y el detalle de la compra
                     var amount = new Amount()
                     {
                         currency = "MXN",
-                        total = order.Result.TotalAmount.ToString(),
+                        total = Math.Round(order.Result.TotalAmount, 2).ToString(new CultureInfo("es-MX")),
                         details = details
                     };
 
@@ -101,7 +102,7 @@
                         new Transaction
                         {
                             description = "Transaction description.",
-                            invoice_number = order.Result.Identifier.ToString().PadLeft(5, '0'),
+                            invoice_number = string.Format("{0}-{1}", guid, order.Result.Identifier),
                             amount = amount,
                             item_list = itemList
                         }
@@ -117,19 +118,26 @@
                     };
 
                     //Creamos el pago
-                    var createdPayment = payment.Create(apiContext);
-
-                    //Se crean los links para que el cliente pueda aceptar o rechazar la compra
-                    var links = createdPayment.links.GetEnumerator();
-                    while (links.MoveNext())
+                    try
                     {
-                        var link = links.Current;
-                        if (link.rel.ToLower().Trim().Equals("approval_url"))
+                        var createdPayment = payment.Create(apiContext);
+                        
+                        //Se crean los links para que el cliente pueda aceptar o rechazar la compra
+                        var links = createdPayment.links.GetEnumerator();
+                        while (links.MoveNext())
                         {
-                            //this.flow.RecordRedirectUrl("Redirect to PayPal to approve the payment...", link.href);
+                            var link = links.Current;
+                            if (link.rel.ToLower().Trim().Equals("approval_url"))
+                            {
+                                //this.flow.RecordRedirectUrl("Redirect to PayPal to approve the payment...", link.href);
+                            }
                         }
+                        Session.Add(guid, createdPayment.id);
                     }
-                    Session.Add(guid, createdPayment.id);
+                    catch (Exception ex)
+                    {
+                        throw;
+                    }
                 }
             }
             else

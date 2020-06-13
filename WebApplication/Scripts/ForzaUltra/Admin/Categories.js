@@ -142,7 +142,7 @@ function loadCategoryDetail(categoryIdentifier) {
 
     $.ajax({
         type: "POST",
-        url: serviceUri + 'CategoryGetItem',
+        url: '../Admin/Categories.aspx/CategoryGetItem',
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         data: JSON.stringify(filter),
@@ -175,7 +175,7 @@ function mergeCategoryItem() {
 
     $.ajax({
         type: "POST",
-        url: serviceUri + 'CategoryMerge',
+        url: '../Admin/Categories.aspx/CategoryMerge',
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         data: JSON.stringify({ 'category': categoryItem }),
@@ -209,7 +209,7 @@ function changeStatusCategoryItem(categoryIdentifier) {
 
     $.ajax({
         type: "POST",
-        url: serviceUri + 'CategoryChangeStatus',
+        url: '../Admin/Categories.aspx/CategoryChangeStatus',
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         data: JSON.stringify(filter),

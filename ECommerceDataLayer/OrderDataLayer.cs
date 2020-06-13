@@ -1,6 +1,7 @@
 ﻿
 namespace ECommerceDataLayer
 {
+    using System.Collections.Generic;
     using ECommerceDataLayer.Extensions;
     using ECommerceDataModel;
     using ECommerceDataModel.Shared;
@@ -25,7 +26,7 @@ namespace ECommerceDataLayer
 
         public OrderDTO OrderGetFilteredList(RequestDTO<OrderDTO> orderItem)
         {
-            var order = new OrderDTO();
+            var order = new OrderDTO { CartItems = new List<CartDTO>() };
             using(SqlCommand command = new SqlCommand("Usp_Order_GETL"))
             {
                 command.Parameters.Add("@OrderId", SqlDbType.BigInt).Value = orderItem.Item.Identifier;

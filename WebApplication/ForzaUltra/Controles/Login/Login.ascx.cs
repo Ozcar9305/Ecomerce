@@ -7,6 +7,7 @@ namespace WebApplication.ForzaUltra.Controles.Login
     using System.Linq;
     using System.Net.Mail;
     using System.Web;
+    using System.Web.Configuration;
     using System.Web.Services;
     using ECommerce;
     using ECommerce.Helpers;
@@ -168,6 +169,12 @@ namespace WebApplication.ForzaUltra.Controles.Login
                         Response.Cookies["forzaUltraUser"].Expires = DateTime.Now.AddDays(-1);
                         Response.Cookies["forzaUltraPwd"].Expires = DateTime.Now.AddDays(-1);
                     }
+
+                    //Establecer el time out de la sesion
+                    Configuration config = WebConfigurationManager.OpenWebConfiguration("~/Web.Config");
+                    SessionStateSection section = (SessionStateSection)config.GetSection("system.web/sessionState");
+                    int timeout = (int)section.Timeout.TotalMinutes * 1000 * 60;
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "SessionAlert", "SessionExpireAlert(" + timeout + ");", true);
 
                     //Redirigir al usuario a la pantalla de categoriaas
                     if (customerResponse.Result.Role == ECommerceDataModel.Enum.CustomerRole.Admin)
