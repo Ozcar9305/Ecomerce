@@ -66,15 +66,15 @@
         {{/each}}        
     </script>
     <script type="text/x-handlebars-template" id="shopping-cart-footer-content">
-        <div class="pull-right" style="margin-left: 10px;">            
-            <a class="d-inline btn paypal-button pay-order-forza" data-payment-type="0" style="min-height:30px!important">                
+        <div class="pull-right" style="margin-left: 10px;">
+            <a class="d-inline btn paypal-button pay-order-forza" data-payment-type="0" style="min-height: 30px!important">
                 <span class="paypal-button-title">Pagar con
                 </span>
                 <span class="paypal-logo">
                     <i>Pay</i><i>Pal</i>
                 </span>
             </a>
-            <a class="d-inline btn btn-lg btn-success  payorder-button pay-order-forza" data-payment-type="1" style="margin-left:5px!important;margin-top:12px!important">
+            <a class="d-inline btn btn-lg btn-success  payorder-button pay-order-forza" data-payment-type="1" style="margin-left: 5px!important; margin-top: 12px!important">
                 <span>
                     <i></i>
                     <i></i>
@@ -83,6 +83,23 @@
             </a>
             <div class="pull-right" style="margin: 5px">
                 Total: <b>${{numberFormat Total}}</b>
+            </div>
+        </div>
+    </script>
+    <script type="text/x-handlebars-template" id="paypal-response-message">
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 col-md-2 text-center">
+                <h4 class="text-danger">{{Title}}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 col-md-2 text-center">
+                <h6 class="text-dark">{{Message}}</h6>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 col-md-2 text-center">
+                <a class="btn btn-danger" href="/Store.aspx">Volver a la página principal</a>
             </div>
         </div>
     </script>

@@ -1,4 +1,5 @@
-﻿$(function () {
+﻿
+$(function () {
 
     var cart_checkout = (function () {
 
@@ -6,7 +7,10 @@
             $shopping_cart_items = $('#shopping-cart-items').html(),
             $shopping_cart_footer = $('#shopping-cart-footer'),
             $shopping_cart_footer_content = $('#shopping-cart-footer-content').html(),
-            $cart_item_count = 0;
+            $paypal_response_message = $('#paypal-response-message').html(),
+            $cart_item_count = 0,
+            $cancel = false,
+            $payment = false;
 
         function delete_cart_item_onClick(e) {
             var cart_identifier = $(this).attr('data-cart-identifier');
@@ -154,55 +158,66 @@
         }
 
         function get_cart_items() {
-            $.ajax({
-                type: "POST",
-                url: "Cart.aspx/CartItemGetList",
-                data: "",
-                contentType: "application/json;charset=utf-8",
-                dataType: "json",
-                async: false,
-                success: function (result) {
-                    var response = result.d;
-                    response.Total = 0;
+            if ($payment) {
+                let paypal_success = Handlebars.compile($paypal_response_message);
+                $shopping_cart_body.empty();
+                $shopping_cart_body.append(paypal_success({ Title: "¡Gracias por tu compra!", Message: "Muy pronto uno de nuestros ejecutivos se pondra en contacto contigo" }));
+            } else if ($cancel) {
+                let paypal_cancel = Handlebars.compile($paypal_response_message);
+                $shopping_cart_body.empty();
+                $shopping_cart_body.append(paypal_cancel({ Title: "La compra ha sido cancelada :-(", Message: "" }));
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: "Cart.aspx/CartItemGetList",
+                    data: "",
+                    contentType: "application/json;charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    success: function (result) {
+                        var response = result.d;
+                        response.Total = 0;
 
-                    if (response.Result === null || response.Result === undefined) {
-                        response.Result = [];
-                    }
+                        if (response.Result === null || response.Result === undefined) {
+                            response.Result = [];
+                        }
 
-                    var compile = Handlebars.compile($shopping_cart_items);
-                    var compileFooter = Handlebars.compile($shopping_cart_footer_content);
-                    $shopping_cart_body.empty();
-                    $shopping_cart_footer.empty();
-                    if (response.Result.length === 0) {
-                        toastr.info("Tu carrito de compras esta vacío!");
-                    }
-                    else {
-                        $cart_item_count = response.Result.length;
-                        $.each(response.Result, function (key, value) {
-                            response.Total += value.ProductCatalog.Price * value.Quantity;
-                            $.each(value.ProductCatalog.Sizes, function (key, value2) {
-                                if (value.SizeId === value2.Identifier) {
-                                    value2.Selected = true;
-                                } else {
-                                    value2.Selected = false;
-                                }
+                        var compile = Handlebars.compile($shopping_cart_items);
+                        var compileFooter = Handlebars.compile($shopping_cart_footer_content);
+                        $shopping_cart_body.empty();
+                        $shopping_cart_footer.empty();
+                        if (response.Result.length === 0) {
+                            $.publish('cart-elements-count:onChange');
+                            toastr.info("Tu carrito de compras esta vacío!");
+                        }
+                        else {
+                            $cart_item_count = response.Result.length;
+                            $.each(response.Result, function (key, value) {
+                                response.Total += value.ProductCatalog.Price * value.Quantity;
+                                $.each(value.ProductCatalog.Sizes, function (key, value2) {
+                                    if (value.SizeId === value2.Identifier) {
+                                        value2.Selected = true;
+                                    } else {
+                                        value2.Selected = false;
+                                    }
+                                });
                             });
+                        }
+
+                        $shopping_cart_body.append(compile(response));
+                        $shopping_cart_footer.append(compileFooter({ Total: response.Total }));
+
+                        bindEvents(response.Result);
+                        $.each(response.Result, function (key, value) {
+                            var dll = $('.dropdown-sizes-for[data-product-identifier="' + value.ProductCatalog.Identifier + '"]');
+                            dll.val(value.SizeId);
                         });
+                    },
+                    failure: function () {
+                        toastr.error("Error al consultar los elementos del carrito de compras.");
                     }
-
-                    $shopping_cart_body.append(compile(response));
-                    $shopping_cart_footer.append(compileFooter({ Total: response.Total }));
-
-                    bindEvents(response.Result);
-                    $.each(response.Result, function (key, value) {
-                        var dll = $('.dropdown-sizes-for[data-product-identifier="' + value.ProductCatalog.Identifier + '"]');
-                        dll.val(value.SizeId);
-                    });
-                },
-                failure: function () {
-                    toastr.error("Error al consultar los elementos del carrito de compras.");
-                }
-            });
+                });
+            }
         }
 
         function setSubscriptions() {
@@ -212,6 +227,11 @@
         return {
             initialize: function () {
                 $.publish('cart-elements-count:onChange');
+                var key_cancel = GetUriValues("cancel");
+                var key_payment = GetUriValues("paymentId");
+                $cancel = (key_cancel !== undefined && key_cancel !== null);
+                $payment = (key_payment !== undefined && key_payment !== null && key_payment !== '');
+                console.log($cancel, $payment);
                 get_cart_items();
                 setSubscriptions();
             }
