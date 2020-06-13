@@ -12,12 +12,7 @@
         {
             if (!Page.IsPostBack)
             {
-                //Do nothing.
-            }
-            else
-            {
-                var postBackParameter = Request["__EVENTARGUMENT"];
-                if (Session["SessionInit"] != null && Convert.ToBoolean(Session["SessionInit"]) && postBackParameter == "SessionInit")
+                if (Session["SessionInit"] != null && Convert.ToBoolean(Session["SessionInit"]))
                 {
                     Configuration config = WebConfigurationManager.OpenWebConfiguration("~/Web.Config");
                     SessionStateSection section = (SessionStateSection)config.GetSection("system.web/sessionState");

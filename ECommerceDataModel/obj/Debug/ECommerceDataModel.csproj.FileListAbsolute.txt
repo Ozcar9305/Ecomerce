@@ -19,3 +19,4 @@ C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\ECommerceDataModel\bin\Debu
 C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\ECommerceDataModel\obj\Debug\ECommerceDataModel.csproj.CoreCompileInputs.cache
 C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\ECommerceDataModel\obj\Debug\ECommerceDataModel.dll
 C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\ECommerceDataModel\obj\Debug\ECommerceDataModel.pdb
+C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\ECommerceDataModel\obj\Debug\ECommerceDataModel.csprojAssemblyReference.cache
