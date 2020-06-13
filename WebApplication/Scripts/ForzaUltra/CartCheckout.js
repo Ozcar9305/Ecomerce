@@ -113,8 +113,7 @@
                     contentType: "application/json;charset=utf-8",
                     dataType: "json",
                     async: false,
-                    success: function (result)
-                    {
+                    success: function (result) {
                         console.log('result', result);
 
                         var response = result.d;
@@ -122,7 +121,7 @@
                             if (paymentType === 0) {
                                 let paypal_href = response.Result.PayPalUrlList.find(element => element.Rel === 'approval_url');
                                 console.log(paypal_href);
-                                window.location.href = paypal_href.HReference;
+                                window.location.replace(paypal_href.HReference);
                             } else {
                                 toastr.success("La orden se genero correctamente, se le ha envíado un correo y pronto un asesor de ventas se pondrá en contacto con usted.")
                                 get_cart_items();
@@ -166,6 +165,10 @@
                     var response = result.d;
                     response.Total = 0;
 
+                    if (response.Result === null || response.Result === undefined) {
+                        response.Result = [];
+                    }
+
                     var compile = Handlebars.compile($shopping_cart_items);
                     var compileFooter = Handlebars.compile($shopping_cart_footer_content);
                     $shopping_cart_body.empty();
@@ -188,7 +191,6 @@
                     }
 
                     $shopping_cart_body.append(compile(response));
-                    console.log(response);
                     $shopping_cart_footer.append(compileFooter({ Total: response.Total }));
 
                     bindEvents(response.Result);
