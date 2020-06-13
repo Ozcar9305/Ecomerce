@@ -11,7 +11,6 @@ namespace WebApplication.ForzaUltra
     using System.Linq;
     using System.Web;
     using System.Web.Services;
-    using System.Web.SessionState;
     using System.Web.UI;
 
     public partial class Cart : Page
@@ -28,10 +27,17 @@ namespace WebApplication.ForzaUltra
 
                 if (!string.IsNullOrEmpty(payerId) && !string.IsNullOrEmpty(guid) && string.IsNullOrEmpty(cancel))
                 {
-                    var paymentId = Session[guid] as string;
-                    var paymentExecution = new PaymentExecution() { payer_id = payerId };
-                    var payment = new Payment() { id = paymentId };
-                    var executedPayment = payment.Execute(apiContext, paymentExecution);
+                    try
+                    {
+                        var paymentId = Session[guid] as string;
+                        var paymentExecution = new PaymentExecution() { payer_id = payerId };
+                        var payment = new Payment() { id = paymentId };
+                        var executedPayment = payment.Execute(apiContext, paymentExecution);
+                    }
+                    catch (Exception exception)
+                    {
+                        exception.LogException();
+                    }
                 }
             }
         }
@@ -167,7 +173,7 @@ namespace WebApplication.ForzaUltra
                 var payer = new Payer() { payment_method = "paypal" };
 
                 //Establecemos las urls de cancelacion de pago y regreso de pago
-                var baseURI = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/Default.aspx?";
+                var baseURI = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/ForzaUltra/Cart.aspx?";
                 var guid = Convert.ToString((new Random()).Next(100000));
                 var redirectUrl = baseURI + "guid=" + guid;
                 var redirUrls = new RedirectUrls()
