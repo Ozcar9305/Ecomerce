@@ -66,17 +66,21 @@
         {{/each}}        
     </script>
     <script type="text/x-handlebars-template" id="shopping-cart-footer-content">
-        <div class="pull-right" style="margin: 10px">
-            <a class="btn btn-sm btn-success pull-right payorder-button pay-order-forza" data-payment-type="1">
-                <i class="fa fa-money" aria-hidden="true"></i>&nbsp;Generar Orden
-            </a>
-            <button class="paypal-button pay-order-forza" data-payment-type="0">
+        <div class="pull-right" style="margin-left: 10px;">            
+            <a class="d-inline btn paypal-button pay-order-forza" data-payment-type="0" style="min-height:30px!important">                
                 <span class="paypal-button-title">Pagar con
                 </span>
                 <span class="paypal-logo">
                     <i>Pay</i><i>Pal</i>
                 </span>
-            </button>
+            </a>
+            <a class="d-inline btn btn-lg btn-success  payorder-button pay-order-forza" data-payment-type="1" style="margin-left:5px!important;margin-top:12px!important">
+                <span>
+                    <i></i>
+                    <i></i>
+                </span>
+                <i class="fa fa-money" aria-hidden="true"></i>&nbsp;Generar Orden
+            </a>
             <div class="pull-right" style="margin: 5px">
                 Total: <b>${{numberFormat Total}}</b>
             </div>
