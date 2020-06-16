@@ -9,6 +9,7 @@ namespace WebApplication.ForzaUltra
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
     using System.Web;
     using System.Web.Services;
     using System.Web.UI;
@@ -33,6 +34,15 @@ namespace WebApplication.ForzaUltra
                         var paymentExecution = new PaymentExecution() { payer_id = payerId };
                         var payment = new Payment() { id = paymentId };
                         var executedPayment = payment.Execute(apiContext, paymentExecution);
+
+                        if(Session["OrderId"] != null)
+                        {
+                            int orderIdentifier;
+                            int.TryParse(Session["OrderId"].ToString(), out orderIdentifier);
+
+                            Task taskCustomerEmail = Task.Run(() => new OrderLogic().sendCustomerEmail(orderIdentifier));
+                            Task taskAdminEmail = Task.Run(() => new OrderLogic().sendAdminEmail(orderIdentifier));
+                        }
                     }
                     catch (Exception exception)
                     {
@@ -118,7 +128,8 @@ namespace WebApplication.ForzaUltra
                         {
                             Identifier = HttpContext.Current.Session["SessionCartIdentifier"].ToString()//cartId
                         }
-                    }
+                    },
+                    PaymentType = paymentType
                 }
             });
 
@@ -131,7 +142,6 @@ namespace WebApplication.ForzaUltra
                     orderResponse.Result.PayPalUrlList = payPalUrlList;
                 }
             }
-
             return orderResponse;
         }
 
@@ -236,7 +246,9 @@ namespace WebApplication.ForzaUltra
                         });
                     }
                 }
+
                 HttpContext.Current.Session.Add(guid, createdPayment.id);
+                HttpContext.Current.Session.Add("OrderId", order.Result.Identifier);
             }
             catch (Exception ex)
             {

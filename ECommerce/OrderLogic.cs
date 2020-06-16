@@ -39,9 +39,12 @@
                         }
                     });
 
-                    //Ejecutar envio de correo al administrador y cliente
-                    Task taskCustomerEmail = Task.Run(() => sendCustomerEmail(orderResponse.Result.Identifier));
-                    Task taskAdminEmail = Task.Run(() => sendAdminEmail(orderResponse.Result.Identifier));
+                    //Ejecutar envio de correo al administrador y cliente cuando el tipo de pago sea contra entrega
+                    if (order.Item.PaymentType == ECommerceDataModel.Enum.PaymentType.AgainstDelivery)
+                    {
+                        Task taskCustomerEmail = Task.Run(() => sendCustomerEmail(orderResponse.Result.Identifier));
+                        Task taskAdminEmail = Task.Run(() => sendAdminEmail(orderResponse.Result.Identifier));
+                    }
                 }
             }
             catch (Exception exception)
@@ -74,7 +77,7 @@
         /// <summary>
         /// Envia el email de la orden de compra al administrador
         /// </summary>
-        private void sendAdminEmail(long orderIdentifier)
+        public void sendAdminEmail(long orderIdentifier)
         {
             try
             {
@@ -133,7 +136,7 @@
         /// <summary>
         /// Envia el email de la orden de compra al cliente
         /// </summary>
-        private void sendCustomerEmail(long orderIdentifier)
+        public void sendCustomerEmail(long orderIdentifier)
         {
             try
             {
