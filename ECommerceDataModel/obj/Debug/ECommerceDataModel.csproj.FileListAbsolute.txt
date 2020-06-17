@@ -25,3 +25,4 @@ D:\Users\Ozcar\Proyects\GitRepository\Forza\Ecomerce\ECommerceDataModel\obj\Debu
 D:\Users\Ozcar\Proyects\GitRepository\Forza\Ecomerce\ECommerceDataModel\obj\Debug\ECommerceDataModel.csproj.CoreCompileInputs.cache
 D:\Users\Ozcar\Proyects\GitRepository\Forza\Ecomerce\ECommerceDataModel\obj\Debug\ECommerceDataModel.dll
 D:\Users\Ozcar\Proyects\GitRepository\Forza\Ecomerce\ECommerceDataModel\obj\Debug\ECommerceDataModel.pdb
+C:\ZharpSystems\Proyectos\ECommerce\Ecommerce_Vs2019\ECommerceDataModel\obj\Debug\ECommerceDataModel.csprojAssemblyReference.cache

@@ -209,6 +209,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="ForzaUltra\Admin\Categories.aspx" />
     <Content Include="ForzaUltra\Cart.aspx" />
+    <Content Include="ForzaUltra\ContactUs.aspx" />
     <Content Include="ForzaUltra\Controles\Login\Login.ascx" />
     <Content Include="ForzaUltra\Admin\ProductCatalog.aspx" />
     <Content Include="ForzaUltra\Customer\Nosotros.aspx" />
@@ -399,6 +400,13 @@
     </Compile>
     <Compile Include="ForzaUltra\Cart.aspx.designer.cs">
       <DependentUpon>Cart.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ForzaUltra\ContactUs.aspx.cs">
+      <DependentUpon>ContactUs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ForzaUltra\ContactUs.aspx.designer.cs">
+      <DependentUpon>ContactUs.aspx</DependentUpon>
     </Compile>
     <Compile Include="ForzaUltra\Controles\Login\Login.ascx.cs">
       <DependentUpon>Login.ascx</DependentUpon>

@@ -240,11 +240,9 @@
                             <a class="nav-link waves-effect" href="<%:ResolveUrl("~/ForzaUltra/Customer/ProductCatalog.aspx") %>">Productos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link waves-effect" href="https://mdbootstrap.com/education/bootstrap/" target="_blank">Contacto
-                            </a>
+                            <a class="nav-link waves-effect" href="<%:ResolveUrl("~/ForzaUltra/ContactUs.aspx") %>">Contacto</a>
                         </li>
                     </ul>
-
                     <ul class="navbar-nav mr-auto" id="menuAdmin" style="display: none!important;">
                         <li class="nav-item active">
                             <a class="nav-link waves-effect" href="<%:ResolveUrl("~/ForzaUltra/Admin/Categories.aspx") %>">Categorias
